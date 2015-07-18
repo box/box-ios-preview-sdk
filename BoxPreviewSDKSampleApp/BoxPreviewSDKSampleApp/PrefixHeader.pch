@@ -1,0 +1,10 @@
+//
+//  PrefixHeader.pch
+//  TwoAndAHalfPartyApp
+//
+//  Created by Boris Suvorov on 3/28/15.
+//  Copyright (c) 2015 Box. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import <BoxPreviewSDK/BOXPreviewSDK.h>

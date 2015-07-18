@@ -42,10 +42,6 @@ Sample App
 ----------
 A sample app can be found in the [BoxPreviewSDKSampleApp](../../tree/master/BoxPreviewSDKSampleApp) folder. To execute the sample app:
 
-Step 0: (temporary, should not be necessary at public launch):
-```
-./build_framework.sh
-```
 Step 1: Install Pods
 ```
 cd BoxPreviewSDKSampleApp

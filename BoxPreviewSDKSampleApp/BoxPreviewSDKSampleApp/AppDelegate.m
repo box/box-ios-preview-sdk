@@ -17,7 +17,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [BOXContentClient setClientID:@"m8nwyiz20tq7j9itkz3loab9rwsgwa1y" clientSecret:@"cVDIgTy6WFQ8RbUKSSgNxlzl4ej59KvO"];
+#warning Set the client ID and client secret that can be retrieved by creating an application at http://developers.box.com
+    [BOXContentClient setClientID:@"your_client_id" clientSecret:@"your_client_secret"];
     [self setupControllers];
     [self.window makeKeyAndVisible];
     

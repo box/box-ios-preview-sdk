@@ -6,7 +6,7 @@ s.name                  = "box-ios-preview-sdk"
 s.version               = "1.0.0"
 s.summary               = "iOS Preview SDK."
 s.homepage              = "https://github.com/box/box-ios-preview-sdk-dev"
-s.license               = { :type => "Commercial", :file => "LICENSE" }
+s.license               = { :type => "Commercial", :file => "LICENSE.md" }
 s.author                = "Box"
 s.source                = { :http => 'https://raw.githubusercontent.com/box/box-ios-preview-sdk/master/box-ios-preview-sdk.zip' }
 
@@ -30,8 +30,8 @@ s.dependency 'box-ios-sdk'
 
 s.resource_bundle = {
   'BoxPreviewSDKResources' => [
-     'BoxPreviewSDK.framework/BoxPreviewSDKResources/*.*',
-     'BoxPreviewSDK.framework/BoxPreviewSDKResources/**/*.*',
+     'BoxPreviewSDK.framework/BoxPreviewSDKResources/MDWebView.bundle',
+     'BoxPreviewSDK.framework/BoxPreviewSDKResources/*Images/*.*',
      'PSPDFKit.bundle'
   ]
 }

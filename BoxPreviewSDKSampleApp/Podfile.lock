@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   box-ios-browse-sdk: ed7cee4ad46bf27eb360f0407362836741dca650
-  box-ios-preview-sdk: 083ee4851e9caf646f81cb13fa1886670e69c727
+  box-ios-preview-sdk: 1ffbd541ffe7d851b3ee58b7f80a5a2ec3481205
   box-ios-sdk: 0b4b9e24c89fde0899ea140e24d78598b246b1d1
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
 

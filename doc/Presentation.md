@@ -54,26 +54,3 @@ willChangeToLeftBarButtonItems:(NSArray *)items;
 - (NSArray *)boxFilePreviewController:(BOXFilePreviewController *)controller
 willChangeToRightBarButtonItems:(NSArray *)items;
 ```
-
-
-Views
-------------------------
-We also provide standalone UI View for previewing a file without a UIViewController. This can be embedded in a UITableViewCell, UICollectionViewCell, or another UIView.
-
-Using PreviewView with a file:
-```objectivec
-BOXFile *file = ... // A BOXFile that you retrieved through the Content SDK or Browse SDK.
-BOXPreviewView *previewView = [[BOXPreviewView alloc] initWithPreviewClient:previewClient];
-
-previewView.file = file;
-```
-
-Using PreviewView with a shared link:
-```objectivec
-NSURL *sharedLinkURL = [NSURL URLWithString:@"https://box.com/yoursharedlink"];
-BOXPreviewView *previewView = [[BOXPreviewView alloc] initWithPreviewClient:previewClient];
-
-previewView.sharedLink = sharedLinkURL;
-```
-
-

@@ -32,8 +32,8 @@
 
     BOXPreviewClient *previewClient = [[BOXPreviewClient alloc] initWithContentClient:[BOXContentClient defaultClient]];
     BOXFilePreviewController *filePreviewController = [[BOXFilePreviewController alloc] initWithPreviewClient:previewClient
-                                                                                                   item:file
-                                                                                                inItems:items];
+                                                                                                         file:file
+                                                                                                      inItems:items];
     filePreviewController.delegate = self;
 
     [((UINavigationController *) self.window.rootViewController) pushViewController:filePreviewController animated:YES];

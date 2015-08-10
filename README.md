@@ -31,7 +31,7 @@ Step 4: Set the Box Client ID and Client Secret that you obtain from [creating a
 Step 5: Present a file
 ```objectivec
 BOXFile *file = ... // A BOXFile that you retrieved through the Content SDK or Browse SDK. See the Sample Application for an example.
-BOXFilePreviewController *filePreviewController = [[BOXFilePreviewController alloc] initWithContentClient:[BOXContentClient defaultClient] item:file];
+BOXFilePreviewController *filePreviewController = [[BOXFilePreviewController alloc] initWithContentClient:[BOXContentClient defaultClient] file:file];
 [self.navigationController pushViewController:filePreviewController animated:YES completion:nil];
 ```
 Using an existing Content Client to initialize a BOXFilePreviewController will create a Preview Client behind the scenes with the default caching policy.
@@ -69,5 +69,4 @@ Copyright and License
 ---------------------
 Copyright 2015 Box, Inc. All rights reserved.
  
-Licensed under the Box Terms of Service; you may not use this file except in compliance with the License.
-You may obtain a copy of the License at [https://www.box.com/legal/termsofservice/](https://www.box.com/legal/termsofservice/)
+Licensed under the Box Terms of Service; you may not use this file except in compliance with the [License](LICENSE).

@@ -110,7 +110,7 @@ Notifications
 
 The BOXPreviewClient will broadcast NSNotifications when clearing the cache.
 
-1. **BOXPreviewCacheDidExceedMaxSizeNotification** - when the cache exceeds the maxmium size of the cache and a purge is triggered.
+1. **BOXPreviewCacheDidExceedMaxSizeNotification** - when the cache exceeds the maxmium size and a purge is triggered.
 
 2. **BOXPreviewCacheDidRemoveFilesNotification** - when files are removed from the cache. The userInfo is a dictionary with the key BOXPreviewCacheRemovedFileIDs corresponding to an array of file IDs that were removed.
 

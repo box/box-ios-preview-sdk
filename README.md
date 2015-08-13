@@ -69,4 +69,4 @@ Copyright and License
 ---------------------
 Copyright 2015 Box, Inc. All rights reserved.
  
-Licensed under the Box Terms of Service; you may not use this file except in compliance with the [License](LICENSE).
+Licensed under the Box Terms of Service; you may not use this file except in compliance with the [License](LICENSE.pdf).

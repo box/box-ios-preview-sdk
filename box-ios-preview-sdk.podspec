@@ -3,12 +3,12 @@ Pod::Spec.new do |s|
 # Root specification
 
 s.name                  = "box-ios-preview-sdk"
-s.version               = "1.0.1"
+s.version               = "1.0.2"
 s.summary               = "iOS Preview SDK."
 s.homepage              = "https://github.com/box/box-ios-preview-sdk"
 s.license               = { :type => "Box Software Development Kit License Agreement", :file => "LICENSE" }
 s.author                = "Box"
-s.source                = { :http => 'https://raw.githubusercontent.com/box/box-ios-preview-sdk/v1.0.1/box-ios-preview-sdk.zip' }
+s.source                = { :http => 'https://raw.githubusercontent.com/box/box-ios-preview-sdk/v1.0.2/box-ios-preview-sdk.zip' }
 
 # Platform
 

@@ -12,7 +12,26 @@
 		70FCACDD1B33FB0700084F9E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70FCACDC1B33FB0700084F9E /* Images.xcassets */; };
 		70FCACE01B33FB0700084F9E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70FCACDE1B33FB0700084F9E /* LaunchScreen.xib */; };
 		70FCACEC1B33FB0800084F9E /* BoxPreviewSDKSampleAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCACEB1B33FB0800084F9E /* BoxPreviewSDKSampleAppTests.m */; };
-		ED622589584101EB1DAD0B2E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 512A9329CA8BF4BF066D5D81 /* Pods.framework */; };
+		A5FD8AC51EDF492300574C20 /* BoxBrowseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8ABF1EDF492300574C20 /* BoxBrowseSDK.framework */; };
+		A5FD8AC61EDF492300574C20 /* BoxBrowseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8ABF1EDF492300574C20 /* BoxBrowseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8AC71EDF492300574C20 /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC01EDF492300574C20 /* BoxContentSDK.framework */; };
+		A5FD8AC81EDF492300574C20 /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC01EDF492300574C20 /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8AC91EDF492300574C20 /* BoxEncryptionSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC11EDF492300574C20 /* BoxEncryptionSDK.framework */; };
+		A5FD8ACA1EDF492300574C20 /* BoxEncryptionSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC11EDF492300574C20 /* BoxEncryptionSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8ACB1EDF492300574C20 /* BOXFMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC21EDF492300574C20 /* BOXFMDB.framework */; };
+		A5FD8ACC1EDF492300574C20 /* BOXFMDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC21EDF492300574C20 /* BOXFMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8ACD1EDF492300574C20 /* BoxPreviewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC31EDF492300574C20 /* BoxPreviewSDK.framework */; };
+		A5FD8ACE1EDF492300574C20 /* BoxPreviewSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC31EDF492300574C20 /* BoxPreviewSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8ACF1EDF492300574C20 /* BoxToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC41EDF492300574C20 /* BoxToolkit.framework */; };
+		A5FD8AD01EDF492300574C20 /* BoxToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC41EDF492300574C20 /* BoxToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8AD51EDF493200574C20 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD11EDF493200574C20 /* Masonry.framework */; };
+		A5FD8AD61EDF493200574C20 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD11EDF493200574C20 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8AD71EDF493200574C20 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD21EDF493200574C20 /* MBProgressHUD.framework */; };
+		A5FD8AD81EDF493200574C20 /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD21EDF493200574C20 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8AD91EDF493200574C20 /* PSPDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD31EDF493200574C20 /* PSPDFKit.framework */; };
+		A5FD8ADA1EDF493200574C20 /* PSPDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD31EDF493200574C20 /* PSPDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5FD8ADB1EDF493200574C20 /* RNCryptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD41EDF493200574C20 /* RNCryptor.framework */; };
+		A5FD8ADC1EDF493200574C20 /* RNCryptor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD41EDF493200574C20 /* RNCryptor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,8 +44,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A5FD8AAD1EDE379000574C20 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A5FD8AD81EDF493200574C20 /* MBProgressHUD.framework in Embed Frameworks */,
+				A5FD8ADA1EDF493200574C20 /* PSPDFKit.framework in Embed Frameworks */,
+				A5FD8ADC1EDF493200574C20 /* RNCryptor.framework in Embed Frameworks */,
+				A5FD8AD61EDF493200574C20 /* Masonry.framework in Embed Frameworks */,
+				A5FD8AC61EDF492300574C20 /* BoxBrowseSDK.framework in Embed Frameworks */,
+				A5FD8ACE1EDF492300574C20 /* BoxPreviewSDK.framework in Embed Frameworks */,
+				A5FD8ACA1EDF492300574C20 /* BoxEncryptionSDK.framework in Embed Frameworks */,
+				A5FD8AD01EDF492300574C20 /* BoxToolkit.framework in Embed Frameworks */,
+				A5FD8AC81EDF492300574C20 /* BoxContentSDK.framework in Embed Frameworks */,
+				A5FD8ACC1EDF492300574C20 /* BOXFMDB.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		512A9329CA8BF4BF066D5D81 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70FCACCC1B33FB0700084F9E /* BoxPreviewSDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxPreviewSDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70FCACD01B33FB0700084F9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70FCACD11B33FB0700084F9E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -37,8 +78,16 @@
 		70FCACE51B33FB0800084F9E /* BoxPreviewSDKSampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxPreviewSDKSampleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70FCACEA1B33FB0800084F9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70FCACEB1B33FB0800084F9E /* BoxPreviewSDKSampleAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxPreviewSDKSampleAppTests.m; sourceTree = "<group>"; };
-		F250F25F76A9E33C5BFE807E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		F5018CF1A6FAA9F524B2B098 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A5FD8ABF1EDF492300574C20 /* BoxBrowseSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxBrowseSDK.framework; path = Carthage/Build/iOS/BoxBrowseSDK.framework; sourceTree = "<group>"; };
+		A5FD8AC01EDF492300574C20 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
+		A5FD8AC11EDF492300574C20 /* BoxEncryptionSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxEncryptionSDK.framework; path = Carthage/Build/iOS/BoxEncryptionSDK.framework; sourceTree = "<group>"; };
+		A5FD8AC21EDF492300574C20 /* BOXFMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BOXFMDB.framework; path = Carthage/Build/iOS/BOXFMDB.framework; sourceTree = "<group>"; };
+		A5FD8AC31EDF492300574C20 /* BoxPreviewSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxPreviewSDK.framework; path = Carthage/Build/iOS/BoxPreviewSDK.framework; sourceTree = "<group>"; };
+		A5FD8AC41EDF492300574C20 /* BoxToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxToolkit.framework; path = Carthage/Build/iOS/BoxToolkit.framework; sourceTree = "<group>"; };
+		A5FD8AD11EDF493200574C20 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = Carthage/Build/iOS/Masonry.framework; sourceTree = "<group>"; };
+		A5FD8AD21EDF493200574C20 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
+		A5FD8AD31EDF493200574C20 /* PSPDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSPDFKit.framework; path = Carthage/Build/iOS/PSPDFKit.framework; sourceTree = "<group>"; };
+		A5FD8AD41EDF493200574C20 /* RNCryptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RNCryptor.framework; path = Carthage/Build/iOS/RNCryptor.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +95,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED622589584101EB1DAD0B2E /* Pods.framework in Frameworks */,
+				A5FD8AD71EDF493200574C20 /* MBProgressHUD.framework in Frameworks */,
+				A5FD8AD91EDF493200574C20 /* PSPDFKit.framework in Frameworks */,
+				A5FD8ADB1EDF493200574C20 /* RNCryptor.framework in Frameworks */,
+				A5FD8AD51EDF493200574C20 /* Masonry.framework in Frameworks */,
+				A5FD8AC51EDF492300574C20 /* BoxBrowseSDK.framework in Frameworks */,
+				A5FD8ACD1EDF492300574C20 /* BoxPreviewSDK.framework in Frameworks */,
+				A5FD8AC91EDF492300574C20 /* BoxEncryptionSDK.framework in Frameworks */,
+				A5FD8ACF1EDF492300574C20 /* BoxToolkit.framework in Frameworks */,
+				A5FD8AC71EDF492300574C20 /* BoxContentSDK.framework in Frameworks */,
+				A5FD8ACB1EDF492300574C20 /* BOXFMDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,7 +121,6 @@
 		3C0EE4F29869F00F32061476 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				512A9329CA8BF4BF066D5D81 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -71,10 +128,19 @@
 		70FCACC31B33FB0700084F9E = {
 			isa = PBXGroup;
 			children = (
+				A5FD8AD11EDF493200574C20 /* Masonry.framework */,
+				A5FD8AD21EDF493200574C20 /* MBProgressHUD.framework */,
+				A5FD8AD31EDF493200574C20 /* PSPDFKit.framework */,
+				A5FD8AD41EDF493200574C20 /* RNCryptor.framework */,
+				A5FD8ABF1EDF492300574C20 /* BoxBrowseSDK.framework */,
+				A5FD8AC01EDF492300574C20 /* BoxContentSDK.framework */,
+				A5FD8AC11EDF492300574C20 /* BoxEncryptionSDK.framework */,
+				A5FD8AC21EDF492300574C20 /* BOXFMDB.framework */,
+				A5FD8AC31EDF492300574C20 /* BoxPreviewSDK.framework */,
+				A5FD8AC41EDF492300574C20 /* BoxToolkit.framework */,
 				70FCACCE1B33FB0700084F9E /* BoxPreviewSDKSampleApp */,
 				70FCACE81B33FB0800084F9E /* BoxPreviewSDKSampleAppTests */,
 				70FCACCD1B33FB0700084F9E /* Products */,
-				CD8912F6770F462FD9206F8F /* Pods */,
 				3C0EE4F29869F00F32061476 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -126,15 +192,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CD8912F6770F462FD9206F8F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F250F25F76A9E33C5BFE807E /* Pods.debug.xcconfig */,
-				F5018CF1A6FAA9F524B2B098 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -142,12 +199,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70FCACEF1B33FB0800084F9E /* Build configuration list for PBXNativeTarget "BoxPreviewSDKSampleApp" */;
 			buildPhases = (
-				8B2C8609FBC211DB9C086AC3 /* Check Pods Manifest.lock */,
 				70FCACC81B33FB0700084F9E /* Sources */,
 				70FCACC91B33FB0700084F9E /* Frameworks */,
 				70FCACCA1B33FB0700084F9E /* Resources */,
-				03018DD57848035E8C240984 /* Copy Pods Resources */,
-				42D6E2B59AFC6208102929EA /* Embed Pods Frameworks */,
+				A5FD8AAD1EDE379000574C20 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -187,6 +242,7 @@
 				TargetAttributes = {
 					70FCACCB1B33FB0700084F9E = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0830;
 					};
 					70FCACE41B33FB0800084F9E = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -231,54 +287,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		03018DD57848035E8C240984 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		42D6E2B59AFC6208102929EA /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8B2C8609FBC211DB9C086AC3 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		70FCACC81B33FB0700084F9E /* Sources */ = {
@@ -404,27 +412,46 @@
 		};
 		70FCACF01B33FB0800084F9E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F250F25F76A9E33C5BFE807E /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BoxPreviewSDKSampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = your.sampleapp.BoxPreviewSDKSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		70FCACF11B33FB0800084F9E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5018CF1A6FAA9F524B2B098 /* Pods.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BoxPreviewSDKSampleApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = your.sampleapp.BoxPreviewSDKSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

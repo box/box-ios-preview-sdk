@@ -5,8 +5,8 @@
 //
 
 #import "AppDelegate.h"
-#import <BoxPreviewSDK/BoxPreviewSDK.h>
-#import <BoxBrowseSDK/BoxBrowseSDK.h>
+@import BoxPreviewSDK;
+@import BoxBrowseSDK;
 
 @interface AppDelegate () <BOXFolderViewControllerDelegate, BOXFilePreviewControllerDelegate>
 @end

@@ -8,7 +8,7 @@ This SDK makes it easy to present Box files in your iOS application.
 Developer Setup
 ---------------
 * Ensure you have the latest version of [XCode](https://developer.apple.com/xcode/) installed.
-* We encourage you to use [Carthage] (https://github.com/Carthage/Carthage#installing-carthage) to manage dependencies. Minimal supported version for Carthage is 0.22.0.
+* We encourage you to use [Carthage](https://github.com/Carthage/Carthage#installing-carthage) to manage dependencies. Minimal supported version for Carthage is 0.22.0.
 
 Quickstart
 ----------
@@ -29,7 +29,7 @@ carthage update --platform iOS
 ```
 Step 3: Drag the built framework from Carthage/Build/iOS into your project.
 ```
-For more detailed instructions please see the official documentation for [Carthage] (https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos)
+For more detailed instructions please see the official documentation for [Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos)
 ```
 Step 4: Import
 ```objectivec

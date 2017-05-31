@@ -23,9 +23,9 @@ git "git@git.dev.box.net:Mobile/fmdb.git" "box"
 
 binary "https://github.com/box/box-ios-preview-sdk/releases/download/1.0.4/previewSDK.json" ==  1.0.4
 ```
-Step 2: Update
+Step 2: Update dependencies
 ```
-carthage update --platform iOS
+make bootstrap
 ```
 Step 3: Drag the built framework from Carthage/Build/iOS into your project.
 ```

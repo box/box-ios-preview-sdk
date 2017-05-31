@@ -35,7 +35,7 @@ Step 4: Import
 ```objectivec
 @import BoxPreviewSDK;
 ```
-Step 5: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md).**
+Step 5: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md).
 ```objectivec
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

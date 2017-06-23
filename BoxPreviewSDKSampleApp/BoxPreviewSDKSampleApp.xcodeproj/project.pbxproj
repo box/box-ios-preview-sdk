@@ -12,26 +12,18 @@
 		70FCACDD1B33FB0700084F9E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70FCACDC1B33FB0700084F9E /* Images.xcassets */; };
 		70FCACE01B33FB0700084F9E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70FCACDE1B33FB0700084F9E /* LaunchScreen.xib */; };
 		70FCACEC1B33FB0800084F9E /* BoxPreviewSDKSampleAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCACEB1B33FB0800084F9E /* BoxPreviewSDKSampleAppTests.m */; };
-		A5FD8AC51EDF492300574C20 /* BoxBrowseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8ABF1EDF492300574C20 /* BoxBrowseSDK.framework */; };
-		A5FD8AC61EDF492300574C20 /* BoxBrowseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8ABF1EDF492300574C20 /* BoxBrowseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8AC71EDF492300574C20 /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC01EDF492300574C20 /* BoxContentSDK.framework */; };
-		A5FD8AC81EDF492300574C20 /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC01EDF492300574C20 /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8AC91EDF492300574C20 /* BoxEncryptionSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC11EDF492300574C20 /* BoxEncryptionSDK.framework */; };
-		A5FD8ACA1EDF492300574C20 /* BoxEncryptionSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC11EDF492300574C20 /* BoxEncryptionSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8ACB1EDF492300574C20 /* BOXFMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC21EDF492300574C20 /* BOXFMDB.framework */; };
-		A5FD8ACC1EDF492300574C20 /* BOXFMDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC21EDF492300574C20 /* BOXFMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8ACD1EDF492300574C20 /* BoxPreviewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC31EDF492300574C20 /* BoxPreviewSDK.framework */; };
-		A5FD8ACE1EDF492300574C20 /* BoxPreviewSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC31EDF492300574C20 /* BoxPreviewSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8ACF1EDF492300574C20 /* BoxToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC41EDF492300574C20 /* BoxToolkit.framework */; };
-		A5FD8AD01EDF492300574C20 /* BoxToolkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AC41EDF492300574C20 /* BoxToolkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8AD51EDF493200574C20 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD11EDF493200574C20 /* Masonry.framework */; };
-		A5FD8AD61EDF493200574C20 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD11EDF493200574C20 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8AD71EDF493200574C20 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD21EDF493200574C20 /* MBProgressHUD.framework */; };
-		A5FD8AD81EDF493200574C20 /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD21EDF493200574C20 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8AD91EDF493200574C20 /* PSPDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD31EDF493200574C20 /* PSPDFKit.framework */; };
-		A5FD8ADA1EDF493200574C20 /* PSPDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD31EDF493200574C20 /* PSPDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5FD8ADB1EDF493200574C20 /* RNCryptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD41EDF493200574C20 /* RNCryptor.framework */; };
-		A5FD8ADC1EDF493200574C20 /* RNCryptor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5FD8AD41EDF493200574C20 /* RNCryptor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A509F9B41F02EE3600892BB4 /* BoxBrowseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9AE1F02EDFB00892BB4 /* BoxBrowseSDK.framework */; };
+		A509F9B51F02EE3600892BB4 /* BoxBrowseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9AE1F02EDFB00892BB4 /* BoxBrowseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A509F9B61F02EE3600892BB4 /* BoxContentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9AF1F02EDFB00892BB4 /* BoxContentSDK.framework */; };
+		A509F9B71F02EE3600892BB4 /* BoxContentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9AF1F02EDFB00892BB4 /* BoxContentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A509F9BA1F02EE3600892BB4 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9B11F02EDFB00892BB4 /* Masonry.framework */; };
+		A509F9BB1F02EE3600892BB4 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9B11F02EDFB00892BB4 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A509F9BC1F02EE3600892BB4 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9B21F02EDFB00892BB4 /* MBProgressHUD.framework */; };
+		A509F9BD1F02EE3600892BB4 /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9B21F02EDFB00892BB4 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A509F9BE1F02EE3600892BB4 /* PSPDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9B31F02EDFB00892BB4 /* PSPDFKit.framework */; };
+		A509F9BF1F02EE3600892BB4 /* PSPDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A509F9B31F02EDFB00892BB4 /* PSPDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A509FBBD1F034AD200892BB4 /* BoxPreviewSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A509FBBC1F034AD200892BB4 /* BoxPreviewSDK.framework */; };
+		A509FBBE1F034AD200892BB4 /* BoxPreviewSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A509FBBC1F034AD200892BB4 /* BoxPreviewSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,22 +37,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A5FD8AAD1EDE379000574C20 /* Embed Frameworks */ = {
+		A509F9C01F02EE3600892BB4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A5FD8AD81EDF493200574C20 /* MBProgressHUD.framework in Embed Frameworks */,
-				A5FD8ADA1EDF493200574C20 /* PSPDFKit.framework in Embed Frameworks */,
-				A5FD8ADC1EDF493200574C20 /* RNCryptor.framework in Embed Frameworks */,
-				A5FD8AD61EDF493200574C20 /* Masonry.framework in Embed Frameworks */,
-				A5FD8AC61EDF492300574C20 /* BoxBrowseSDK.framework in Embed Frameworks */,
-				A5FD8ACE1EDF492300574C20 /* BoxPreviewSDK.framework in Embed Frameworks */,
-				A5FD8ACA1EDF492300574C20 /* BoxEncryptionSDK.framework in Embed Frameworks */,
-				A5FD8AD01EDF492300574C20 /* BoxToolkit.framework in Embed Frameworks */,
-				A5FD8AC81EDF492300574C20 /* BoxContentSDK.framework in Embed Frameworks */,
-				A5FD8ACC1EDF492300574C20 /* BOXFMDB.framework in Embed Frameworks */,
+				A509FBBE1F034AD200892BB4 /* BoxPreviewSDK.framework in Embed Frameworks */,
+				A509F9B51F02EE3600892BB4 /* BoxBrowseSDK.framework in Embed Frameworks */,
+				A509F9BF1F02EE3600892BB4 /* PSPDFKit.framework in Embed Frameworks */,
+				A509F9BB1F02EE3600892BB4 /* Masonry.framework in Embed Frameworks */,
+				A509F9BD1F02EE3600892BB4 /* MBProgressHUD.framework in Embed Frameworks */,
+				A509F9B71F02EE3600892BB4 /* BoxContentSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,16 +66,12 @@
 		70FCACE51B33FB0800084F9E /* BoxPreviewSDKSampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxPreviewSDKSampleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70FCACEA1B33FB0800084F9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70FCACEB1B33FB0800084F9E /* BoxPreviewSDKSampleAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxPreviewSDKSampleAppTests.m; sourceTree = "<group>"; };
-		A5FD8ABF1EDF492300574C20 /* BoxBrowseSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxBrowseSDK.framework; path = Carthage/Build/iOS/BoxBrowseSDK.framework; sourceTree = "<group>"; };
-		A5FD8AC01EDF492300574C20 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
-		A5FD8AC11EDF492300574C20 /* BoxEncryptionSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxEncryptionSDK.framework; path = Carthage/Build/iOS/BoxEncryptionSDK.framework; sourceTree = "<group>"; };
-		A5FD8AC21EDF492300574C20 /* BOXFMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BOXFMDB.framework; path = Carthage/Build/iOS/BOXFMDB.framework; sourceTree = "<group>"; };
-		A5FD8AC31EDF492300574C20 /* BoxPreviewSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxPreviewSDK.framework; path = Carthage/Build/iOS/BoxPreviewSDK.framework; sourceTree = "<group>"; };
-		A5FD8AC41EDF492300574C20 /* BoxToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxToolkit.framework; path = Carthage/Build/iOS/BoxToolkit.framework; sourceTree = "<group>"; };
-		A5FD8AD11EDF493200574C20 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = Carthage/Build/iOS/Masonry.framework; sourceTree = "<group>"; };
-		A5FD8AD21EDF493200574C20 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
-		A5FD8AD31EDF493200574C20 /* PSPDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSPDFKit.framework; path = Carthage/Build/iOS/PSPDFKit.framework; sourceTree = "<group>"; };
-		A5FD8AD41EDF493200574C20 /* RNCryptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RNCryptor.framework; path = Carthage/Build/iOS/RNCryptor.framework; sourceTree = "<group>"; };
+		A509F9AE1F02EDFB00892BB4 /* BoxBrowseSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxBrowseSDK.framework; path = Carthage/Build/iOS/BoxBrowseSDK.framework; sourceTree = "<group>"; };
+		A509F9AF1F02EDFB00892BB4 /* BoxContentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxContentSDK.framework; path = Carthage/Build/iOS/BoxContentSDK.framework; sourceTree = "<group>"; };
+		A509F9B11F02EDFB00892BB4 /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = Carthage/Build/iOS/Masonry.framework; sourceTree = "<group>"; };
+		A509F9B21F02EDFB00892BB4 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
+		A509F9B31F02EDFB00892BB4 /* PSPDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSPDFKit.framework; path = Carthage/Build/iOS/PSPDFKit.framework; sourceTree = "<group>"; };
+		A509FBBC1F034AD200892BB4 /* BoxPreviewSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxPreviewSDK.framework; path = Carthage/Build/iOS/BoxPreviewSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,16 +79,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5FD8AD71EDF493200574C20 /* MBProgressHUD.framework in Frameworks */,
-				A5FD8AD91EDF493200574C20 /* PSPDFKit.framework in Frameworks */,
-				A5FD8ADB1EDF493200574C20 /* RNCryptor.framework in Frameworks */,
-				A5FD8AD51EDF493200574C20 /* Masonry.framework in Frameworks */,
-				A5FD8AC51EDF492300574C20 /* BoxBrowseSDK.framework in Frameworks */,
-				A5FD8ACD1EDF492300574C20 /* BoxPreviewSDK.framework in Frameworks */,
-				A5FD8AC91EDF492300574C20 /* BoxEncryptionSDK.framework in Frameworks */,
-				A5FD8ACF1EDF492300574C20 /* BoxToolkit.framework in Frameworks */,
-				A5FD8AC71EDF492300574C20 /* BoxContentSDK.framework in Frameworks */,
-				A5FD8ACB1EDF492300574C20 /* BOXFMDB.framework in Frameworks */,
+				A509FBBD1F034AD200892BB4 /* BoxPreviewSDK.framework in Frameworks */,
+				A509F9B41F02EE3600892BB4 /* BoxBrowseSDK.framework in Frameworks */,
+				A509F9BE1F02EE3600892BB4 /* PSPDFKit.framework in Frameworks */,
+				A509F9BA1F02EE3600892BB4 /* Masonry.framework in Frameworks */,
+				A509F9BC1F02EE3600892BB4 /* MBProgressHUD.framework in Frameworks */,
+				A509F9B61F02EE3600892BB4 /* BoxContentSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,16 +108,12 @@
 		70FCACC31B33FB0700084F9E = {
 			isa = PBXGroup;
 			children = (
-				A5FD8AD11EDF493200574C20 /* Masonry.framework */,
-				A5FD8AD21EDF493200574C20 /* MBProgressHUD.framework */,
-				A5FD8AD31EDF493200574C20 /* PSPDFKit.framework */,
-				A5FD8AD41EDF493200574C20 /* RNCryptor.framework */,
-				A5FD8ABF1EDF492300574C20 /* BoxBrowseSDK.framework */,
-				A5FD8AC01EDF492300574C20 /* BoxContentSDK.framework */,
-				A5FD8AC11EDF492300574C20 /* BoxEncryptionSDK.framework */,
-				A5FD8AC21EDF492300574C20 /* BOXFMDB.framework */,
-				A5FD8AC31EDF492300574C20 /* BoxPreviewSDK.framework */,
-				A5FD8AC41EDF492300574C20 /* BoxToolkit.framework */,
+				A509FBBC1F034AD200892BB4 /* BoxPreviewSDK.framework */,
+				A509F9AE1F02EDFB00892BB4 /* BoxBrowseSDK.framework */,
+				A509F9AF1F02EDFB00892BB4 /* BoxContentSDK.framework */,
+				A509F9B11F02EDFB00892BB4 /* Masonry.framework */,
+				A509F9B21F02EDFB00892BB4 /* MBProgressHUD.framework */,
+				A509F9B31F02EDFB00892BB4 /* PSPDFKit.framework */,
 				70FCACCE1B33FB0700084F9E /* BoxPreviewSDKSampleApp */,
 				70FCACE81B33FB0800084F9E /* BoxPreviewSDKSampleAppTests */,
 				70FCACCD1B33FB0700084F9E /* Products */,
@@ -202,7 +178,7 @@
 				70FCACC81B33FB0700084F9E /* Sources */,
 				70FCACC91B33FB0700084F9E /* Frameworks */,
 				70FCACCA1B33FB0700084F9E /* Resources */,
-				A5FD8AAD1EDE379000574C20 /* Embed Frameworks */,
+				A509F9C01F02EE3600892BB4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -243,6 +219,7 @@
 					70FCACCB1B33FB0700084F9E = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
 					};
 					70FCACE41B33FB0800084F9E = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -413,9 +390,11 @@
 		70FCACF01B33FB0800084F9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "$(CODE_SIGN_ENTITLEMENTS_$(DISTRIBUTION_MODE))";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -426,8 +405,10 @@
 				INFOPLIST_FILE = BoxPreviewSDKSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = your.sampleapp.BoxPreviewSDKSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -436,9 +417,11 @@
 		70FCACF11B33FB0800084F9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "$(CODE_SIGN_ENTITLEMENTS_$(DISTRIBUTION_MODE))";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -449,8 +432,9 @@
 				INFOPLIST_FILE = BoxPreviewSDKSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = your.sampleapp.BoxPreviewSDKSampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.box.ios.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

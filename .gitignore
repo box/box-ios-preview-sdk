@@ -19,5 +19,3 @@ buildArtifacts
 
 # Box localization files
 /output/*
-
-BoxPreviewSDKSampleApp/Pods

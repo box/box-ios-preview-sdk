@@ -8,25 +8,37 @@ This SDK makes it easy to present Box files in your iOS application.
 Developer Setup
 ---------------
 * Ensure you have the latest version of [XCode](https://developer.apple.com/xcode/) installed.
-* We encourage you to use [Cocoa Pods](http://cocoapods.org/) to import the SDK into your project. Cocoa Pods is a simple, but powerful dependency management tool. If you do not already use Cocoa Pods, it's very easy to [get started](http://guides.cocoapods.org/using/getting-started.html).
+* We encourage you to use [Carthage](https://github.com/Carthage/Carthage#installing-carthage) to manage dependencies. Minimal supported version for Carthage is 0.22.0.
 
 Quickstart
 ----------
-Step 1: Add to your Podfile
+Step 1: Add to your Cartfile
 ```
-pod 'box-ios-preview-sdk'
+# Box SDKs
+git "git@github.com:box/box-ios-browse-sdk.git" "master"
+git "git@github.com:box/box-ios-sdk.git" "master"
+
+binary "https://github.com/box/box-ios-preview-sdk/releases/download/v1.1.0/previewSDK.json" ==  1.1.0
 ```
-Step 2: Install
+Step 2: Update dependencies
 ```
-pod install
+make bootstrap
 ```
-Step 3: Import
+Step 3: Drag the built framework from Carthage/Build/iOS into your project.
+```
+For more detailed instructions please see the official documentation for Carthage (https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos)
+```
+Step 4: Import
 ```objectivec
-#import <BoxPreviewSDK/BoxPreviewSDK.h>
+@import BoxPreviewSDK;
 ```
-Step 4: Set the Box Client ID and Client Secret that you obtain from [creating a developer account](http://developers.box.com/)
+Step 5: Set the Box Client ID and Client Secret that you obtain from [creating your app](doc/Setup.md).
 ```objectivec
-[BOXContentClient setClientID:@"your-client-id" clientSecret:@"your-client-secret"];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  // The UIApplicationDelegate is a good place to do this.
+  [BOXContentClient setClientID:@"your-client-id" clientSecret:@"your-client-secret"];
+}
 ```
 Step 5: Present a file
 ```objectivec
@@ -42,10 +54,10 @@ Sample App
 ----------
 A sample app can be found in the [BoxPreviewSDKSampleApp](../../tree/master/BoxPreviewSDKSampleApp) folder. To execute the sample app:
 
-Step 1: Install Pods
+Step 1: Run carthage
 ```
 cd BoxPreviewSDKSampleApp
-pod install
+carthage update --platform iOS
 ```
 Step 2: Open Workspace
 ```

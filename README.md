@@ -21,7 +21,7 @@ binary "https://github.com/box/box-ios-preview-sdk/releases/download/v1.1.0/prev
 ```
 Step 2: Update dependencies
 ```
-make bootstrap
+carthage update
 ```
 Step 3: Drag the built framework from Carthage/Build/iOS into your project.
 ```

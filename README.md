@@ -15,7 +15,6 @@ Quickstart
 Step 1: Add to your Cartfile
 ```
 # Box SDKs
-git "git@github.com:box/box-ios-browse-sdk.git" "master"
 git "git@github.com:box/box-ios-sdk.git" "master"
 
 binary "https://github.com/box/box-ios-preview-sdk/releases/download/v1.1.0/previewSDK.json" ==  1.1.0

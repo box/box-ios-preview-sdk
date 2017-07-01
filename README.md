@@ -17,7 +17,7 @@ Step 1: Add to your Cartfile
 # Box SDKs
 git "git@github.com:box/box-ios-sdk.git" "master"
 
-binary "https://github.com/box/box-ios-preview-sdk/releases/download/v1.1.0/previewSDK.json" ==  1.1.0
+binary "https://github.com/box/box-ios-preview-sdk/releases/download/v1.1.1/previewSDK.json" ==  1.1.1
 
 # 3rd Party SDKs
 github "SnapKit/Masonry" ~> 1.0.1

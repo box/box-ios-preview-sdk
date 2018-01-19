@@ -17,11 +17,11 @@ Step 1: Add to your Cartfile
 # Box SDKs
 git "git@github.com:box/box-ios-sdk.git" "master"
 
-binary "https://github.com/box/box-ios-preview-sdk/releases/download/v1.1.2/previewSDK.json" ==  1.1.2
+binary "https://github.com/box/box-ios-preview-sdk/releases/download/v1.1.5/previewSDK.json"
 
 # 3rd Party SDKs
-github "SnapKit/Masonry" ~> 1.0.1
-github "jdg/MBProgressHUD" ~> 1.0.0
+github "SnapKit/Masonry" ~> 1.1.0
+github "jdg/MBProgressHUD" ~> 1.1.0
 ```
 Step 2: Update dependencies
 ```

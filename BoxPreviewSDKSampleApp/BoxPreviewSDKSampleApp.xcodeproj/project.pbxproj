@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D822C0820115048003AD4AF /* BoxPreviewCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D822C0720115048003AD4AF /* BoxPreviewCoreSDK.framework */; };
+		0D822C0A2011505C003AD4AF /* BoxPreviewCoreSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D822C0720115048003AD4AF /* BoxPreviewCoreSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		70FCACD21B33FB0700084F9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCACD11B33FB0700084F9E /* main.m */; };
 		70FCACD51B33FB0700084F9E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCACD41B33FB0700084F9E /* AppDelegate.m */; };
 		70FCACDD1B33FB0700084F9E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70FCACDC1B33FB0700084F9E /* Images.xcassets */; };
@@ -44,6 +46,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				A509FBBE1F034AD200892BB4 /* BoxPreviewSDK.framework in Embed Frameworks */,
+				0D822C0A2011505C003AD4AF /* BoxPreviewCoreSDK.framework in Embed Frameworks */,
 				A509F9B51F02EE3600892BB4 /* BoxBrowseSDK.framework in Embed Frameworks */,
 				A509F9BF1F02EE3600892BB4 /* PSPDFKit.framework in Embed Frameworks */,
 				A509F9BB1F02EE3600892BB4 /* Masonry.framework in Embed Frameworks */,
@@ -56,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D822C0720115048003AD4AF /* BoxPreviewCoreSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxPreviewCoreSDK.framework; path = Carthage/Build/iOS/BoxPreviewCoreSDK.framework; sourceTree = "<group>"; };
 		70FCACCC1B33FB0700084F9E /* BoxPreviewSDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxPreviewSDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70FCACD01B33FB0700084F9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70FCACD11B33FB0700084F9E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A509FBBD1F034AD200892BB4 /* BoxPreviewSDK.framework in Frameworks */,
+				0D822C0820115048003AD4AF /* BoxPreviewCoreSDK.framework in Frameworks */,
 				A509F9B41F02EE3600892BB4 /* BoxBrowseSDK.framework in Frameworks */,
 				A509F9BE1F02EE3600892BB4 /* PSPDFKit.framework in Frameworks */,
 				A509F9BA1F02EE3600892BB4 /* Masonry.framework in Frameworks */,
@@ -109,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				A509FBBC1F034AD200892BB4 /* BoxPreviewSDK.framework */,
+				0D822C0720115048003AD4AF /* BoxPreviewCoreSDK.framework */,
 				A509F9AE1F02EDFB00892BB4 /* BoxBrowseSDK.framework */,
 				A509F9AF1F02EDFB00892BB4 /* BoxContentSDK.framework */,
 				A509F9B11F02EDFB00892BB4 /* Masonry.framework */,
@@ -213,7 +219,7 @@
 		70FCACC41B33FB0700084F9E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Box;
 				TargetAttributes = {
 					70FCACCB1B33FB0700084F9E = {
@@ -313,19 +319,28 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -357,13 +372,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -453,6 +476,7 @@
 				);
 				INFOPLIST_FILE = BoxPreviewSDKSampleAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "your.sampleapp.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxPreviewSDKSampleApp.app/BoxPreviewSDKSampleApp";
 			};
@@ -468,6 +492,7 @@
 				);
 				INFOPLIST_FILE = BoxPreviewSDKSampleAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "your.sampleapp.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxPreviewSDKSampleApp.app/BoxPreviewSDKSampleApp";
 			};

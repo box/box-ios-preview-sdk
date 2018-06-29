@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0D822C0820115048003AD4AF /* BoxPreviewCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D822C0720115048003AD4AF /* BoxPreviewCoreSDK.framework */; };
 		0D822C0A2011505C003AD4AF /* BoxPreviewCoreSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D822C0720115048003AD4AF /* BoxPreviewCoreSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2914720520E6F71D001F4EEC /* PSPDFKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2914720320E6F701001F4EEC /* PSPDFKitUI.framework */; };
+		2914720620E6F71D001F4EEC /* PSPDFKitUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2914720320E6F701001F4EEC /* PSPDFKitUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		70FCACD21B33FB0700084F9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCACD11B33FB0700084F9E /* main.m */; };
 		70FCACD51B33FB0700084F9E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70FCACD41B33FB0700084F9E /* AppDelegate.m */; };
 		70FCACDD1B33FB0700084F9E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70FCACDC1B33FB0700084F9E /* Images.xcassets */; };
@@ -48,6 +50,7 @@
 				A509FBBE1F034AD200892BB4 /* BoxPreviewSDK.framework in Embed Frameworks */,
 				0D822C0A2011505C003AD4AF /* BoxPreviewCoreSDK.framework in Embed Frameworks */,
 				A509F9B51F02EE3600892BB4 /* BoxBrowseSDK.framework in Embed Frameworks */,
+				2914720620E6F71D001F4EEC /* PSPDFKitUI.framework in Embed Frameworks */,
 				A509F9BF1F02EE3600892BB4 /* PSPDFKit.framework in Embed Frameworks */,
 				A509F9BB1F02EE3600892BB4 /* Masonry.framework in Embed Frameworks */,
 				A509F9BD1F02EE3600892BB4 /* MBProgressHUD.framework in Embed Frameworks */,
@@ -60,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		0D822C0720115048003AD4AF /* BoxPreviewCoreSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoxPreviewCoreSDK.framework; path = Carthage/Build/iOS/BoxPreviewCoreSDK.framework; sourceTree = "<group>"; };
+		2914720320E6F701001F4EEC /* PSPDFKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSPDFKitUI.framework; path = Carthage/Build/iOS/PSPDFKitUI.framework; sourceTree = "<group>"; };
 		70FCACCC1B33FB0700084F9E /* BoxPreviewSDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxPreviewSDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70FCACD01B33FB0700084F9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70FCACD11B33FB0700084F9E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 				0D822C0820115048003AD4AF /* BoxPreviewCoreSDK.framework in Frameworks */,
 				A509F9B41F02EE3600892BB4 /* BoxBrowseSDK.framework in Frameworks */,
 				A509F9BE1F02EE3600892BB4 /* PSPDFKit.framework in Frameworks */,
+				2914720520E6F71D001F4EEC /* PSPDFKitUI.framework in Frameworks */,
 				A509F9BA1F02EE3600892BB4 /* Masonry.framework in Frameworks */,
 				A509F9BC1F02EE3600892BB4 /* MBProgressHUD.framework in Frameworks */,
 				A509F9B61F02EE3600892BB4 /* BoxContentSDK.framework in Frameworks */,
@@ -106,6 +111,7 @@
 		3C0EE4F29869F00F32061476 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2914720320E6F701001F4EEC /* PSPDFKitUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -1,4 +1,4 @@
-binary "https://github.com/box/box-ios-preview-sdk/releases/download/v2.0.0/previewSDK.json" "2.0.0"
+binary "https://github.com/box/box-ios-preview-sdk/releases/download/v2.0.1/previewSDK.json" "2.0.1"
 github "SnapKit/Masonry" "v1.1.0"
 github "box/box-ios-browse-sdk" "d736197e4103c338958b9dd2a8e09a5ba2b5f57f"
 github "box/box-ios-sdk" "4afb78fca778f622f9f84985979eb2b18418fb37"

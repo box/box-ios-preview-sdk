@@ -1,5 +1,5 @@
-binary "https://github.com/box/box-ios-preview-sdk/releases/download/v2.1.2/previewSDK.json" "2.1.2"
+binary "https://github.com/box/box-ios-preview-sdk/releases/download/v2.2.0/previewSDK.json" "2.2.0"
 github "SnapKit/Masonry" "v1.1.0"
 github "box/box-ios-browse-sdk" "839e227c8599b81a1b2382e272d6bb08384a229e"
-github "box/box-ios-sdk" "f815c01b734a903a8e2c3d3dd02ec4bcdfda93e2"
+github "box/box-ios-sdk" "5cf69ec08c9c407df5cc1173b04966001e479638"
 github "jdg/MBProgressHUD" "1.1.0"

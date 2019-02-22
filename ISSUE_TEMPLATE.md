@@ -8,7 +8,7 @@
 
 ### Versions Used
 Preview SDK: // Replace with the version of the Box Preview SDK you're using.  
-iOS: // Replace with the version of Node.js your application is running on.
+iOS: // Replace with the version of iOS your application is running on.
 
 ### Steps to Reproduce
 // Please include detailed steps to reproduce the issue you're seeing, if possible.  

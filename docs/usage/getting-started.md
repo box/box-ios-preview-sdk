@@ -85,7 +85,7 @@ Using the same client ID from the previous step, set the value for Item 0 to
 ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
 `boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5`
 
-![Info.plist setting](https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/URL Schemes in Info.plist.png)
+![Info.plist setting](https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/URL%20Schemes%20in%20Info.plist.png)
 
 __Step 6__: Run the sample app
 

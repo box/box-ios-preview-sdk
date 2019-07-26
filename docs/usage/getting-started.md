@@ -51,6 +51,7 @@ log in.
 [sample-app-zip]: https://github.com/box/box-ios-preview-sdk/blob/limited-beta-release/BoxPreviewSDKSampleApp.zip?raw=true
 
 To execute the sample app:
+
 __Step 1__: Run carthage
 ```shell
 $ cd BoxPreviewSDKSampleApp

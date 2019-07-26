@@ -37,18 +37,21 @@ Getting Started
 
 To get started with the SDK, you'll need the Client ID and Client Secret of your app in the [Box Developer Console][dev-console].
 If you're familar with [Getting Started with the OAuth2 Sample App in the Box Content SDK](https://github.com/box/box-ios-sdk/docs/usage/getting-started.md#oauth2-sample-app)
-you'll find the process very similar. 
+you'll find the process very similar.
 
 [dev-console]: https://app.box.com/developers/console
 
 Sample App Config
 -----------------
 
-The Box Preview SDK Sample App can be found in the
-[BoxPreviewSDKSampleApp](../../tree/limited-beta-release/BoxPreviewSDKSampleApp) folder.  This app demonstrates how to use the
-Box Preview SDK to make calls with OAuth2 Authentication, and can be run directly by entering your own credentials to log in.
+The [Box Preview SDK Sample App][sample-app-zip] can be downloaded as a zip file.  This app demonstrates how to use the
+Box Preview SDK to make calls with OAuth2 Authentication, and can be run directly by entering your own credentials to
+log in.
+
+[sample-app-zip]: https://github.com/box/box-ios-preview-sdk/blob/limited-beta-release/BoxPreviewSDKSampleApp.zip?raw=true
 
 To execute the sample app:
+
 __Step 1__: Run carthage
 ```shell
 $ cd BoxPreviewSDKSampleApp
@@ -63,7 +66,7 @@ $ open BoxPreviewSDKSampleApp.xcworkspace
 __Step 3__: Insert your client ID and client secret
 
 First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
-values to the sample app in [Constants.swift](../../tree/limited-beta-release/BoxPreviewSDKSampleApp/Constants.swift):
+values to the sample app in `Constants.swift` file:
 ```swift
 static let clientId = "YOUR CLIENT ID GOES HERE"
 static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
@@ -78,7 +81,7 @@ ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
 
 __Step 5__: Insert your client ID to receive the redirect in the app
 
-Open the [Info.plist](../../tree/limited-beta-release/BoxPreviewSDKSampleApp/Resources/Info.plist) file and find the key here:
+Open the `Info.plist` file in the sample app and find the key here:
 URL Types --> Item 0 --> URL Schemes --> Item 0
 Using the same client ID from the previous step, set the value for Item 0 to
 `boxsdk-<<YOUR CLIENT ID>>`, where `<<YOUR CLIENT ID>>` is replaced with your client ID.  For example, if your client
@@ -99,12 +102,12 @@ An iOS System Dialog pops up asking if you agree to open a URL to authenticate. 
 
 A Box login page loads.  Enter your credentials and tap "Authorize" to proceed.
 
-A confirmation screen displays the name of your application, as defined in the [Box Developer Console][dev-console], along with the scopes it is configured with.  
+A confirmation screen displays the name of your application, as defined in the [Box Developer Console][dev-console], along with the scopes it is configured with.
 Tap "Grant access to Box" to grant your application access to the Box account.
 
 The next screen displays all the files in the root folder for the account.  If you don't see any files on the screen, check that you have files saved in the root folder of the Box account.
 Note that for simplicity, folders are not displayed in this sample app.
-From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it.  
+From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it.
 PDF, JPG, JPEG, PNG files are currently supported.
 
 

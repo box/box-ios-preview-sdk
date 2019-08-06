@@ -20,7 +20,7 @@ Installing the SDK
 
 __Step 1__: Add to your `Cartfile`
 ```ogdl
-binary "https://github.com/box/box-ios-preview-sdk/releases/download/v3.0.0-alpha.1/boxPreviewSDK.json"
+binary "https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/boxPreviewSDK.json" == 3.0.0-alpha.1
 ```
 
 __Step 2__: Update dependencies

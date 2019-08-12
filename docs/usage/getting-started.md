@@ -152,3 +152,9 @@ You can expect to see the following enhancements in future updates of the Box Pr
   - Support for left and right swiping gestures to navigate from one image to the next
 - Start app on last-viewed file
 - And more!
+
+License
+-------
+
+Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
+__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__

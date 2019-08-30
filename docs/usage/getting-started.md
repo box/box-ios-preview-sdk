@@ -29,7 +29,7 @@ __Step 2__: Update dependencies
 $ carthage update --platform iOS
 ```
 
-__Step 3__: Drag the built framework from Carthage/Build/iOS into your project.
+__Step 3__: The framework in the Carthage/Build/iOS folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.
 
 For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
 
@@ -142,13 +142,16 @@ Future Enhancements
 
 You can expect to see the following enhancements in future updates of the Box Preview SDK Sample App:
 - Support for more file types
-- Search
-  - Search Results navigator
-  - Search Results highlighting in document
-  - Search history
 - Local file caching
 - Open multiple images at once
   - Load all images in thumbnail navigation bar at the bottom of the screen
   - Support for left and right swiping gestures to navigate from one image to the next
 - Start app on last-viewed file
 - And more!
+
+
+License
+-------
+
+Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
+__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__

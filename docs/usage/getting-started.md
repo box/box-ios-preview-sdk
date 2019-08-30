@@ -20,8 +20,8 @@ Installing the SDK
 
 __Step 1__: Add to your `Cartfile`
 ```ogdl
-binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-alpha.2
-binary "https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/boxPreviewSDK.json" == 3.0.0-alpha.2
+binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-alpha.3
+binary "https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/boxPreviewSDK.json" == 3.0.0-alpha.3
 ```
 
 __Step 2__: Update dependencies
@@ -29,7 +29,7 @@ __Step 2__: Update dependencies
 $ carthage update --platform iOS
 ```
 
-__Step 3__: The framework in the Carthage/Build/iOS folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.
+__Step 3__: Drag the built framework from Carthage/Build/iOS into your project.
 
 For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
 

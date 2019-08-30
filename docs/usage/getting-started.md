@@ -20,8 +20,8 @@ Installing the SDK
 
 __Step 1__: Add to your `Cartfile`
 ```ogdl
-binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-alpha.2
-binary "https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/boxPreviewSDK.json" == 3.0.0-alpha.2
+binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-alpha.3
+binary "https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/boxPreviewSDK.json" == 3.0.0-alpha.3
 ```
 
 __Step 2__: Update dependencies
@@ -142,13 +142,16 @@ Future Enhancements
 
 You can expect to see the following enhancements in future updates of the Box Preview SDK Sample App:
 - Support for more file types
-- Search
-  - Search Results navigator
-  - Search Results highlighting in document
-  - Search history
 - Local file caching
 - Open multiple images at once
   - Load all images in thumbnail navigation bar at the bottom of the screen
   - Support for left and right swiping gestures to navigate from one image to the next
 - Start app on last-viewed file
 - And more!
+
+
+License
+-------
+
+Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
+__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__

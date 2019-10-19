@@ -1,0 +1,11 @@
+framework module BoxPreviewSDK {
+  umbrella header "BoxPreviewSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module BoxPreviewSDK.Swift {
+    header "BoxPreviewSDK-Swift.h"
+    requires objc
+}

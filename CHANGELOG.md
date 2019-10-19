@@ -1,6 +1,23 @@
 Changelog
 =========
 
+## v3.0.0-rc.1 [2019-10-18]
+
+__Breaking Changes:__
+
+
+__New Features and Enhancements:__
+
+- Added Xcode 11 support (SDK builds still target iOS 11.0)
+- Added new Error View for displaying errors
+- Added ability to open multiple image files at once with navigation
+- Added search for PDF files
+- Added search results navigation
+- Added search string history
+- Added support of all iOS-supported image file extensions
+- Improved structure and usability of Sample Apps
+
+
 ## v3.0.0-alpha.3 [2019-08-29]
 
 __Breaking Changes:__
@@ -14,7 +31,7 @@ __New Features and Enhancements:__
 - Added search history for PDFs
 - Added search results navigation for PDFs
 - Added logout feature to OAuth2 Sample App
-- Added support for custome Error Views
+- Added support for custom Error Views
 
 
 ## v3.0.0-alpha.2 [2019-08-08]

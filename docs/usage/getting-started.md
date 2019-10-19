@@ -20,8 +20,8 @@ Installing the SDK
 
 __Step 1__: Add to your `Cartfile`
 ```ogdl
-binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-alpha.3
-binary "https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/boxPreviewSDK.json" == 3.0.0-alpha.3
+binary "https://raw.githubusercontent.com/box/box-ios-sdk/limited-beta-release/boxSDK.json" == 3.0.0-rc.1
+binary "https://raw.githubusercontent.com/box/box-ios-preview-sdk/limited-beta-release/boxPreviewSDK.json" == 3.0.0-rc.1
 ```
 
 __Step 2__: Update dependencies
@@ -109,7 +109,7 @@ Tap "Grant access to Box" to grant your application access to the Box account.
 The next screen displays all the files in the root folder for the account.  If you don't see any files on the screen, check that you have files saved in the root folder of the Box account.
 Note that for simplicity, folders are not displayed in this sample app.
 From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it.
-PDF, JPG, JPEG, PNG files are currently supported.
+PDF and all iOS-supported image files are currently supported in the app.
 
 
 Open a PDF File
@@ -136,6 +136,11 @@ The toolbar at the top contains an arrow to go back to the file list and the fil
 
 The image supports pinch-to-zoom gestures and panning.
 
+The Preview SDK supports opening multiple images at once, but this is currently not exposed in the sample app.  Feel free to play around with this functionality on your own, by calling `BoxPreviewSDK.openImageFiles(fileIds:selectedId:delegate:allowedAction:displayThumbnails)`
+  - Loads all images in thumbnail navigation bar at the bottom of the screen
+  - Supports left and right swiping gestures to navigate from one image to the next
+  - Gallery view
+
 
 Future Enhancements
 -------------------
@@ -143,9 +148,6 @@ Future Enhancements
 You can expect to see the following enhancements in future updates of the Box Preview SDK Sample App:
 - Support for more file types
 - Local file caching
-- Open multiple images at once
-  - Load all images in thumbnail navigation bar at the bottom of the screen
-  - Support for left and right swiping gestures to navigate from one image to the next
 - Start app on last-viewed file
 - And more!
 

@@ -1,9 +1,23 @@
 Changelog
 =========
 
+## v3.0.0-rc.2 [2019-10-30]
+
+__Breaking Changes:__
+
+- Changed SDK errors from customValue enum cases to specific enum cases
+
+
+__New Features and Enhancements:__
+
+- Added Xcode 11 + iOS 13 support to Travis CI
+
+
 ## v3.0.0-rc.1 [2019-10-18]
 
 __Breaking Changes:__
+
+- Temporarily removed progress closure for uploads and downloads
 
 
 __New Features and Enhancements:__

@@ -1,3 +1,5 @@
+#BoxPreviewSDK
+
 - [Installing the SDK](#installing-the-sdk)
 - [Getting Started](#getting-started)
 - [Sample App Config](#sample-app-config)

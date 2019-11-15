@@ -1,6 +1,16 @@
 Changelog
 =========
 
+## v3.0.0-rc.3 [2019-11-14]
+
+__Breaking Changes:__
+
+
+__New Features and Enhancements:__
+
+- Update Sample Apps to use new PagingIterator responses 
+
+
 ## v3.0.0-rc.2 [2019-10-30]
 
 __Breaking Changes:__

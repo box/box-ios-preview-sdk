@@ -52,11 +52,11 @@ you'll find the process very similar.
 Sample App Config
 -----------------
 
-The [Box Preview SDK Sample App][sample-app-zip] can be downloaded as a zip file.  This app demonstrates how to use the
+A sample app using OAuth2 Authentication can be found in the repository [here][oauth2-sample-app].  This app demonstrates how to use the
 Box Preview SDK to make calls with OAuth2 Authentication, and can be run directly by entering your own credentials to
 log in.
 
-[sample-app-zip]: https://github.com/box/box-ios-preview-sdk/blob/limited-beta-release/BoxPreviewSDKSampleApp.zip?raw=true
+[sample-app-zip]: https://github.com/box/box-ios-preview-sdk/tree/limited-beta-release/SampleApps/OAuth2SampleApp
 
 To execute the sample app:
 
@@ -66,9 +66,9 @@ $ cd BoxPreviewSDKSampleApp
 $ carthage update --platform iOS
 ```
 
-__Step 2__: Open Workspace
+__Step 2__: Open Xcode Project File
 ```shell
-$ open BoxPreviewSDKSampleApp.xcworkspace
+$ open OAuth2SampleApp.xcodeproj
 ```
 
 __Step 3__: Insert your client ID and client secret

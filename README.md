@@ -1,12 +1,162 @@
-# Box iOS Preview SDK
+# BoxPreviewSDK
 
-Box iOS Preview SDK
+[![Platforms](https://img.shields.io/cocoapods/p/BoxPreviewSDK.svg)](https://cocoapods.org/pods/BoxPreviewSDK)
+[![License](https://img.shields.io/cocoapods/l/BoxPreviewSDK.svg)](https://raw.githubusercontent.com/box/BoxPreviewSDK/master/LICENSE)
 
+[![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxPreviewSDK.svg)](https://cocoapods.org/pods/BoxPreviewSDK)
+
+[![Build Status](https://travis-ci.com/box/box-swift-preview-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master)](https://travis-ci.com/box/box-swift-preview-sdk)
+
+This SDK makes it easy to present Box files in your iOS application.
+
+- [Installing the SDK](#installing-the-sdk)
 - [Getting Started](#getting-started)
+- [Sample App Config](#sample-app-config)
+- [Using the Sample App](#using-the-sample-app)
+- [Open a PDF File](#open-a-pdf-file)
+- [Open an Image File](#open-an-image-file)
+- [Future Enhancements](#future-enhancements)
 - [Release Definitions](#release-definitions)
 
-## Getting Started
-Please refer to [docs/usage/getting-started.md](https://github.com/box/box-ios-preview-sdk/blob/limited-beta-release/docs/usage/getting-started.md)
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+Installing the SDK
+------------------
+
+__Step 1__: Add to your `Cartfile`
+```ogdl
+git "https://github.com/box/box-ios-sdk.git" "limited-beta-release"
+git "https://github.com/box/box-ios-preview-sdk.git" "limited-beta-release"
+```
+
+__Step 2__: Update dependencies
+```shell
+$ carthage update --platform iOS
+```
+
+__Step 3__: The framework in the Carthage/Build/iOS folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.
+
+For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
+
+Getting Started
+---------------
+
+To get started with the SDK, you'll need the Client ID and Client Secret of your app in the [Box Developer Console][dev-console].
+If you're familar with [Getting Started with the OAuth2 Sample App in the Box Content SDK](https://github.com/box/box-ios-sdk/docs/usage/getting-started.md#oauth2-sample-app)
+you'll find the process very similar.
+
+[dev-console]: https://app.box.com/developers/console
+
+Sample App Config
+-----------------
+
+The [Box Preview SDK Sample App][sample-app-zip] can be downloaded as a zip file.  This app demonstrates how to use the
+Box Preview SDK to make calls with OAuth2 Authentication, and can be run directly by entering your own credentials to
+log in.
+
+[sample-app-zip]: https://github.com/box/box-ios-preview-sdk/blob/limited-beta-release/BoxPreviewSDKSampleApp.zip?raw=true
+
+To execute the sample app:
+
+__Step 1__: Run carthage
+```shell
+$ cd BoxPreviewSDKSampleApp
+$ carthage update --platform iOS
+```
+
+__Step 2__: Open Workspace
+```shell
+$ open BoxPreviewSDKSampleApp.xcworkspace
+```
+
+__Step 3__: Insert your client ID and client secret
+
+First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
+values to the sample app in `Constants.swift` file:
+```swift
+static let clientId = "YOUR CLIENT ID GOES HERE"
+static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
+```
+
+__Step 4__: Set redirect URL
+
+Using the same client ID from the previous step, set the redirect URL for your application in the [Box Developer Console][dev-console] to
+`boxsdk-<<YOUR CLIENT ID>>://boxsdkoauth2redirect`, where `<<YOUR CLIENT ID>>` is replaced with your client ID.  For example, if your client
+ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
+`boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5://boxsdkoauth2redirect`
+
+__Step 5__: Insert your client ID to receive the redirect in the app
+
+Open the `Info.plist` file in the sample app and find the key here:
+URL Types --> Item 0 --> URL Schemes --> Item 0
+Using the same client ID from the previous step, set the value for Item 0 to
+`boxsdk-<<YOUR CLIENT ID>>`, where `<<YOUR CLIENT ID>>` is replaced with your client ID.  For example, if your client
+ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
+`boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5`
+
+![Info.plist setting](./URL%20Schemes%20in%20Info.plist.png)
+
+__Step 6__: Run the sample app
+
+Using the Sample App
+--------------------
+The app opens with a prompt to begin OAuth2.0 Authentication.  Tap "OAuth2.0 Authentication" to proceed.
+
+On the next screen, tap "Login".
+
+An iOS System Dialog pops up asking if you agree to open a URL to authenticate.  Tap "Continue" to proceed.
+
+A Box login page loads.  Enter your credentials and tap "Authorize" to proceed.
+
+A confirmation screen displays the name of your application, as defined in the [Box Developer Console][dev-console], along with the scopes it is configured with.
+Tap "Grant access to Box" to grant your application access to the Box account.
+
+The next screen displays all the files in the root folder for the account.  If you don't see any files on the screen, check that you have files saved in the root folder of the Box account.
+Note that for simplicity, folders are not displayed in this sample app.
+From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it.
+PDF and all iOS-supported image files are currently supported in the app.
+
+
+Open a PDF File
+---------------
+
+Tap a PDF file in the file list.  A progress bar indicates the download progress as the file is retrieved from Box.  When the progress reaches 100%, the document is displayed.
+
+The toolbar at the top contains an arrow to go back to the file list, the file name, the current page number, an outline view button (if the document contains an outline) and a gallery view button.  The toolbar can be toggled by tapping the document.
+
+The outline view allows you to view the hierarchical structure of the document and offers quick navigation to a particular page.
+
+The gallery view shows large thumbnails of each page and offers quick navigation to a particular page.
+
+The document supports left and right swiping gestures to navigate one page at a time, pinch-to-zoom gestures and panning.
+
+For PDF files containing multiple pages, the thumbnail navigation bar at the bottom of the screen allows for quick navigation through the entire document.
+
+
+Open an Image File
+------------------
+Tap an image file (JPG, JPEG, PNG files are currently supported) in the file list.  A progress bar indicates the download progress as the file is retrieved from Box.  When the progress reaches 100%, the image is displayed.
+
+The toolbar at the top contains an arrow to go back to the file list and the file name.  The toolbar can be toggled by tapping the image.
+
+The image supports pinch-to-zoom gestures and panning.
+
+The Preview SDK supports opening multiple images at once, but this is currently not exposed in the sample app.  Feel free to play around with this functionality on your own, by calling `BoxPreviewSDK.openImageFiles(fileIds:selectedId:delegate:allowedAction:displayThumbnails)`
+  - Loads all images in thumbnail navigation bar at the bottom of the screen
+  - Supports left and right swiping gestures to navigate from one image to the next
+  - Gallery view
+
+
+Future Enhancements
+-------------------
+
+You can expect to see the following enhancements in future updates of the Box Preview SDK Sample App:
+- Support for more file types
+- Local file caching
+- Start app on last-viewed file
+- And more!
 
 
 ## Release Definitions
@@ -72,3 +222,10 @@ After a time, the release is no longer under active development, but customers m
 
 #### End-of-life
 After a release is no longer being supported by Box, it enters End-of-life (EOL) and no further changes should be expected by customers.  Customers must upgrade to a newer release if they want to receive support.
+
+
+License
+-------
+
+Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
+__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__

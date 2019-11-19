@@ -1,6 +1,6 @@
 # Box SDKs
 git "git@github.com:box/box-ios-browse-sdk.git" "master"
-git "git@github.com:box/box-ios-sdk.git" "master"
+git "git@github.com:box/box-ios-sdk.git" "objective-c-maintenance"
 
 binary "https://github.com/box/box-ios-preview-sdk/releases/download/v2.1.2/previewSDK.json" ==  2.1.2
 

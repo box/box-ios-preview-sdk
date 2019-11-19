@@ -1,5 +1,11 @@
 [![Project Status](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges)
 
+NOTE:
+===================
+
+The iOS Preview SDK in **Objective-C** (prior to v3.0.0) has been moved from the master branch to this objective-c-maintenance branch.
+Going forward, the master branch will contain the iOS Preview SDK in **Swift**, starting with v3.0.0.
+
 Box iOS Preview SDK
 ===================
 
@@ -15,7 +21,7 @@ Quickstart
 Step 1: Add to your Cartfile
 ```
 # Box SDKs
-git "git@github.com:box/box-ios-sdk.git" "master"
+git "git@github.com:box/box-ios-sdk.git" "objective-c-maintenance"
 
 binary "https://github.com/box/box-ios-preview-sdk/releases/download/v1.1.5/previewSDK.json"
 

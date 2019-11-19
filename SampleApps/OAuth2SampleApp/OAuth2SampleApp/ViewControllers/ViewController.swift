@@ -86,13 +86,42 @@ class ViewController: UITableViewController, ASWebAuthenticationPresentationCont
             cell.textLabel?.text = file.name
             cell.detailTextLabel?.text = String(format: "Date Modified %@", dateFormatter.string(from: file.modifiedAt ?? Date()))
             cell.accessoryType = .none
-            cell.imageView?.image = nil
+            var icon: String
+            switch file.extension {
+            case "boxnote":
+                icon = "boxnote"
+            case "jpg",
+                 "jpeg",
+                 "png",
+                 "tiff",
+                 "tif",
+                 "gif",
+                 "bmp",
+                 "BMPf",
+                 "ico",
+                 "cur",
+                 "xbm":
+                icon = "image"
+            case "pdf":
+                icon = "pdf"
+            case "docx":
+                icon = "word"
+            case "pptx":
+                icon = "powerpoint"
+            case "xlsx":
+                icon = "excel"
+            case "zip":
+                icon = "zip"
+            default:
+                icon = "generic"
+            }
+            cell.imageView?.image = UIImage(named: icon)
         }
         else if case let .folder(folder) = item {
             cell.textLabel?.text = folder.name
             cell.detailTextLabel?.text = ""
             cell.accessoryType = .disclosureIndicator
-            cell.imageView?.image = UIImage(named: "folderIcon")
+            cell.imageView?.image = UIImage(named: "folder")
         }
 
         return cell
@@ -142,7 +171,7 @@ private extension ViewController {
         client.folders.listItems(
             folderId: BoxSDK.Constants.rootFolder,
             usemarker: true,
-            fields: ["modified_at", "name"]
+            fields: ["modified_at", "name", "extension"]
         ){ [weak self] result in
             guard let self = self else {return}
 
@@ -155,13 +184,11 @@ private extension ViewController {
                     items.next { result in
                         switch result {
                         case let .success(item):
-                            if case .file = item {
-                                print ("    Got Item #\(String(format: "%03d", i)) | \(item.debugDescription))")
-                                DispatchQueue.main.async {
-                                    self.folderItems.append(item)
-                                    self.tableView.reloadData()
-                                    self.navigationItem.rightBarButtonItem?.title = "Refresh"
-                                }
+                            print ("    Got Item #\(String(format: "%03d", i)) | \(item.debugDescription))")
+                            DispatchQueue.main.async {
+                                self.folderItems.append(item)
+                                self.tableView.reloadData()
+                                self.navigationItem.rightBarButtonItem?.title = "Refresh"
                             }
                         case let .failure(error):
                             print ("     No Item #\(String(format: "%03d", i)) | \(error.message)")

@@ -27,8 +27,8 @@ Installing the SDK
 
 __Step 1__: Add to your `Cartfile`
 ```ogdl
-git "https://github.com/box/box-ios-sdk.git" "limited-beta-release"
-git "https://github.com/box/box-ios-preview-sdk.git" "limited-beta-release"
+git "https://github.com/box/box-ios-sdk.git" ~> 3.0
+git "https://github.com/box/box-ios-preview-sdk.git" ~> 3.0
 ```
 
 __Step 2__: Update dependencies
@@ -152,7 +152,7 @@ The Preview SDK supports opening multiple images at once, but this is currently 
 Future Enhancements
 -------------------
 
-You can expect to see the following enhancements in future updates of the Box Preview SDK Sample App:
+You can expect to see the following enhancements in future updates of the Box Preview SDK:
 - Support for more file types
 - Local file caching
 - Start app on last-viewed file
@@ -222,10 +222,3 @@ After a time, the release is no longer under active development, but customers m
 
 #### End-of-life
 After a release is no longer being supported by Box, it enters End-of-life (EOL) and no further changes should be expected by customers.  Customers must upgrade to a newer release if they want to receive support.
-
-
-License
--------
-
-Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
-__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__

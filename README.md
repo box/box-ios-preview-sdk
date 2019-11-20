@@ -35,7 +35,7 @@ Requirements
 Installing the SDK
 ------------------
 
-###Carthage
+### Carthage
 
 __Step 1__: Add to your `Cartfile`
 

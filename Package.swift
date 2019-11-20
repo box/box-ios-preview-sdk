@@ -22,18 +22,13 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/box/box-swift-sdk.git", .upToNextMajor(from: "3.0.0"))
+        .package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "3.0.0"))
     ],
     targets: [
         .target(
             name: "BoxPreviewSDK",
-            dependencies: [],
+            dependencies: ["BoxSDK"],
             path: "Sources"
-        ),
-        .testTarget(
-            name: "BoxPreviewSDKTests",
-            dependencies: ["BoxPreviewSDK"],
-            path: "Tests"
         )
     ]
 )

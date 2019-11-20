@@ -83,7 +83,7 @@ __Step 4__: Leave the default settings to get the most recent release and click 
 
 The process should look like below:
 
-![Import Package](docs/Import_BoxSDK.gif)
+![Import Package](docs/usage/import-sdk-spm.gif)
 
 
 
@@ -147,7 +147,7 @@ Using the same client ID from the previous step, set the value for Item 0 to
 ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
 `boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5`
 
-![Info.plist setting](./URL%20Schemes%20in%20Info.plist.png)
+![Info.plist setting](docs/usage/redirect-url-scheme.png)
 
 __Step 6__: Run the sample app
 

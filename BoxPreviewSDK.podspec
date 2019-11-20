@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
   spec.social_media_url   = "https://twitter.com/box"
   spec.ios.deployment_target = "11.0"
   spec.source       = { :git => "https://github.com/box/box-ios-preview-sdk.git", :tag => "v"+spec.version.to_s }
-  spec.swift_version = ["5.0", "5.1"]
+  spec.swift_versions = ["5.0", "5.1"]
   spec.requires_arc = true
   spec.dependency "BoxSDK", "~> 3.0.0"
 

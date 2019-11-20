@@ -29,10 +29,6 @@ let package = Package(
             name: "BoxPreviewSDK",
             dependencies: [],
             path: "Sources"
-        ),
-        .testTarget(
-            name: "BoxPreviewSDKTests",
-            dependencies: ["BoxPreviewSDK"]
         )
     ]
 )

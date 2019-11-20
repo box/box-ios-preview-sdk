@@ -27,7 +27,7 @@ let package = Package(
     targets: [
         .target(
             name: "BoxPreviewSDK",
-            dependencies: [],
+            dependencies: ["BoxSDK"],
             path: "Sources"
         )
     ]

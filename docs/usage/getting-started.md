@@ -29,7 +29,7 @@ This SDK makes it easy to present Box files in your iOS application.
 Requirements
 ------------------
 
-- iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+
+- iOS 11.0+
 - Xcode 10.0+
 
 Installing the SDK

@@ -11,7 +11,11 @@
 
 This SDK makes it easy to present Box files in your iOS application.
 
+- [Requirements](#requirements)
 - [Installing the SDK](#installing-the-sdk)
+  - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
+  - [Swift Package Manager](#swift-package-manager)
 - [Getting Started](#getting-started)
 - [Sample App Config](#sample-app-config)
 - [Using the Sample App](#using-the-sample-app)
@@ -22,10 +26,19 @@ This SDK makes it easy to present Box files in your iOS application.
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+Requirements
+------------------
+
+- iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+
+- Xcode 10.0+
+
 Installing the SDK
 ------------------
 
+###Carthage
+
 __Step 1__: Add to your `Cartfile`
+
 ```ogdl
 git "https://github.com/box/box-ios-sdk.git" ~> 3.0
 git "https://github.com/box/box-ios-preview-sdk.git" ~> 3.0
@@ -39,6 +52,44 @@ $ carthage update --platform iOS
 __Step 3__: The framework in the Carthage/Build/iOS folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.
 
 For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
+
+### CocoaPods
+
+__Step 1__: Add to your `Podfile`
+
+```
+pod 'BoxPreviewSDK', '~> 3.0'
+```
+
+__Step 2__: Install pod by running the following command in the directory with the `Podfile`
+
+```
+$ pod install
+```
+
+For more detailed instructions, please see the [official document for Cocoapods](https://guides.cocoapods.org/using/using-cocoapods.html).
+
+### Swift Package Manager
+
+#### Importing BoxSDK into Project
+
+__Step 1__: Click on Xcode project file
+
+__Step 2__: Click on Swift Packages and click on the plus to add a package
+
+__Step 3__: Enter the following repository url `https://github.com/box/box-ios-preview-sdk.git` and click next
+
+__Step 4__: Leave the default settings to get the most recent release and click next to finish importing
+
+The process should look like below:
+
+![Import Package](docs/Import_BoxSDK.gif)
+
+
+
+#### Adding BoxSDK as a Dependency
+
+For detailed instructions, please see the [official document for SPM](https://swift.org/package-manager/). 
 
 Getting Started
 ---------------
@@ -218,7 +269,13 @@ For the above reasons, we recommend all developers who do not intend to make fre
 Once a release is considered ready for release, a new version is cut and the release enters the Active phase.  However, new features may be added to the SDK, including support for new API endpoints. 
 
 #### Maintenance
+
 After a time, the release is no longer under active development, but customers may still be depending on it.  At this time, we consider the release to be in Maintenance phase; generally, only bug fixes will be considered for inclusion in new versions.  We may of course opt to include new functionality based on customer demand, but in general customers should expect that the SDK feature set will be mostly frozen for the remainder of its lifecycle.
 
 #### End-of-life
 After a release is no longer being supported by Box, it enters End-of-life (EOL) and no further changes should be expected by customers.  Customers must upgrade to a newer release if they want to receive support.
+
+License
+-------
+
+Apache License, Version 2.0

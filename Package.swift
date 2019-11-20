@@ -12,7 +12,10 @@ import PackageDescription
 let package = Package(
     name: "BoxPreviewSDK",
     platforms: [
-        .iOS(.v11)
+        .iOS(.v11),
+        .macOS(.v10_13),
+        .watchOS(.v4),
+        .tvOS(.v11)
     ],
     products: [
         .library(
@@ -22,8 +25,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/box/box-swift-sdk.git", .upToNextMajor(from: "0.0.1"))
+        .package(url: "https://github.com/box/box-swift-sdk.git", .upToNextMajor(from: "3.0.0"))
     ],
     targets: [
         .target(
@@ -36,6 +38,5 @@ let package = Package(
             dependencies: ["BoxPreviewSDK"],
             path: "Tests"
         )
-    ],
-    swiftLanguageVersions: [.v5]
+    ]
 )

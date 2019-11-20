@@ -1,6 +1,21 @@
 # BoxPreviewSDK
 
+[![Platforms](https://img.shields.io/cocoapods/p/BoxPreviewSDK.svg)](https://cocoapods.org/pods/BoxPreviewSDK)
+[![License](https://img.shields.io/cocoapods/l/BoxPreviewSDK.svg)](https://raw.githubusercontent.com/box/BoxPreviewSDK/master/LICENSE)
+
+[![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxPreviewSDK.svg)](https://cocoapods.org/pods/BoxPreviewSDK)
+
+[![Build Status](https://travis-ci.com/box/box-swift-preview-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master)](https://travis-ci.com/box/box-swift-preview-sdk)
+
+This SDK makes it easy to present Box files in your iOS application.
+
+- [Requirements](#requirements)
 - [Installing the SDK](#installing-the-sdk)
+  - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
+  - [Swift Package Manager](#swift-package-manager)
 - [Getting Started](#getting-started)
 - [Sample App Config](#sample-app-config)
 - [Using the Sample App](#using-the-sample-app)
@@ -11,16 +26,26 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+Requirements
+------------------
+
+- iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+
+- Xcode 10.0+
+
 Installing the SDK
 ------------------
 
+###Carthage
+
 __Step 1__: Add to your `Cartfile`
+
 ```ogdl
-git "https://github.com/box/box-ios-sdk.git" "limited-beta-release"
-git "https://github.com/box/box-ios-preview-sdk.git" "limited-beta-release"
+git "https://github.com/box/box-ios-sdk.git" ~> 3.0
+git "https://github.com/box/box-ios-preview-sdk.git" ~> 3.0
 ```
 
 __Step 2__: Update dependencies
+
 ```shell
 $ carthage update --platform iOS
 ```
@@ -28,6 +53,44 @@ $ carthage update --platform iOS
 __Step 3__: The framework in the Carthage/Build/iOS folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.
 
 For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
+
+### CocoaPods
+
+__Step 1__: Add to your `Podfile`
+
+```
+pod 'BoxPreviewSDK', '~> 3.0'
+```
+
+__Step 2__: Install pod by running the following command in the directory with the `Podfile`
+
+```
+$ pod install
+```
+
+For more detailed instructions, please see the [official document for Cocoapods](https://guides.cocoapods.org/using/using-cocoapods.html).
+
+### Swift Package Manager
+
+#### Importing BoxSDK into Project
+
+__Step 1__: Click on Xcode project file
+
+__Step 2__: Click on Swift Packages and click on the plus to add a package
+
+__Step 3__: Enter the following repository url `https://github.com/box/box-ios-preview-sdk.git` and click next
+
+__Step 4__: Leave the default settings to get the most recent release and click next to finish importing
+
+The process should look like below:
+
+![Import Package](/Users/sgarlanka/Documents/SDKs/box-ios-preview-sdk/docs/Import_BoxSDK.gif)
+
+
+
+#### Adding BoxSDK as a Dependency
+
+For detailed instructions, please see the [official document for SPM](https://swift.org/package-manager/). 
 
 Getting Started
 ---------------
@@ -50,12 +113,14 @@ log in.
 To execute the sample app:
 
 __Step 1__: Run carthage
+
 ```shell
 $ cd BoxPreviewSDKSampleApp
 $ carthage update --platform iOS
 ```
 
 __Step 2__: Open Xcode Project File
+
 ```shell
 $ open OAuth2SampleApp.xcodeproj
 ```
@@ -64,6 +129,7 @@ __Step 3__: Insert your client ID and client secret
 
 First, find your OAuth2 app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
 values to the sample app in `Constants.swift` file:
+
 ```swift
 static let clientId = "YOUR CLIENT ID GOES HERE"
 static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
@@ -85,12 +151,13 @@ Using the same client ID from the previous step, set the value for Item 0 to
 ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
 `boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5`
 
-![Info.plist setting](./URL%20Schemes%20in%20Info.plist.png)
+![Info.plist setting](/Users/sgarlanka/Documents/SDKs/box-ios-preview-sdk/URL Schemes in Info.plist.png)
 
 __Step 6__: Run the sample app
 
 Using the Sample App
 --------------------
+
 The app opens with a prompt to begin OAuth2.0 Authentication.  Tap "OAuth2.0 Authentication" to proceed.
 
 On the next screen, tap "Login".
@@ -126,6 +193,7 @@ For PDF files containing multiple pages, the thumbnail navigation bar at the bot
 
 Open an Image File
 ------------------
+
 Tap an image file (JPG, JPEG, PNG files are currently supported) in the file list.  A progress bar indicates the download progress as the file is retrieved from Box.  When the progress reaches 100%, the image is displayed.
 
 The toolbar at the top contains an arrow to go back to the file list and the file name.  The toolbar can be toggled by tapping the image.
@@ -133,6 +201,7 @@ The toolbar at the top contains an arrow to go back to the file list and the fil
 The image supports pinch-to-zoom gestures and panning.
 
 The Preview SDK supports opening multiple images at once, but this is currently not exposed in the sample app.  Feel free to play around with this functionality on your own, by calling `BoxPreviewSDK.openImageFiles(fileIds:selectedId:delegate:allowedAction:displayThumbnails)`
+
   - Loads all images in thumbnail navigation bar at the bottom of the screen
   - Supports left and right swiping gestures to navigate from one image to the next
   - Gallery view
@@ -141,7 +210,8 @@ The Preview SDK supports opening multiple images at once, but this is currently 
 Future Enhancements
 -------------------
 
-You can expect to see the following enhancements in future updates of the Box Preview SDK Sample App:
+You can expect to see the following enhancements in future updates of the Box Preview SDK:
+
 - Support for more file types
 - Local file caching
 - Start app on last-viewed file
@@ -149,17 +219,22 @@ You can expect to see the following enhancements in future updates of the Box Pr
 
 
 ## Release Definitions
+
 Starting Oct 19th, 2019 the Box Swift SDK for iOS will be available for general use. This implies all Box developers will be able to use the SDK to build native iOS applications on Box. Between now and the next couple of months, we will be making frequent updates to the SDK based on feedback from our customers, and this document aims to set expectations with respect to:
+
 1. the various release types you will see over the next few months, what they mean and how to identify them
 1. support policy for each of the release types
 
 Between now and the next couple of months, the Box Swift SDK for iOS releases will be one of the following types:
+
 - [Release Candidate (RC)](#release-candidate-rc)
 - [Current Release](#current-release)
 - [Long Term Support](#long-term-support)
 
 ### Release Candidate (RC)
+
 The initial releases of the SDK starting Oct 19th will be Release Candidate (RC). This means (1) the core functionality is present and tested, (2) additional functionality from this point on will be considered improvements or enhancements based on customer feedback. RC releases are usually more frequent (every few weeks), followed shortly by a current release. If you plan to use an RC release, we recommend:
+
 - that you don't use it for production workloads (If that is unavoidable, we recommend upgrading to the Current Release version once it's ready.)
 - that you create a plan to keep your application on the latest RC release version at all times (since older RC releases are considered "out of support" as soon as a new RC release is released)
 
@@ -168,7 +243,9 @@ Also, RC releases may carry breaking changes from the previous release and we ad
 The idea behind releasing RC releases is to rapidly iterate on the SDK (bug fixes, feature tweaks, etc.) to get it to a production-ready state, and typically we don't expect to have the SDK in the RC phase for more than a month.
 
 > #### Support for RC releases
+>
 > A RC release
+>
 > - is Considered [Active](#active) when released
 > - transitions to [End-of-life](#end-of-life) when the next release becomes Active
 
@@ -183,7 +260,9 @@ A Current release is on the leading edge of our SDK development, and is intended
 
 
 > #### Support for Current Release
+>
 > A Current Release
+>
 > - is Considered [Active](#active) when released
 > - transitions to [Maintenance](#maintenance) 3 months after it becomes Active, or when the next release becomes Active, whichever is later
 > - reaches [End-of-life](#end-of-life) 6 months after it becomes Active, or 3 months after the next release becomes Active, whichever is later
@@ -196,25 +275,31 @@ A Long-Term Support (LTS) release is one which we plan to guarantee compatibilit
 For the above reasons, we recommend all developers who do not intend to make frequent updates (~every 6 - 12 months) to their application, only use a Long Term Release version of the SDK. 
 
 > #### Support for Long Term Release
+>
 > A Long Term Release
+>
 > - is considered [Active](#active) when released
 > - transitions to [Maintenance](#maintenance) 1 year after it becomes Active, or when the next release becomes Active, whichever is later
 > - reaches [End-of-life](#end-of-life) 2 years after it becomes Active, or 1 year after the next LTS release becomes Active, whichever is later
 
 
 ### Support Phases
+
 #### Active
+
 Once a release is considered ready for release, a new version is cut and the release enters the Active phase.  However, new features may be added to the SDK, including support for new API endpoints. 
 
+
+
 #### Maintenance
+
 After a time, the release is no longer under active development, but customers may still be depending on it.  At this time, we consider the release to be in Maintenance phase; generally, only bug fixes will be considered for inclusion in new versions.  We may of course opt to include new functionality based on customer demand, but in general customers should expect that the SDK feature set will be mostly frozen for the remainder of its lifecycle.
 
 #### End-of-life
-After a release is no longer being supported by Box, it enters End-of-life (EOL) and no further changes should be expected by customers.  Customers must upgrade to a newer release if they want to receive support.
 
+After a release is no longer being supported by Box, it enters End-of-life (EOL) and no further changes should be expected by customers.  Customers must upgrade to a newer release if they want to receive support.
 
 License
 -------
 
-Any use of this software is governed by the attached [Box SDK Beta Agreement](../../BETA-AGREEMENT.md).
-__If you do not accept the terms of the Box SDK Beta Agreement, you may not use this software.__
+Apache License, Version 2.0

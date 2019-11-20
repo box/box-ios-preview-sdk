@@ -71,7 +71,7 @@ For more detailed instructions, please see the [official document for Cocoapods]
 
 ### Swift Package Manager
 
-#### Importing BoxSDK into Project
+#### Importing BoxPreviewSDK into Project
 
 __Step 1__: Click on Xcode project file
 
@@ -87,7 +87,7 @@ The process should look like below:
 
 
 
-#### Adding BoxSDK as a Dependency
+#### Adding BoxPreviewSDK as a Dependency
 
 For detailed instructions, please see the [official document for SPM](https://swift.org/package-manager/). 
 

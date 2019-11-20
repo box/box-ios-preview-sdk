@@ -72,7 +72,7 @@ For more detailed instructions, please see the [official document for Cocoapods]
 
 ### Swift Package Manager
 
-#### Importing BoxSDK into Project
+#### Importing BoxPreviewSDK into Project
 
 __Step 1__: Click on Xcode project file
 
@@ -88,7 +88,7 @@ The process should look like below:
 
 
 
-#### Adding BoxSDK as a Dependency
+#### Adding BoxPreviewSDK as a Dependency
 
 For detailed instructions, please see the [official document for SPM](https://swift.org/package-manager/). 
 
@@ -150,8 +150,6 @@ Using the same client ID from the previous step, set the value for Item 0 to
 `boxsdk-<<YOUR CLIENT ID>>`, where `<<YOUR CLIENT ID>>` is replaced with your client ID.  For example, if your client
 ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
 `boxsdk-vvxff7v61xi7gqveejo8jh9d2z9xhox5`
-
-![Info.plist setting](/Users/sgarlanka/Documents/SDKs/box-ios-preview-sdk/URL Schemes in Info.plist.png)
 
 __Step 6__: Run the sample app
 

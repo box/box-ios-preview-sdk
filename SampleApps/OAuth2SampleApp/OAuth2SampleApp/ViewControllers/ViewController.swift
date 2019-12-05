@@ -188,7 +188,7 @@ private extension ViewController {
                             DispatchQueue.main.async {
                                 self.folderItems.append(item)
                                 self.tableView.reloadData()
-                                self.navigationItem.rightBarButtonItem?.title = "Refresh"
+                                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(self.logoutPressed))
                             }
                         case let .failure(error):
                             print ("     No Item #\(String(format: "%03d", i)) | \(error.message)")

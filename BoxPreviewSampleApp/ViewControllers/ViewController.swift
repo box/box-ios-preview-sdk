@@ -105,7 +105,7 @@ private extension ViewController {
                             DispatchQueue.main.async {
                                 self.folderItems.append(item)
                                 self.tableView.reloadData()
-                                self.navigationItem.rightBarButtonItem?.title = "Refresh"
+                                self.navigationItem.rightBarButtonItem = nil
                             }
                         case let .failure(error):
                             print ("     No Item #\(String(format: "%03d", i)) | \(error.message)")

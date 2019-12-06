@@ -200,7 +200,7 @@ private extension PDFViewController {
         setupTitleView()
         setupNavigationItems()
         setupGestureRecognizers()
-        setupSearchResultsNavitionView()
+        setupSearchResultsNavigationView()
         setupObservers()
         loadPDF()
         updatePageIndicator()
@@ -255,7 +255,8 @@ private extension PDFViewController {
         navBarItems.append(search)
         
         parent?.navigationItem.rightBarButtonItems = navBarItems
-        parent?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        let backButton = UIBarButtonItem(title: "back", style: .plain, target: self, action: #selector(backTapped))
+        parent?.navigationItem.leftBarButtonItem = backButton
     }
     
     func setupObservers() {
@@ -287,7 +288,7 @@ private extension PDFViewController {
         pdfView.addGestureRecognizer(swipeRight)
     }
     
-    func setupSearchResultsNavitionView() {
+    func setupSearchResultsNavigationView() {
         view.addSubview(searchResultsNavigationView)
         NSLayoutConstraint.activate([
             searchResultsNavigationView.heightAnchor.constraint(equalToConstant: 44),
@@ -436,6 +437,17 @@ extension PDFViewController {
         removeHighlightFromSearchResults()
         hideSearchResultsView()
         navigationController?.present(navigationViewController, animated: true, completion: nil)
+    }
+    
+    @objc private func backTapped() {
+        if !currentSearchResults.isEmpty {
+            removeHighlightFromSearchResults()
+            hideSearchResultsView()
+            currentSearchResults = []
+        }
+        else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 

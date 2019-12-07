@@ -437,17 +437,6 @@ extension PDFViewController {
         hideSearchResultsView()
         navigationController?.present(navigationViewController, animated: true, completion: nil)
     }
-    
-    @objc private func backTapped() {
-        if !currentSearchResults.isEmpty {
-            removeHighlightFromSearchResults()
-            hideSearchResultsView()
-            currentSearchResults = []
-        }
-        else {
-            navigationController?.popViewController(animated: true)
-        }
-    }
 }
 
 // MARK: - ThumbnailGridViewControllerDelegate

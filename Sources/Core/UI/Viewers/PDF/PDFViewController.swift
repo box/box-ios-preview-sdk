@@ -255,8 +255,7 @@ private extension PDFViewController {
         navBarItems.append(search)
         
         parent?.navigationItem.rightBarButtonItems = navBarItems
-        let backButton = UIBarButtonItem(title: "back", style: .plain, target: self, action: #selector(backTapped))
-        parent?.navigationItem.leftBarButtonItem = backButton
+        parent?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     func setupObservers() {
@@ -480,6 +479,14 @@ extension PDFViewController: SearchViewControllerDelegate {
         hightlightCurrentSearchResult(selection)
         configureSearchResultsView(selection: selection, searchResults: searchResults)
         showSearchResultsView()
+        parent?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.stop, target: self, action: #selector(closeSearchView))
+    }
+    
+    @objc private func closeSearchView() {
+        removeHighlightFromSearchResults()
+        hideSearchResultsView()
+        currentSearchResults = []
+        parent?.navigationItem.leftBarButtonItem = nil
     }
     
     private func highlightSearchResults(selections: [PDFSelection]) {

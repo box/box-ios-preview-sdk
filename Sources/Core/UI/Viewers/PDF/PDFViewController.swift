@@ -200,7 +200,7 @@ private extension PDFViewController {
         setupTitleView()
         setupNavigationItems()
         setupGestureRecognizers()
-        setupSearchResultsNavitionView()
+        setupSearchResultsNavigationView()
         setupObservers()
         loadPDF()
         updatePageIndicator()
@@ -287,7 +287,7 @@ private extension PDFViewController {
         pdfView.addGestureRecognizer(swipeRight)
     }
     
-    func setupSearchResultsNavitionView() {
+    func setupSearchResultsNavigationView() {
         view.addSubview(searchResultsNavigationView)
         NSLayoutConstraint.activate([
             searchResultsNavigationView.heightAnchor.constraint(equalToConstant: 44),
@@ -468,6 +468,14 @@ extension PDFViewController: SearchViewControllerDelegate {
         hightlightCurrentSearchResult(selection)
         configureSearchResultsView(selection: selection, searchResults: searchResults)
         showSearchResultsView()
+        parent?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.stop, target: self, action: #selector(closeSearchView))
+    }
+    
+    @objc private func closeSearchView() {
+        removeHighlightFromSearchResults()
+        hideSearchResultsView()
+        currentSearchResults = []
+        parent?.navigationItem.leftBarButtonItem = nil
     }
     
     private func highlightSearchResults(selections: [PDFSelection]) {

@@ -1,6 +1,15 @@
 Changelog
 =========
 
+## In Progress
+
+__Breaking Changes:__
+
+__New Features and Enhancements:__
+
+- Back button for search results exits out of search view, allowing the user to view the file instead of exiting to folder items table view 
+
+
 ## v3.0.0 [2019-11-18]
 
 __Breaking Changes:__

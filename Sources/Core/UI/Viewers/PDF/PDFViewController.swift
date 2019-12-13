@@ -194,7 +194,6 @@ private extension PDFViewController {
     func setupView() {
         view.addSubview(pdfView)
         view.addSubview(pdfThumbnailContainerView)
-        view.addGestureRecognizer(singleTapGesture)
         setupPDFView()
         setupThumbnailView()
         setupTitleView()
@@ -276,8 +275,8 @@ private extension PDFViewController {
     }
     
     func setupGestureRecognizers() {
-        view.addGestureRecognizer(singleTapGesture)
-        view.addGestureRecognizer(doubleTapGesture)
+        pdfView.addGestureRecognizer(singleTapGesture)
+        pdfView.addGestureRecognizer(doubleTapGesture)
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
         swipeLeft.direction = .left
         pdfView.addGestureRecognizer(swipeLeft)
@@ -567,6 +566,7 @@ extension PDFViewController: UIGestureRecognizerDelegate {
 
 extension PDFViewController {
     @objc func doubleTapped(_ sender: UITapGestureRecognizer) {
+        NSLog("test")
         guard let scrollView = pdfView.subviews.first as? UIScrollView, let currentPage = pdfView.currentPage else {
             return
         }

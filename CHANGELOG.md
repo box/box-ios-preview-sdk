@@ -8,7 +8,7 @@ __Breaking Changes:__
 __New Features and Enhancements:__
 
 - Back button for search results exits out of search view, allowing the user to view the file instead of exiting to folder items table view 
-- Fixed single tap full screen mode on PDFs
+- Fixed single tap for full screen mode toggle on PDFs
 - Fixed double tap zoom level on PDFs
 
 

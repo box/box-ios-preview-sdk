@@ -566,7 +566,6 @@ extension PDFViewController: UIGestureRecognizerDelegate {
 
 extension PDFViewController {
     @objc func doubleTapped(_ sender: UITapGestureRecognizer) {
-        NSLog("test")
         guard let scrollView = pdfView.subviews.first as? UIScrollView, let currentPage = pdfView.currentPage else {
             return
         }

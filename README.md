@@ -1,4 +1,4 @@
-# BoxPreviewSDK
+# Box Preview SDK
 
 [![Platforms](https://img.shields.io/cocoapods/p/BoxPreviewSDK.svg)](https://cocoapods.org/pods/BoxPreviewSDK)
 [![License](https://img.shields.io/cocoapods/l/BoxPreviewSDK.svg)](https://raw.githubusercontent.com/box/BoxPreviewSDK/master/LICENSE)
@@ -9,6 +9,15 @@
 
 [![Build Status](https://travis-ci.com/box/box-swift-preview-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master)](https://travis-ci.com/box/box-swift-preview-sdk)
 
+NOTE:
+===================
+
+The Box iOS Preview SDK in **Objective-C** (prior to v3.0.0) has been moved from the master branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-preview-sdk/tree/objective-c-maintenance).
+Going forward, the master branch will contain the iOS Preview SDK in **Swift**, starting with v3.0.0.
+
+
+Box Preview SDK
+------------------
 This SDK makes it easy to present Box files in your iOS application.
 
 - [Requirements](#requirements)

@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/box/box-ios-preview-sdk.git", :tag => "v"+spec.version.to_s }
   spec.swift_versions = ["5.0", "5.1"]
   spec.requires_arc = true
-  spec.dependency "BoxSDK", "~> 3.0.0"
+  spec.dependency "BoxSDK", "~> 3.0"
 
   spec.default_subspec = "Core"
   spec.subspec "Core" do |ss|

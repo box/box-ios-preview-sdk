@@ -77,7 +77,7 @@ __Step 2__: Install pod by running the following command in the directory with t
 $ pod install
 ```
 
-For more detailed instructions, please see the [official document for Cocoapods](https://guides.cocoapods.org/using/using-cocoapods.html).
+For more detailed instructions, please see the [official documentation for Cocoapods](https://guides.cocoapods.org/using/using-cocoapods.html).
 
 ### Swift Package Manager
 
@@ -99,7 +99,7 @@ The process should look like below:
 
 #### Adding BoxPreviewSDK as a Dependency
 
-For detailed instructions, please see the [official document for SPM](https://swift.org/package-manager/). 
+For detailed instructions, please see the [official documentation for SPM](https://swift.org/package-manager/). 
 
 Getting Started
 ---------------

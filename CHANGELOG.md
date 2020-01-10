@@ -1,17 +1,20 @@
 Changelog
 =========
 
-## Next Release
+## v3.1.0 [2020-01-10]
 
 __Breaking Changes:__
 
 __New Features and Enhancements:__
 
-- Show file download progress
-- Back button for search results exits out of search view, allowing the user to view the file instead of exiting to folder items table view 
-- Fixed single tap for full screen mode toggle on PDFs
-- Fixed double tap zoom level on PDFs
+- Show file download progress before a file previews
+- Added log out button for OAuth2 sample app 
 
+__Bug Fixes:__
+
+- Back button for search results exits out of search view, allowing the user to view the file instead of exiting to the table view for the folder items
+- Constant zoom level instead of a variable zoom level on PDFs when a user double taps
+- Full screen mode now toggles on PDFs when a user single taps
 
 ## v3.0.0 [2019-11-18]
 

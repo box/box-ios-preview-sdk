@@ -169,6 +169,9 @@ private extension PreviewViewController {
 
     func downloadFile() {
         previewHelper.downloadBoxFile(
+            progress: { [weak self] progress in
+                self?.progressView.setProgress(progress.fractionCompleted)
+            },
             completion: { [weak self] result in
                 guard let self = self else {
                     return

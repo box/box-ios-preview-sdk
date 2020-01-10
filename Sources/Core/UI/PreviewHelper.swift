@@ -30,11 +30,7 @@ internal class PreviewHelper {
     
     // MARK: - Helpers
     
-<<<<<<< HEAD
     func downloadBoxFile(progress: @escaping (Progress) -> Void, completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
-=======
-    func downloadBoxFile(completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
->>>>>>> 4ce98f613dc3c1ca09c01f5e333a319e68e27262
         client.files.get(fileId: fileId, fields: ["name", "representations"]) { [weak self] (result: Result<File, BoxSDKError>) in
             guard let self = self else {
                 return
@@ -47,11 +43,7 @@ internal class PreviewHelper {
                 
             case let .success(file):
                 self.fileName = file.name
-<<<<<<< HEAD
                 self.downloadFile(file: file, progress: progress, completion: completion)
-=======
-                self.downloadFile(file: file, completion: completion)
->>>>>>> 4ce98f613dc3c1ca09c01f5e333a319e68e27262
             }
         }
     }

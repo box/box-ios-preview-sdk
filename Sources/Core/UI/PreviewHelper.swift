@@ -17,6 +17,7 @@ internal class PreviewHelper {
     
     var client: BoxClient
     var fileId: String
+    var fileName: String?
     var filePath: URL?
     private var supportedFileFormat = ["pdf", "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "BMPf", "ico", "cur", "xbm", "mp4", "mov", "wmv", "flv", "avi", "mp3"]
     
@@ -41,6 +42,7 @@ internal class PreviewHelper {
                 return
                 
             case let .success(file):
+                self.fileName = file.name
                 self.downloadFile(file: file, completion: completion)
             }
         }
@@ -59,7 +61,7 @@ internal class PreviewHelper {
             do {
                 let data = try Data(contentsOf: unwrappedFileURL)
                 if let document = PDFDocument(data: data) {
-                    childViewController = PDFViewController(document: document, title: unwrappedFileURL.lastPathComponent, actions: actions)
+                    childViewController = PDFViewController(document: document, title: fileName, actions: actions)
                     return .success(childViewController)
                 }
                 else {
@@ -73,7 +75,7 @@ internal class PreviewHelper {
             do {
                 let data = try Data(contentsOf: unwrappedFileURL)
                 if let image = UIImage(data: data) {
-                    childViewController = ImageViewController(image: image, title: unwrappedFileURL.lastPathComponent, actions: actions)
+                    childViewController = ImageViewController(image: image, title: fileName, actions: actions)
                     return .success(childViewController)
                 }
                 else {
@@ -84,16 +86,13 @@ internal class PreviewHelper {
                 return .failure(BoxPreviewError(error: error))
             }
         case "mp4", "mov", "wmv", "flv", "avi", "mp3":
-            do {
-                childViewController = VideoViewController(url: unwrappedFileURL, title: unwrappedFileURL.lastPathComponent)
-                return .success(childViewController)
-            }
-            catch {
-                return .failure(BoxPreviewError(error: error))
-            }
-        default:
-            if unwrappedFileURL.lastPathComponent == "hls" {
-                do {
+            childViewController = VideoViewController(url: unwrappedFileURL, title: fileName)
+            return .success(childViewController)
+
+        case "m3u8":
+            childViewController = VideoViewController(url: unwrappedFileURL, title: fileName, client: client)
+            return .success(childViewController)
+//                do {
 //                    var token: String;
 //                    let semaphore = DispatchSemaphore(value: 1)
 //                    self.client.session.getAccessToken() { result in
@@ -102,19 +101,18 @@ internal class PreviewHelper {
 //                            case let .success(accessToken):
 //                                token = accessToken
 //                                childViewController = VideoViewController(url: unwrappedFileURL, title: unwrappedFileURL.lastPathComponent, token: token)
-//
-////                                return .success()
 //                            case let .failure(error):
 ////                                return .failure(BoxPreviewError(error: error))
 //                                print("hls failed")
 //                        }
 //                    }
 //                    semaphore.wait()
-                }
-                catch {
-                    return .failure(BoxPreviewError(error: error))
-                }
-            }
+//                }
+//                catch {
+//                    return .failure(BoxPreviewError(error: error))
+//                }
+            
+        default:
             return .failure(BoxPreviewError(message: .unknownFileType(unwrappedFileURL.pathExtension)))
         }
     }
@@ -132,25 +130,28 @@ internal class PreviewHelper {
         var fileURL = documentsURL.appendingPathComponent(fileName)
         let streamAvailable = file.representations?.entries?.contains { $0.representation == "hls" } ?? false
         if streamAvailable {
-            
-//            self.client.files.getRe(
-//                fileId: file.id,
-//                representationHint: .customValue("hls"),
-//                destinationURL: fileURL,
-//                completion: { [weak self] (result: Result<Void, BoxSDKError>) in
-//                    guard let self = self else {
-//                        return
-//                    }
-//                    completion(self.processFileDownload(to: fileURL, result: result))
-//            })
-            
-            let streamRepresentation = file.representations?.entries?.first(where: { $0.representation == "hls" })
-            guard let streamURL = streamRepresentation?.info?.url else {
-                return
-            }
-            fileURL = URL(string: streamURL)!
-            completion(self.processFileDownload(to: fileURL, result: .success(())))
-            print(streamURL)
+            self.client.files.listRepresentations(
+                fileId: file.id,
+                representationHint: .customValue("[hls]"),
+                completion: { [weak self] (result: Result<[FileRepresentation], BoxSDKError>) in
+                    guard let self = self else {
+                        return
+                    }
+                    switch result {
+                    case let .success(representations):
+                        let streamRepresentation = representations.first(where: { $0.representation == "hls" })
+                        guard let streamURL = streamRepresentation?.content?.urlTemplate else {
+                            return
+                        }
+                        fileURL = URL(fileURLWithPath: streamURL)
+                        fileURL.deleteLastPathComponent()
+                        fileURL.appendPathComponent("master.m3u8")
+                        completion(self.processFileDownload(to: fileURL, result: .success(())))
+                        print(fileURL.absoluteString)
+                    case let .failure(error):
+                        completion(self.processFileDownload(to: fileURL, result: .failure(error)))
+                    }
+            })
         }
         else if supportedFileFormat.contains(fileURL.pathExtension) {
             self.client.files.download(

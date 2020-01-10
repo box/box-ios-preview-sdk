@@ -6,6 +6,7 @@
 //  Copyright © 2019 Box. All rights reserved.
 //
 
+import BoxSDK
 import Foundation
 import AVKit
 
@@ -13,6 +14,7 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
     
     weak var fullScreenDelegate: PreviewItemFullScreenDelegate?
     var toolbarButtons: [UIBarButtonItem] = []
+    
     private var videoName: String?
     
     private lazy var titleView: CustomTitleView = {
@@ -27,16 +29,11 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
         return gestureRecognizer
     }()
     
-    public init(url: URL, title: String? = nil, token: String? = nil) {
+    public init(url: URL, title: String? = nil, client: BoxClient? = nil) {
         super.init(nibName: nil, bundle: nil)
-        let headers: [String: String] = [
-           "Authorization": "Bearer 2z1uswp5q3cWhaQNJgngSLvIPezNb2W6"
-        ]
-        let url = URL(string: "https://dl2.boxcloud.com/api/2.0/internal_files/587388334111/versions/622656241711/representations/hls/content/master.m3u8")!
-        let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
-        let playerItem = AVPlayerItem(asset: asset)
-        self.player = AVPlayer(playerItem: playerItem)
         videoName = title
+//        self.player = AVPlayer()
+        setupPlayer(url: url, client: client)
     }
     
     public override func viewDidLoad() {
@@ -69,6 +66,30 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
 }
 
 private extension VideoViewController {
+    func setupPlayer(url: URL, client: BoxClient?) {
+        if let unwrappedClient = client {
+//            unwrappedClient.session.revokeTokens { _ in
+                unwrappedClient.session.getAccessToken { result in
+                    switch result {
+                    case let .success(accessToken):
+                        let headers: [String: String] = [
+                           "Authorization": "Bearer \(accessToken)"
+                        ]
+                        let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
+                        let playerItem = AVPlayerItem(asset: asset)
+                        self.player = AVPlayer(playerItem: playerItem)
+                    case .failure:
+                        self.showAlertWith(title: "Error", message: "Was not able connect to Box account.")
+                    }
+                }
+//            }
+        }
+        else {
+            let asset = AVURLAsset(url: url)
+            let playerItem = AVPlayerItem(asset: asset)
+            self.player = AVPlayer(playerItem: playerItem)
+        }
+    }
     func setupView() {
         titleView.title = videoName
         parent?.navigationItem.titleView = titleView

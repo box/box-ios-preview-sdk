@@ -28,7 +28,7 @@ internal class PreviewHelper {
     
     // MARK: - Helpers
     
-    func downloadBoxFile(completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
+    func downloadBoxFile(progress: @escaping (Progress) -> Void, completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
         client.files.get(fileId: fileId) { [weak self] (result: Result<File, BoxSDKError>) in
             guard let self = self else {
                 return
@@ -40,7 +40,7 @@ internal class PreviewHelper {
                 return
                 
             case let .success(file):
-                self.downloadFile(file: file, completion: completion)
+                self.downloadFile(file: file, progress: progress, completion: completion)
             }
         }
     }
@@ -90,7 +90,7 @@ internal class PreviewHelper {
     
     // MARK: - Private helpers
     
-    private func downloadFile(file: File,
+    private func downloadFile(file: File, progress: @escaping (Progress) -> Void,
                               completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
         guard let fileName = file.name,
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -101,6 +101,7 @@ internal class PreviewHelper {
             self.client.files.download(
                 fileId: file.id,
                 destinationURL: fileURL,
+                progress: progress,
                 completion: { [weak self] (result: Result<Void, BoxSDKError>) in
                     guard let self = self else {
                         return
@@ -115,6 +116,7 @@ internal class PreviewHelper {
                 fileId: file.id,
                 representationHint: .pdf,
                 destinationURL: fileURL,
+                progress: progress,
                 completion: { [weak self] (result: Result<Void, BoxSDKError>) in
                     guard let self = self else {
                         return

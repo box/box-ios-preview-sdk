@@ -16,37 +16,22 @@ internal class PreviewHelper {
     // MARK: - Properties
     
     var client: BoxClient
-    var fileId: String
+    var file: File?
     var fileName: String?
     var filePath: URL?
-    private var supportedFileFormat = ["pdf", "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "BMPf", "ico", "cur", "xbm", "mp4", "mov", "wmv", "flv", "avi", "mp3"]
+    var AVFileFormat = ["mp4", "mov", "wmv", "flv", "avi", "mp3"]
+    var otherFileFormat = ["pdf", "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "BMPf", "ico", "cur", "xbm"]
+    var supportedFileFormat: [String] {
+        return AVFileFormat + otherFileFormat
+    }
     
     // MARK: - Init
     
-    public init(client: BoxClient, fileId: String) {
+    public init(client: BoxClient) {
         self.client = client
-        self.fileId = fileId
     }
     
     // MARK: - Helpers
-    
-    func downloadBoxFile(progress: @escaping (Progress) -> Void, completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
-        client.files.get(fileId: fileId, fields: ["name", "representations"]) { [weak self] (result: Result<File, BoxSDKError>) in
-            guard let self = self else {
-                return
-            }
-            
-            switch result {
-            case let .failure(error):
-                completion(.failure(error))
-                return
-                
-            case let .success(file):
-                self.fileName = file.name
-                self.downloadFile(file: file, progress: progress, completion: completion)
-            }
-        }
-    }
     
     
     func getChildViewController(withActions actions: [FileInteractions]) -> Result<PreviewItemChildViewController, BoxPreviewError> {
@@ -65,7 +50,7 @@ internal class PreviewHelper {
                     return .success(childViewController)
                 }
                 else {
-                    return .failure(BoxPreviewError(message: .unableToReadFile(fileId)))
+                    return .failure(BoxPreviewError(message: .unableToReadFile(file!.id)))
                 }
             }
             catch {
@@ -79,7 +64,7 @@ internal class PreviewHelper {
                     return .success(childViewController)
                 }
                 else {
-                    return .failure(BoxPreviewError(message: .unableToReadFile(fileId)))
+                    return .failure(BoxPreviewError(message: .unableToReadFile(file!.id)))
                 }
             }
             catch {
@@ -111,47 +96,31 @@ internal class PreviewHelper {
 //                catch {
 //                    return .failure(BoxPreviewError(error: error))
 //                }
-            
         default:
             return .failure(BoxPreviewError(message: .unknownFileType(unwrappedFileURL.pathExtension)))
         }
     }
     
-    
-    // MARK: - Private helpers
-    
-    private func downloadFile(file: File, progress: @escaping (Progress) -> Void,
+    func downloadFile(file: File, representations: [FileRepresentation]? = nil, progress: @escaping (Progress) -> Void,
                               completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
         guard let fileName = file.name,
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 return
         }
+        self.fileName = fileName
+        self.file = file
         
         var fileURL = documentsURL.appendingPathComponent(fileName)
-        let streamAvailable = file.representations?.entries?.contains { $0.representation == "hls" } ?? false
-        if streamAvailable {
-            self.client.files.listRepresentations(
-                fileId: file.id,
-                representationHint: .customValue("[hls]"),
-                completion: { [weak self] (result: Result<[FileRepresentation], BoxSDKError>) in
-                    guard let self = self else {
-                        return
-                    }
-                    switch result {
-                    case let .success(representations):
-                        let streamRepresentation = representations.first(where: { $0.representation == "hls" })
-                        guard let streamURL = streamRepresentation?.content?.urlTemplate else {
-                            return
-                        }
-                        fileURL = URL(fileURLWithPath: streamURL)
-                        fileURL.deleteLastPathComponent()
-                        fileURL.appendPathComponent("master.m3u8")
-                        completion(self.processFileDownload(to: fileURL, result: .success(())))
-                        print(fileURL.absoluteString)
-                    case let .failure(error):
-                        completion(self.processFileDownload(to: fileURL, result: .failure(error)))
-                    }
-            })
+//        let streamAvailable = representations?.contains { $0.representation == "hls" } ?? false
+        if let streamRepresentation = representations?.first(where: { $0.representation == "hls" }) {
+            guard let streamURL = streamRepresentation.content?.urlTemplate else {
+                return
+            }
+            fileURL = URL(fileURLWithPath: streamURL)
+            fileURL.deleteLastPathComponent()
+            fileURL.appendPathComponent("master.m3u8")
+            completion(self.processFileDownload(to: fileURL, result: .success(())))
+            print(fileURL.absoluteString)
         }
         else if supportedFileFormat.contains(fileURL.pathExtension) {
             self.client.files.download(
@@ -181,6 +150,8 @@ internal class PreviewHelper {
             })
         }
     }
+    
+    // MARK: - Private helpers
     
     private func processFileDownload(to fileURL: URL, result: Result<Void, BoxSDKError>) -> Result<Void, BoxSDKError> {
         switch result {

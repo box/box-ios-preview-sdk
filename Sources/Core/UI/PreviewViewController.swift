@@ -40,7 +40,9 @@ public protocol PreviewViewControllerDelegate: class {
 public class PreviewViewController: UIViewController {
 
     // MARK: - Properties
-
+    var client: BoxClient
+    var fileId: String?
+    var file: File?
     var shouldHideToolbarWhenDisappearing: Bool = true
 
     weak var parentWithToolbar: UIViewController?
@@ -68,7 +70,21 @@ public class PreviewViewController: UIViewController {
                 fileId: String,
                 delegate: PreviewViewControllerDelegate? = nil,
                 allowedActions: [FileInteractions] = FileInteractions.allCases) {
-        previewHelper = PreviewHelper(client: client, fileId: fileId)
+        self.client = client
+        self.fileId = fileId
+        previewHelper = PreviewHelper(client: client)
+        self.delegate = delegate
+        itemActions = allowedActions
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    public init(client: BoxClient,
+                file: File,
+                delegate: PreviewViewControllerDelegate? = nil,
+                allowedActions: [FileInteractions] = FileInteractions.allCases) {
+        self.client = client
+        self.file = file
+        previewHelper = PreviewHelper(client: client)
         self.delegate = delegate
         itemActions = allowedActions
         super.init(nibName: nil, bundle: nil)
@@ -84,7 +100,7 @@ public class PreviewViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        downloadFile()
+        previewFile()
     }
 
     public override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +145,6 @@ private extension PreviewViewController {
         view.backgroundColor = .white
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        addProgressView()
     }
 
     func addProgressView() {
@@ -166,9 +181,67 @@ private extension PreviewViewController {
             self.errorView.removeFromSuperview()
         }
     }
+    
+    func previewFile() {
+        if let unwrappedFile = file, let _ = unwrappedFile.name  {
+            previewFile(file: unwrappedFile)
+        }
+        else if let unwrappedFileId = fileId {
+            client.files.get(fileId: unwrappedFileId) { [weak self] (result: Result<File, BoxSDKError>) in
+                guard let self = self else {
+                    return
+                }
+    
+                switch result {
+                case let .success(file):
+                    self.previewFile(file: file)
+                case let .failure(error):
+                    self.previewViewControllerFailed(error: BoxPreviewError(message: .contentSDKError, error: error))
+                }
+            }
+        }
+    }
+    
+    func previewFile(file: File) {
+        if let fileName = file.name, previewHelper.AVFileFormat.contains(URL(fileURLWithPath: fileName).pathExtension) {
+           self.client.files.listRepresentations(
+               fileId: file.id,
+               representationHint: .customValue("[hls]"),
+               completion: { [weak self] (result: Result<[FileRepresentation], BoxSDKError>) in
+                   guard let self = self else {
+                       return
+                   }
+                   switch result {
+                   case let .success(representations):
+                        if representations.isEmpty {
+                            DispatchQueue.main.async {
+                                self.addProgressView()
+                            }
+                            self.downloadFile(file: file)
+                        }
+                        else {
+                            self.downloadFile(file: file, representations: representations)
+                        }
+                   case .failure(_):
+                        DispatchQueue.main.async {
+                            self.addProgressView()
+                        }
+                        self.downloadFile(file: file)
+                   }
+           })
+        }
+        else {
+            DispatchQueue.main.async {
+                self.addProgressView()
+            }
+            self.downloadFile(file: file)
+        }
+    }
 
-    func downloadFile() {
-        previewHelper.downloadBoxFile(
+    func downloadFile(file: File, representations: [FileRepresentation]? = nil) {
+        previewHelper.downloadFile(
+            file: file,
+            representations: representations,
             progress: { [weak self] progress in
                 self?.progressView.setProgress(progress.fractionCompleted)
             },

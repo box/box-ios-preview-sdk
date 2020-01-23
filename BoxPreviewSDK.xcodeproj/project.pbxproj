@@ -55,6 +55,7 @@
 		3549BB501DA38A2000C63030 /* BoxPreviewSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 3549BB181DA3890B00C63030 /* BoxPreviewSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		359649031FB18CC000FC7ADC /* BoxPreviewSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359649021FB18CBF00FC7ADC /* BoxPreviewSDK.swift */; };
 		919E896722DFC45700E94CCA /* BoxPreviewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E896622DFC45700E94CCA /* BoxPreviewError.swift */; };
+		F9B2D3D723D93B7900C21EFD /* VideoGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B2D3D623D93B7900C21EFD /* VideoGestureView.swift */; };
 		F9D5628B23AC63FE003553D8 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5628A23AC63FE003553D8 /* VideoViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +135,7 @@
 		35B7422D1F82A5DF00829B21 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		35B7422E1F82A5E000829B21 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		919E896622DFC45700E94CCA /* BoxPreviewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxPreviewError.swift; sourceTree = "<group>"; };
+		F9B2D3D623D93B7900C21EFD /* VideoGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGestureView.swift; sourceTree = "<group>"; };
 		F9D5628A23AC63FE003553D8 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -402,6 +404,7 @@
 		F9D5628923AC63E3003553D8 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				F9B2D3D623D93B7900C21EFD /* VideoGestureView.swift */,
 				F9D5628A23AC63FE003553D8 /* VideoViewController.swift */,
 			);
 			path = Video;
@@ -597,6 +600,7 @@
 			files = (
 				1732048E230325E400082B38 /* PreviewPageViewController.swift in Sources */,
 				359649031FB18CC000FC7ADC /* BoxPreviewSDK.swift in Sources */,
+				F9B2D3D723D93B7900C21EFD /* VideoGestureView.swift in Sources */,
 				0C36C56022E09FC5001C07BC /* DefaultErrorView.swift in Sources */,
 				0CF861AA23041F76008B4653 /* Array+Box.swift in Sources */,
 				0C61953B22CA3F2E004B7302 /* ThumbnailGridCell.swift in Sources */,

@@ -65,4 +65,19 @@ public extension BoxPreviewSDK {
                   allowedAction: [FileInteractions] = FileInteractions.allCases) -> PreviewViewController {
         return PreviewViewController(client: client, fileId: fileId, delegate: delegate, allowedActions: allowedAction)
     }
+    
+    /// Creates UIViewController for previewing file detail. Makes less calls than the other openFile
+    ///
+    /// - Parameters:
+    ///   - file: File Info object of the file to preview.
+    ///   - delegate: Delegate for catching the errors for further handling.
+    ///   - allowedAction: Actions on image user can perform such as saving to library or files. By default all actions are allowed.
+    ///   - customErrorView: Error view with custom design. To implement your own error view, implement ErrorView protocol and pass new error view here.
+    ///     Error view is then displayed full screen.
+    /// - Returns: Returns UIViewController displaying detail of the file.
+    func openFile(file: File,
+                  delegate: PreviewViewControllerDelegate? = nil,
+                  allowedAction: [FileInteractions] = FileInteractions.allCases) -> PreviewViewController {
+        return PreviewViewController(client: client, file: file, delegate: delegate, allowedActions: allowedAction)
+    }
 }

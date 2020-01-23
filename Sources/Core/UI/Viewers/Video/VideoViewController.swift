@@ -11,11 +11,12 @@ import Foundation
 import AVKit
 
 public class VideoViewController: AVPlayerViewController, PreviewItemChildViewController {
-    
+
     weak var fullScreenDelegate: PreviewItemFullScreenDelegate?
     var toolbarButtons: [UIBarButtonItem] = []
     
     private var videoName: String?
+    var gestureView: AVGestureView?
     
     private lazy var titleView: CustomTitleView = {
         let view: CustomTitleView = CustomTitleView()
@@ -25,7 +26,7 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
     private lazy var singleTapGesture: UITapGestureRecognizer = {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchTapped))
         gestureRecognizer.numberOfTapsRequired = 1
-        gestureRecognizer.delegate = self
+//        gestureRecognizer.delegate = self
         return gestureRecognizer
     }()
     
@@ -34,6 +35,9 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
         videoName = title
 //        self.player = AVPlayer()
         setupPlayer(url: url, client: client)
+//        log("test")
+        gestureView = AVGestureView(frame: view.frame)
+//        print("test")
     }
     
     public override func viewDidLoad() {
@@ -43,20 +47,23 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
     
     /// Takes an appropriate action based on the current action style
     @objc func touchTapped(_: UITapGestureRecognizer) {
-        var shouldHide: Bool {
-            guard let isNavigationBarHidden = navigationController?.isNavigationBarHidden else {
-                return false
-            }
-            return !isNavigationBarHidden
-        }
-        fullScreenDelegate?.viewController(self, didEnterFullScreen: shouldHide)
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        UIView.animate(withDuration: 0.25) { [weak self] in
-            guard let self = self else {
-                return
-            }
-            self.navigationController?.isToolbarHidden = self.toolbarButtons.isEmpty ? true : !shouldHide
-        }
+//        titleView.title = "pressed"
+//        parent?.navigationItem.titleView = titleView
+//        showAlertWith(title: "Image copied", message: "Image was copied to the clipboard.")
+//        var shouldHide: Bool {
+//            guard let isNavigationBarHidden = navigationController?.isNavigationBarHidden else {
+//                return false
+//            }
+//            return !isNavigationBarHidden
+//        }
+//        fullScreenDelegate?.viewController(self, didEnterFullScreen: shouldHide)
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        UIView.animate(withDuration: 0.25) { [weak self] in
+//            guard let self = self else {
+//                return
+//            }
+//            self.navigationController?.isToolbarHidden = self.toolbarButtons.isEmpty ? true : !shouldHide
+//        }
     }
     
     @available(*, unavailable)
@@ -68,7 +75,7 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
 private extension VideoViewController {
     func setupPlayer(url: URL, client: BoxClient?) {
         if let unwrappedClient = client {
-//            unwrappedClient.session.revokeTokens { _ in
+            unwrappedClient.session.revokeTokens { _ in
                 unwrappedClient.session.getAccessToken { result in
                     switch result {
                     case let .success(accessToken):
@@ -78,11 +85,12 @@ private extension VideoViewController {
                         let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
                         let playerItem = AVPlayerItem(asset: asset)
                         self.player = AVPlayer(playerItem: playerItem)
+//                        self.view.isUserInteractionEnabled = false
                     case .failure:
-                        self.showAlertWith(title: "Error", message: "Was not able connect to Box account.")
+                        self.showAlertWith(title: "Error", message: "Was not able to connect to Box account.")
                     }
                 }
-//            }
+            }
         }
         else {
             let asset = AVURLAsset(url: url)
@@ -90,22 +98,26 @@ private extension VideoViewController {
             self.player = AVPlayer(playerItem: playerItem)
         }
     }
+    
     func setupView() {
+//        view.backgroundColor = .black
         titleView.title = videoName
-        parent?.navigationItem.titleView = titleView
-        view.addGestureRecognizer(singleTapGesture)
+//        self.showAlertWith(title: "Image copied", message: self.contentOverlayView!.frame.debugDescription)
+//        parent?.navigationItem.titleView = titleView
+//        showAlertWith(title: "Image copied", message: "Image was copied to the clipboard.")
+//        self.view.addGestureRecognizer(singleTapGesture)
     }
 }
 
-extension VideoViewController: UIGestureRecognizerDelegate {
-    public func gestureRecognizer(
-        _ gestureRecognizer: UIGestureRecognizer,
-        shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
-    ) -> Bool {
-        // Don't recognize a single tap until a double-tap fails.
-        if gestureRecognizer == singleTapGesture {
-            return true
-        }
-        return false
-    }
-}
+//extension VideoViewController: UIGestureRecognizerDelegate {
+//    public func gestureRecognizer(
+//        _ gestureRecognizer: UIGestureRecognizer,
+//        shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
+//    ) -> Bool {
+//        // Don't recognize a single tap until a double-tap fails.
+//        if gestureRecognizer == singleTapGesture {
+//            return true
+//        }
+//        return false
+//    }
+//}

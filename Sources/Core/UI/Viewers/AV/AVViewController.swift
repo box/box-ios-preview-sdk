@@ -1,5 +1,5 @@
 //
-//  VideoViewController.swift
+//  AVViewController.swift
 //  BoxPreviewSDK-iOS
 //
 //  Created by Sujay Garlanka on 12/19/19.
@@ -10,7 +10,7 @@ import BoxSDK
 import Foundation
 import AVKit
 
-public class VideoViewController: AVPlayerViewController, PreviewItemChildViewController {
+public class AVViewController: AVPlayerViewController, PreviewItemChildViewController {
 
     weak var fullScreenDelegate: PreviewItemFullScreenDelegate?
     var toolbarButtons: [UIBarButtonItem] = []
@@ -36,7 +36,11 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
 //        self.player = AVPlayer()
         setupPlayer(url: url, client: client)
 //        log("test")
-        gestureView = AVGestureView(frame: view.frame)
+//        DispatchQueue.main.async {
+//            self.gestureView = AVGestureView(frame: self.view.frame)
+//        }
+//        gestureView!.addGestureRecognizer(singleTapGesture)
+//        self.contentOverlayView?.addSubview(gestureView!)
 //        print("test")
     }
     
@@ -49,7 +53,7 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
     @objc func touchTapped(_: UITapGestureRecognizer) {
 //        titleView.title = "pressed"
 //        parent?.navigationItem.titleView = titleView
-//        showAlertWith(title: "Image copied", message: "Image was copied to the clipboard.")
+//        showAlertWith(title: "Test", message: "Image was copied to the clipboard.")
 //        var shouldHide: Bool {
 //            guard let isNavigationBarHidden = navigationController?.isNavigationBarHidden else {
 //                return false
@@ -72,25 +76,29 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
     }
 }
 
-private extension VideoViewController {
+private extension AVViewController {
     func setupPlayer(url: URL, client: BoxClient?) {
         if let unwrappedClient = client {
-//            unwrappedClient.session.revokeTokens { _ in
+            unwrappedClient.session.revokeTokens { _ in
                 unwrappedClient.session.getAccessToken { result in
                     switch result {
                     case let .success(accessToken):
                         let headers: [String: String] = [
                            "Authorization": "Bearer \(accessToken)"
                         ]
-                        let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
-                        let playerItem = AVPlayerItem(asset: asset)
-                        self.player = AVPlayer(playerItem: playerItem)
+                        DispatchQueue.main.async {
+                            let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
+                            let playerItem = AVPlayerItem(asset: asset)
+                            self.player = AVPlayer(playerItem: playerItem)
+                        }
 //                        self.view.isUserInteractionEnabled = false
                     case .failure:
-                        self.showAlertWith(title: "Error", message: "Was not able to connect to Box account.")
+                        DispatchQueue.main.async {
+                            self.showAlertWith(title: "Error", message: "Was not able to connect to Box account.")
+                        }
                     }
                 }
-//            }
+            }
         }
         else {
             let asset = AVURLAsset(url: url)
@@ -103,9 +111,9 @@ private extension VideoViewController {
 //        view.backgroundColor = .black
         titleView.title = videoName
 //        self.showAlertWith(title: "Image copied", message: self.contentOverlayView!.frame.debugDescription)
-//        parent?.navigationItem.titleView = titleView
+        parent?.navigationItem.titleView = titleView
 //        showAlertWith(title: "Image copied", message: "Image was copied to the clipboard.")
-//        self.view.addGestureRecognizer(singleTapGesture)
+//        self.gestureView!.addGestureRecognizer(singleTapGesture)
     }
 }
 

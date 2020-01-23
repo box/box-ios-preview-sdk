@@ -71,11 +71,11 @@ internal class PreviewHelper {
                 return .failure(BoxPreviewError(error: error))
             }
         case "mp4", "mov", "wmv", "flv", "avi", "mp3":
-            childViewController = VideoViewController(url: unwrappedFileURL, title: fileName)
+            childViewController = AVViewController(url: unwrappedFileURL, title: fileName)
             return .success(childViewController)
 
         case "m3u8":
-            childViewController = VideoViewController(url: unwrappedFileURL, title: fileName, client: client)
+            childViewController = AVViewController(url: unwrappedFileURL, title: fileName, client: client)
             return .success(childViewController)
 //                do {
 //                    var token: String;

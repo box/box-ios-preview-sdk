@@ -1,5 +1,5 @@
 //
-//  VideoGestureView.swift
+//  AVGestureView.swift
 //  BoxPreviewSDK-iOS
 //
 //  Created by Sujay Garlanka on 1/22/20.

@@ -75,7 +75,7 @@ public class VideoViewController: AVPlayerViewController, PreviewItemChildViewCo
 private extension VideoViewController {
     func setupPlayer(url: URL, client: BoxClient?) {
         if let unwrappedClient = client {
-            unwrappedClient.session.revokeTokens { _ in
+//            unwrappedClient.session.revokeTokens { _ in
                 unwrappedClient.session.getAccessToken { result in
                     switch result {
                     case let .success(accessToken):
@@ -90,7 +90,7 @@ private extension VideoViewController {
                         self.showAlertWith(title: "Error", message: "Was not able to connect to Box account.")
                     }
                 }
-            }
+//            }
         }
         else {
             let asset = AVURLAsset(url: url)

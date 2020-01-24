@@ -79,23 +79,21 @@ public class AVViewController: AVPlayerViewController, PreviewItemChildViewContr
 private extension AVViewController {
     func setupPlayer(url: URL, client: BoxClient?) {
         if let unwrappedClient = client {
-            unwrappedClient.session.revokeTokens { _ in
-                unwrappedClient.session.getAccessToken { result in
-                    switch result {
-                    case let .success(accessToken):
-                        let headers: [String: String] = [
-                           "Authorization": "Bearer \(accessToken)"
-                        ]
-                        DispatchQueue.main.async {
-                            let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
-                            let playerItem = AVPlayerItem(asset: asset)
-                            self.player = AVPlayer(playerItem: playerItem)
-                        }
+            self.getToken(client: unwrappedClient) { result in
+                switch result {
+                case let .success(accessToken):
+                    let headers: [String: String] = [
+                       "Authorization": "Bearer \(accessToken)"
+                    ]
+                    DispatchQueue.main.async {
+                        let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
+                        let playerItem = AVPlayerItem(asset: asset)
+                        self.player = AVPlayer(playerItem: playerItem)
+                    }
 //                        self.view.isUserInteractionEnabled = false
-                    case .failure:
-                        DispatchQueue.main.async {
-                            self.showAlertWith(title: "Error", message: "Was not able to connect to Box account.")
-                        }
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.showAlertWith(title: "Error", message: "Was not able to retrview video.")
                     }
                 }
             }
@@ -104,6 +102,32 @@ private extension AVViewController {
             let asset = AVURLAsset(url: url)
             let playerItem = AVPlayerItem(asset: asset)
             self.player = AVPlayer(playerItem: playerItem)
+        }
+    }
+    
+    func getToken(client: BoxClient, completion: @escaping (Result<String, BoxSDKError>) -> Void) {
+        if let oauthSession = client.session as? OAuth2Session {
+            oauthSession.refreshToken { result in
+                switch result {
+                case let .success(accessToken):
+                    completion(.success(accessToken))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        else if let delegatedSession = client.session as? DelegatedAuthSession {
+            
+        }
+        else if let singleTokenSession = client.session as? SingleTokenSession {
+            singleTokenSession.getAccessToken { result in
+                switch result {
+                case let .success(accessToken):
+                    completion(.success(accessToken))
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
         }
     }
     

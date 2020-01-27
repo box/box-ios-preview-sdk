@@ -9,7 +9,6 @@
 import BoxSDK
 import Foundation
 import PDFKit
-import os.log
 
 internal class PreviewHelper {
     

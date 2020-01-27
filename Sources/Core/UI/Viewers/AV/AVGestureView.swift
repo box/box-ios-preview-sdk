@@ -14,7 +14,7 @@ final class AVGestureView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+//        setupView()
     }
 
     @available(*, unavailable)
@@ -32,6 +32,7 @@ final class AVGestureView: UIView {
     // MARK: - Private helpers
 
     private func setupView() {
+        backgroundColor = .white
 //        translatesAutoresizingMaskIntoConstraints = false
 //        backgroundColor = .clear
     }

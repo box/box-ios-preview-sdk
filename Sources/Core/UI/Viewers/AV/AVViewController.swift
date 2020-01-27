@@ -10,38 +10,31 @@ import BoxSDK
 import Foundation
 import AVKit
 
-public class AVViewController: AVPlayerViewController, PreviewItemChildViewController {
+public class AVViewController: UIViewController, PreviewItemChildViewController {
 
     weak var fullScreenDelegate: PreviewItemFullScreenDelegate?
     var toolbarButtons: [UIBarButtonItem] = []
     
     private var videoName: String?
-    var gestureView: AVGestureView?
+    private var AVPlayerVC: AVPlayerViewController
     
     private lazy var titleView: CustomTitleView = {
         let view: CustomTitleView = CustomTitleView()
         return view
     }()
     
-    private lazy var singleTapGesture: UITapGestureRecognizer = {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchTapped))
-        gestureRecognizer.numberOfTapsRequired = 1
-//        gestureRecognizer.delegate = self
-        return gestureRecognizer
-    }()
-    
-    public init(url: URL, title: String? = nil, client: BoxClient? = nil) {
+    public init(url: URL, title: String? = nil, client: BoxClient? = nil, actions: [FileInteractions]) {
+        self.videoName = title
+        self.AVPlayerVC = AVPlayerViewController()
+        self.AVPlayerVC.showsPlaybackControls = false
         super.init(nibName: nil, bundle: nil)
-        videoName = title
-//        self.player = AVPlayer()
-        setupPlayer(url: url, client: client)
-//        log("test")
-//        DispatchQueue.main.async {
-//            self.gestureView = AVGestureView(frame: self.view.frame)
-//        }
-//        gestureView!.addGestureRecognizer(singleTapGesture)
-//        self.contentOverlayView?.addSubview(gestureView!)
-//        print("test")
+        self.set(actions: actions)
+        self.setupPlayer(url: url, client: client)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     public override func viewDidLoad() {
@@ -49,30 +42,14 @@ public class AVViewController: AVPlayerViewController, PreviewItemChildViewContr
         setupView()
     }
     
-    /// Takes an appropriate action based on the current action style
-    @objc func touchTapped(_: UITapGestureRecognizer) {
-//        titleView.title = "pressed"
-//        parent?.navigationItem.titleView = titleView
-//        showAlertWith(title: "Test", message: "Image was copied to the clipboard.")
-//        var shouldHide: Bool {
-//            guard let isNavigationBarHidden = navigationController?.isNavigationBarHidden else {
-//                return false
-//            }
-//            return !isNavigationBarHidden
-//        }
-//        fullScreenDelegate?.viewController(self, didEnterFullScreen: shouldHide)
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        UIView.animate(withDuration: 0.25) { [weak self] in
-//            guard let self = self else {
-//                return
-//            }
-//            self.navigationController?.isToolbarHidden = self.toolbarButtons.isEmpty ? true : !shouldHide
-//        }
-    }
-    
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            let navbarBottom = navigationController?.navigationBar.frame.maxY ?? CGFloat(0.0)
+            let toolbarTop = navigationController?.toolbar.frame.minY ?? view.frame.maxY
+            print(navbarBottom)
+            print(toolbarTop)
+//            self.AVPlayerVC?.view.frame = self.view.frame
+        }
     }
 }
 
@@ -88,23 +65,51 @@ private extension AVViewController {
                     DispatchQueue.main.async {
                         let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
                         let playerItem = AVPlayerItem(asset: asset)
-                        self.player = AVPlayer(playerItem: playerItem)
+                        self.AVPlayerVC.player = AVPlayer(playerItem: playerItem)
+                        self.AVPlayerVC.player?.play()
+                        self.AVPlayerVC.showsPlaybackControls = true
                     }
-//                        self.view.isUserInteractionEnabled = false
                 case .failure:
-                    DispatchQueue.main.async {
-                        self.showAlertWith(title: "Error", message: "Was not able to retrview video.")
-                    }
+                    break
                 }
             }
         }
         else {
             let asset = AVURLAsset(url: url)
             let playerItem = AVPlayerItem(asset: asset)
-            self.player = AVPlayer(playerItem: playerItem)
+            DispatchQueue.main.async {
+                self.AVPlayerVC.player = AVPlayer(playerItem: playerItem)
+                self.AVPlayerVC.player?.play()
+                self.AVPlayerVC.showsPlaybackControls = true
+            }
         }
     }
+}
+
+// MARK: - Private extensions
+
+private extension AVViewController {
+    func setupView() {
+        titleView.title = videoName
+        parent?.navigationItem.titleView = titleView
+        let navbarBottom = navigationController?.navigationBar.frame.maxY ?? CGFloat(0.0)
+        let toolbarTop = navigationController?.toolbar.frame.minY ?? view.frame.maxY
+        self.view.addSubview(self.AVPlayerVC.view ?? UIView())
+//        NSLayoutConstraint.activate([
+//            self.AVPlayerVC.view.topAnchor.constraint(equalTo: self.parent!.view.topAnchor),
+//            self.AVPlayerVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            self.AVPlayerVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            self.AVPlayerVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+//        ])
+    }
     
+    func set(actions actionTypes: [FileInteractions]) {
+        var buttons: [UIBarButtonItem] = []
+
+        toolbarButtons = buttons
+    }
+    
+    // Gets a fresh token that will last for around an hour if the session allows for a new token
     func getToken(client: BoxClient, completion: @escaping (Result<String, BoxSDKError>) -> Void) {
         if let oauthSession = client.session as? OAuth2Session {
             oauthSession.refreshToken { result in
@@ -117,7 +122,21 @@ private extension AVViewController {
             }
         }
         else if let delegatedSession = client.session as? DelegatedAuthSession {
-            
+            delegatedSession.revokeTokens { revokeResult in
+                switch revokeResult {
+                case .success:
+                    delegatedSession.getAccessToken { result in
+                        switch result {
+                        case let .success(accessToken):
+                            completion(.success(accessToken))
+                        case let .failure(error):
+                            completion(.failure(error))
+                        }
+                    }
+                case let .failure(error):
+                    completion(.failure(error))
+                }
+            }
         }
         else if let singleTokenSession = client.session as? SingleTokenSession {
             singleTokenSession.getAccessToken { result in
@@ -130,26 +149,4 @@ private extension AVViewController {
             }
         }
     }
-    
-    func setupView() {
-//        view.backgroundColor = .black
-        titleView.title = videoName
-//        self.showAlertWith(title: "Image copied", message: self.contentOverlayView!.frame.debugDescription)
-        parent?.navigationItem.titleView = titleView
-//        showAlertWith(title: "Image copied", message: "Image was copied to the clipboard.")
-//        self.gestureView!.addGestureRecognizer(singleTapGesture)
-    }
 }
-
-//extension VideoViewController: UIGestureRecognizerDelegate {
-//    public func gestureRecognizer(
-//        _ gestureRecognizer: UIGestureRecognizer,
-//        shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer
-//    ) -> Bool {
-//        // Don't recognize a single tap until a double-tap fails.
-//        if gestureRecognizer == singleTapGesture {
-//            return true
-//        }
-//        return false
-//    }
-//}

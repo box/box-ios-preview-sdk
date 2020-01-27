@@ -12,19 +12,19 @@ import UIKit
 // MARK: - Preview actions
 
 public enum FileInteractions: CaseIterable {
-
+    
     // MARK: - Image-only actions
-
+    
     /// Saves image to image library
     case saveImageToLibrary
-
+    
     // MARK: - Common actions
-
+    
     /// Print image or PDF
     case print
     /// Saves file to file system
     case saveToFiles
-
+    
     /// Allow all share and save actions that iOS offers including printing
     /// Automatically replaces print, saveToFiles and saveImageToLibrary actions
     case allShareAndSaveActions
@@ -38,34 +38,34 @@ public protocol PreviewViewControllerDelegate: class {
 }
 
 public class PreviewViewController: UIViewController {
-
+    
     // MARK: - Properties
     var client: BoxClient
     var fileId: String?
     var file: File?
     var shouldHideToolbarWhenDisappearing: Bool = true
-
+    
     weak var parentWithToolbar: UIViewController?
     weak var delegate: PreviewViewControllerDelegate?
     weak var fullScreenDelegate: PreviewItemFullScreenDelegate?
     private let itemActions: [FileInteractions]
-
+    
     private lazy var progressView: CustomProgressView = {
         let progressView = CustomProgressView()
         return progressView
     }()
-
+    
     private lazy var errorView: ErrorView = {
         let errorView = self.delegate?.makeCustomErrorView() ?? DefaultErrorView()
         errorView.translatesAutoresizingMaskIntoConstraints = false
         return errorView
     }()
-
+    
     // swiftlint:disable:next implicitly_unwrapped_optional
     private var previewHelper: PreviewHelper!
-
+    
     // MARK: - Inits
-
+    
     public init(client: BoxClient,
                 fileId: String,
                 delegate: PreviewViewControllerDelegate? = nil,
@@ -89,23 +89,23 @@ public class PreviewViewController: UIViewController {
         itemActions = allowedActions
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - View life cycle
-
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         previewFile()
     }
-
+    
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         // Sets toolbar items for a parent in case of paging
         // Needs to be set every time view appears or otherwise parent will remain with old items in a toolbar.
         if !itemActions.isEmpty {
@@ -113,26 +113,26 @@ public class PreviewViewController: UIViewController {
             parentWithToolbar?.toolbarItems = toolbarItems
         }
     }
-
+    
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if shouldHideToolbarWhenDisappearing {
             navigationController?.isToolbarHidden = true
         }
     }
-
+    
     public override var prefersStatusBarHidden: Bool {
         return navigationController?.isNavigationBarHidden == true
     }
-
+    
     public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .fade
     }
-
+    
     public override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
-
+    
     public override var childForHomeIndicatorAutoHidden: UIViewController? {
         return nil
     }
@@ -146,7 +146,7 @@ private extension PreviewViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
-
+    
     func addProgressView() {
         view.addSubview(progressView)
         NSLayoutConstraint.activate([
@@ -156,16 +156,16 @@ private extension PreviewViewController {
             progressView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
     func removeProgressView() {
         DispatchQueue.main.async {
             self.progressView.removeFromSuperview()
         }
     }
-
+    
     func addErrorView(with error: BoxPreviewError) {
-
-
+        
+        
         view.addSubview(errorView)
         NSLayoutConstraint.activate([
             errorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -175,7 +175,7 @@ private extension PreviewViewController {
         ])
         errorView.displayError(error)
     }
-
+    
     func removeErrorView() {
         DispatchQueue.main.async {
             self.errorView.removeFromSuperview()
@@ -183,7 +183,7 @@ private extension PreviewViewController {
     }
     
     func previewFile() {
-        if let unwrappedFile = file, let _ = unwrappedFile.name  {
+        if let unwrappedFile = file, unwrappedFile.name != nil {
             previewFile(file: unwrappedFile)
         }
         else if let unwrappedFileId = fileId {
@@ -191,7 +191,7 @@ private extension PreviewViewController {
                 guard let self = self else {
                     return
                 }
-    
+                
                 switch result {
                 case let .success(file):
                     self.previewFile(file: file)
@@ -204,15 +204,15 @@ private extension PreviewViewController {
     
     func previewFile(file: File) {
         if let fileName = file.name, previewHelper.AVFileFormat.contains(URL(fileURLWithPath: fileName).pathExtension) {
-           self.client.files.listRepresentations(
-               fileId: file.id,
-               representationHint: .customValue("[hls]"),
-               completion: { [weak self] (result: Result<[FileRepresentation], BoxSDKError>) in
-                   guard let self = self else {
-                       return
-                   }
-                   switch result {
-                   case let .success(representations):
+            self.client.files.listRepresentations(
+                fileId: file.id,
+                representationHint: .customValue("[hls]"),
+                completion: { [weak self] (result: Result<[FileRepresentation], BoxSDKError>) in
+                    guard let self = self else {
+                        return
+                    }
+                    switch result {
+                    case let .success(representations):
                         if representations.isEmpty {
                             DispatchQueue.main.async {
                                 self.addProgressView()
@@ -222,13 +222,13 @@ private extension PreviewViewController {
                         else {
                             self.downloadFile(file: file, representations: representations)
                         }
-                   case .failure(_):
+                    case .failure:
                         DispatchQueue.main.async {
                             self.addProgressView()
                         }
                         self.downloadFile(file: file)
-                   }
-           })
+                    }
+            })
         }
         else {
             DispatchQueue.main.async {
@@ -237,7 +237,7 @@ private extension PreviewViewController {
             self.downloadFile(file: file)
         }
     }
-
+    
     func downloadFile(file: File, representations: [FileRepresentation]? = nil) {
         previewHelper.downloadFile(
             file: file,
@@ -249,31 +249,22 @@ private extension PreviewViewController {
                 guard let self = self else {
                     return
                 }
-                switch result {
-                case .success:
-                    self.removeProgressView()
-                    let result = self.previewHelper.getChildViewController(withActions: self.itemActions)
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
                     switch result {
-                    case let .success(childViewController):
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self else {
-                                return
-                            }
+                    case .success:
+                        self.removeProgressView()
+                        
+                        let result = self.previewHelper.getChildViewController(withActions: self.itemActions)
+                        switch result {
+                        case let .success(childViewController):
                             self.displayChild(contentController: childViewController, on: self.view)
-                        }
-                    case let .failure(getChildViewControllerError):
-                        DispatchQueue.main.async { [weak self] in
-                            guard let self = self else {
-                                return
-                            }
+                        case let .failure(getChildViewControllerError):
                             self.previewViewControllerFailed(error: getChildViewControllerError)
                         }
-                    }
-                case let .failure(downloadFileError):
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else {
-                            return
-                        }
+                    case let .failure(downloadFileError):
                         self.removeProgressView()
                         self.previewViewControllerFailed(error: BoxPreviewError(message: .contentSDKError, error: downloadFileError))
                     }
@@ -281,19 +272,19 @@ private extension PreviewViewController {
             }
         )
     }
-
+    
     func displayChild(contentController content: UIViewController, on view: UIView) {
         addChild(content)
         content.view.frame = view.bounds
         view.addSubview(content.view)
         content.didMove(toParent: self)
-
+        
         if let itemViewController = content as? PreviewItemChildViewController {
             itemViewController.fullScreenDelegate = fullScreenDelegate
             setToolbar(for: itemViewController)
         }
     }
-
+    
     func setToolbar(for itemViewController: PreviewItemChildViewController) {
         navigationController?.isToolbarHidden = itemViewController.toolbarButtons.isEmpty
         toolbarItems = createToolbarItems(for: itemViewController)
@@ -311,7 +302,7 @@ private extension PreviewViewController {
         }
         return toolbarItems
     }
-
+    
     func previewViewControllerFailed(error: BoxPreviewError) {
         DispatchQueue.main.async { [weak self] in self?.addErrorView(with: error) }
         delegate?.previewViewControllerFailed(error: error)

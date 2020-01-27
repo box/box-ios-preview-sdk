@@ -50,7 +50,7 @@ internal class PreviewHelper {
                     return .success(childViewController)
                 }
                 else {
-                    return .failure(BoxPreviewError(message: .unableToReadFile(file!.id)))
+                    return .failure(BoxPreviewError(message: .unableToReadFile(file?.id ?? "")))
                 }
             }
             catch {
@@ -64,18 +64,18 @@ internal class PreviewHelper {
                     return .success(childViewController)
                 }
                 else {
-                    return .failure(BoxPreviewError(message: .unableToReadFile(file!.id)))
+                    return .failure(BoxPreviewError(message: .unableToReadFile(file?.id ?? "")))
                 }
             }
             catch {
                 return .failure(BoxPreviewError(error: error))
             }
         case "mp4", "mov", "wmv", "flv", "avi", "mp3":
-            childViewController = AVViewController(url: unwrappedFileURL, title: fileName)
+            childViewController = AVViewController(url: unwrappedFileURL, title: fileName, actions: actions)
             return .success(childViewController)
 
         case "m3u8":
-            childViewController = AVViewController(url: unwrappedFileURL, title: fileName, client: client)
+            childViewController = AVViewController(url: unwrappedFileURL, title: fileName, client: client, actions: actions)
             return .success(childViewController)
 //                do {
 //                    var token: String;
@@ -101,8 +101,10 @@ internal class PreviewHelper {
         }
     }
     
-    func downloadFile(file: File, representations: [FileRepresentation]? = nil, progress: @escaping (Progress) -> Void,
-                              completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
+    func downloadFile(file: File,
+                      representations: [FileRepresentation]? = nil,
+                      progress: @escaping (Progress) -> Void,
+                      completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
         guard let fileName = file.name,
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 return

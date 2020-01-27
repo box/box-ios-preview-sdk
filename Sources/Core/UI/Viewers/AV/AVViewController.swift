@@ -46,8 +46,8 @@ public class AVViewController: UIViewController, PreviewItemChildViewController 
         if UIDevice.current.orientation.isLandscape {
             let navbarBottom = navigationController?.navigationBar.frame.maxY ?? CGFloat(0.0)
             let toolbarTop = navigationController?.toolbar.frame.minY ?? view.frame.maxY
-            print(navbarBottom)
-            print(toolbarTop)
+//            print(navbarBottom)
+//            print(toolbarTop)
 //            self.AVPlayerVC?.view.frame = self.view.frame
         }
     }
@@ -94,6 +94,7 @@ private extension AVViewController {
         parent?.navigationItem.titleView = titleView
         let navbarBottom = navigationController?.navigationBar.frame.maxY ?? CGFloat(0.0)
         let toolbarTop = navigationController?.toolbar.frame.minY ?? view.frame.maxY
+        self.AVPlayerVC.view.frame = CGRect(x: 0.0, y: navbarBottom, width: self.view.frame.width, height: toolbarTop - navbarBottom)
         self.view.addSubview(self.AVPlayerVC.view ?? UIView())
 //        NSLayoutConstraint.activate([
 //            self.AVPlayerVC.view.topAnchor.constraint(equalTo: self.parent!.view.topAnchor),
@@ -106,6 +107,12 @@ private extension AVViewController {
     func set(actions actionTypes: [FileInteractions]) {
         var buttons: [UIBarButtonItem] = []
 
+        if actionTypes.contains(.saveToFiles) {
+            let button = makeSaveToFilesButton()
+//            button.action = #selector(saveButtonTapped(_:))
+            buttons.append(button)
+        }
+        
         toolbarButtons = buttons
     }
     

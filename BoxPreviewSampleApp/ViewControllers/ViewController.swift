@@ -29,9 +29,9 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         title = "Box Preview SDK - Sample App"
         setupView()
-        contentSDK = BoxSDK(clientId: "5t1jh03gpivv76p0ue2cro332uxui2t6", clientSecret: "cbXjQbG0Oy4WQZAUVp1L2zgVGI0po5aZ")
+        contentSDK = BoxSDK(clientId: "", clientSecret: "")
 //        #error("Obtain a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console")
-        client = contentSDK.getClient(token: "")
+        client = contentSDK.getClient(token: "DzR221zzbRRrJkjzGXvh29hytmhHZ5bp")
 //        contentSDK.getDelegatedAuthClient(authClosure: obtainJWTTokenFromExternalSources(), uniqueID: "dummyID") { [weak self] result in
 //            guard let self = self else { return }
 //            switch result {

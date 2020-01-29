@@ -56,34 +56,34 @@ extension PreviewItemChildViewController {
 // MARK: - Print functionality
 
 extension PreviewItemChildViewController {
-//    func print(fileAt url: URL) {
-//        if UIPrintInteractionController.canPrint(url) {
-//            print(item: url)
-//        }
-//    }
-//
-//    func print(from data: Data) {
-//        if UIPrintInteractionController.canPrint(data) {
-//            print(item: data)
-//        }
-//    }
-//
-//    func print(_ image: UIImage) {
-//        print(item: image)
-//    }
-//
-//    private func print(item: Any) {
-//        let printInfo = UIPrintInfo(dictionary: nil)
-//        printInfo.jobName = "Print file"
-//        printInfo.outputType = .general
-//
-//        let printController = UIPrintInteractionController.shared
-//        printController.printInfo = printInfo
-//        printController.showsNumberOfCopies = true
-//        printController.printingItem = item
-//
-//        printController.present(animated: true, completionHandler: nil)
-//    }
+    func print(fileAt url: URL) {
+        if UIPrintInteractionController.canPrint(url) {
+            print(item: url)
+        }
+    }
+
+    func print(from data: Data) {
+        if UIPrintInteractionController.canPrint(data) {
+            print(item: data)
+        }
+    }
+
+    func print(_ image: UIImage) {
+        print(item: image)
+    }
+
+    private func print(item: Any) {
+        let printInfo = UIPrintInfo(dictionary: nil)
+        printInfo.jobName = "Print file"
+        printInfo.outputType = .general
+
+        let printController = UIPrintInteractionController.shared
+        printController.printInfo = printInfo
+        printController.showsNumberOfCopies = true
+        printController.printingItem = item
+
+        printController.present(animated: true, completionHandler: nil)
+    }
 }
 
 extension PreviewItemChildViewController {
@@ -120,6 +120,15 @@ extension PreviewItemChildViewController {
         try? itemData?.write(to: path)
 
         let activityController: UIActivityViewController = UIActivityViewController(activityItems: [path], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
+    }
+    
+    /// Displays available share and other options for a file.
+    ///
+    /// - Parameters:
+    ///   - filePath: URL of the file path to the downloaded file
+    func displayAllShareOptions(filePath: URL) {
+        let activityController: UIActivityViewController = UIActivityViewController(activityItems: [filePath], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
 }

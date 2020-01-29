@@ -12,10 +12,13 @@ import AVKit
 
 public class AVViewController: UIViewController, PreviewItemChildViewController {
 
+    // MARK: - Properties
+    
     weak var fullScreenDelegate: PreviewItemFullScreenDelegate?
     var toolbarButtons: [UIBarButtonItem] = []
     
-    private var videoName: String?
+    private var url: URL
+    private var file: File?
     private var AVPlayerVC: AVPlayerViewController
     private var client: BoxClient?
     
@@ -24,21 +27,26 @@ public class AVViewController: UIViewController, PreviewItemChildViewController 
         return view
     }()
     
-    public init(url: URL, title: String? = nil, client: BoxClient? = nil, actions: [FileInteractions]) {
-        self.videoName = title
+    // MARK: - Initializer
+    
+    public init(url: URL, file: File? = nil, client: BoxClient? = nil, actions: [FileInteractions]) {
+        self.url = url
+        self.file = file
         self.AVPlayerVC = AVPlayerViewController()
         self.client = client
         super.init(nibName: nil, bundle: nil)
         // Not showing controls, so when video players doesn't flash a play button before it automatically starts playing
         self.AVPlayerVC.showsPlaybackControls = false
         self.set(actions: actions)
-        self.setupPlayer(url: url, client: client)
+        self.setupPlayer()
     }
     
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - View life cycle
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +57,7 @@ public class AVViewController: UIViewController, PreviewItemChildViewController 
 // MARK: - Setup video player
 
 private extension AVViewController {
-    func setupPlayer(url: URL, client: BoxClient?) {
+    func setupPlayer() {
         if let unwrappedClient = client {
             self.getToken(client: unwrappedClient) { result in
                 switch result {
@@ -58,7 +66,7 @@ private extension AVViewController {
                        "Authorization": "Bearer \(accessToken)"
                     ]
                     DispatchQueue.main.async {
-                        let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
+                        let asset = AVURLAsset(url: self.url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
                         let playerItem = AVPlayerItem(asset: asset)
                         self.AVPlayerVC.player = AVPlayer(playerItem: playerItem)
                         self.AVPlayerVC.player?.play()
@@ -131,7 +139,7 @@ private extension AVViewController {
 
 private extension AVViewController {
     func setupView() {
-        titleView.title = videoName
+        titleView.title = file?.name
         parent?.navigationItem.titleView = titleView
         // This makes sure the video player is bounded by the navigation bar and toolbar and does not go below the two
         self.AVPlayerVC.view.translatesAutoresizingMaskIntoConstraints = false
@@ -147,6 +155,14 @@ private extension AVViewController {
     func set(actions actionTypes: [FileInteractions]) {
         var buttons: [UIBarButtonItem] = []
 
+        if actionTypes.contains(.allShareAndSaveActions) {
+            let button = makeShareButton()
+            button.action = #selector(shareOptionsButtonTapped(_:))
+            buttons.append(button)
+            toolbarButtons = buttons
+            return
+        }
+        
         if actionTypes.contains(.saveToFiles) {
             let button = makeSaveToFilesButton()
             button.action = #selector(saveButtonTapped(_:))
@@ -160,22 +176,42 @@ private extension AVViewController {
 // MARK: - Actions
 
 private extension AVViewController {
-    @objc func saveButtonTapped(_: Any) {
-//        guard let fileData = document.dataRepresentation(),
-//            let fileName = documentName else {
-//                showAlertWith(title: "Error", message: "Unable to retrieve file data to perform save.")
-//                return
-//        }
-//        do {
-//            try saveDataToFiles(fileData, withName: fileName)
-//            showAlertWith(title: "File saved", message: "The file was successfully saved.")
-//        }
-//        catch {
-//            showAlertWith(title: "Error", message: "Unable to save file.")
-//        }
-        if client != nil {
-            
+    @objc func shareOptionsButtonTapped(_: Any) {
+        if let unwrappedClient = client, let unwrappedFile = file {
+            let filesDirectory = FileManager.default.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
+            guard let filePath = filesDirectory.first else {
+                showAlertWith(title: "Error", message: "Unable to open share options")
+                return
+            }
+            let fileURL = filePath.appendingPathComponent(unwrappedFile.name ?? "untitled")
+            unwrappedClient.files.download(fileId: unwrappedFile.id, destinationURL: fileURL ) { result in
+                switch result {
+                case .success:
+                    self.displayAllShareOptions(filePath: fileURL)
+                case .failure:
+                    self.showAlertWith(title: "Error", message: "Unable to open share options")
+                }
+            }
         }
-        FileManager.default.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
+    }
+    
+    @objc func saveButtonTapped(_: Any) {
+        if let unwrappedClient = client, let unwrappedFile = file {
+            let filesDirectory = FileManager.default.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
+            guard let filePath = filesDirectory.first else {
+                showAlertWith(title: "Error", message: "Unable to save media")
+                return
+            }
+            unwrappedClient.files.download(fileId: unwrappedFile.id, destinationURL: filePath) { result in
+                switch result {
+                case .success:
+                    self.showAlertWith(title: "Media saved", message: "Media was successfully saved to your files")
+                case .failure:
+                    self.showAlertWith(title: "Error", message: "Unable to save media")
+                }
+            }
+        } else {
+            self.showAlertWith(title: "Media saved", message: "Media was successfully saved to your files")
+        }
     }
 }

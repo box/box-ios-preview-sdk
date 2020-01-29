@@ -157,10 +157,10 @@ public class PDFViewController: UIViewController, PreviewItemChildViewController
     
     @objc func printButtonTapped(_: Any) {
         if let fileData = document.dataRepresentation() {
-//            print(from: fileData)
+            print(from: fileData)
         }
         else if let fileURL = document.documentURL {
-//            print(fileAt: fileURL)
+            print(fileAt: fileURL)
         }
     }
     

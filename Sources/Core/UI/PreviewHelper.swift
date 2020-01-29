@@ -69,10 +69,10 @@ internal class PreviewHelper {
                 return .failure(BoxPreviewError(error: error))
             }
         case "mp4", "mov", "wmv", "flv", "avi", "mp3":
-            childViewController = AVViewController(url: unwrappedFileURL, title: fileName, actions: actions)
+            childViewController = AVViewController(url: unwrappedFileURL, file: file, actions: actions)
             return .success(childViewController)
         case "m3u8":
-            childViewController = AVViewController(url: unwrappedFileURL, title: fileName, client: client, actions: actions)
+            childViewController = AVViewController(url: unwrappedFileURL, file: file, client: client, actions: actions)
             return .success(childViewController)
         default:
             return .failure(BoxPreviewError(message: .unknownFileType(unwrappedFileURL.pathExtension)))

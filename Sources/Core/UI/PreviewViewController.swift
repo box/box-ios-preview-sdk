@@ -191,7 +191,6 @@ private extension PreviewViewController {
                 guard let self = self else {
                     return
                 }
-                
                 switch result {
                 case let .success(file):
                     self.previewFile(file: file)

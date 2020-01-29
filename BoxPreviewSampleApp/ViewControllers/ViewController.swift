@@ -30,52 +30,11 @@ class ViewController: UITableViewController {
         title = "Box Preview SDK - Sample App"
         setupView()
         contentSDK = BoxSDK(clientId: "", clientSecret: "")
-//        #error("Obtain a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console")
-        client = contentSDK.getClient(token: "DzR221zzbRRrJkjzGXvh29hytmhHZ5bp")
-//        contentSDK.getDelegatedAuthClient(authClosure: obtainJWTTokenFromExternalSources(), uniqueID: "dummyID") { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case let .success(client):
-//                self.client = client
-//                self.previewSDK = BoxPreviewSDK(client: client)
-//                self.getSinglePageOfFolderItems()
-//            case let .failure(error):
-//                print("error in authorizeWithJWClient: \(error)")
-//                self.addErrorView(with: error)
-//            }
-//        }
+        #error("Obtain a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console")
+        client = contentSDK.getClient(token: "")
         previewSDK = BoxPreviewSDK(client: client)
         getSinglePageOfFolderItems()
     }
-    
-        func obtainJWTTokenFromExternalSources() -> DelegatedAuthClosure {
-            return { uniqueID, completion in
-    //            #error("Obtain a JWT Token from your own service or a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console and return it in the completion.")
-                // The code below is an example implementation of the delegate function
-                // Please provide your own implementation
-
-    //            let session = URLSession(configuration: .default)
-    //            let tokenUrl = "https://example.com/getToken"
-    //            let urlRequest = URLRequest(url: URL(string: tokenUrl)!)
-    //
-    //            let task = session.dataTask(with: urlRequest) { data, response, error in
-    //                if let unwrappedError = error {
-    //                    print(error.debugDescription)
-    //                    completion(.failure(unwrappedError))
-    //                    return
-    //                }
-    //
-    //                if let body = data, let token = String(data: body, encoding: .utf8) {
-    //                    print("\nFetched new token: \(token)\n")
-                        completion(.success((accessToken: "D7BFuR1rCsaXEf6JWaU8Fiy2auYCY7PS", expiresIn: 999)))
-    //                }
-    //                else {
-    //                    completion(.failure(customError))
-    //                }
-    //            }
-    //            task.resume()
-            }
-        }
 
     // MARK: - Table view data source
 
@@ -108,7 +67,7 @@ class ViewController: UITableViewController {
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = folderItems[indexPath.row]
         if case let .file(file) = item {
-            showPreviewViewController(fileId: file.id)
+            showPreviewViewController(file: file)
         }
     }
 }
@@ -165,8 +124,8 @@ private extension ViewController {
         }
     }
 
-    func showPreviewViewController(fileId: String) {
-        let previewController: PreviewViewController = previewSDK.openFile(fileId: fileId, delegate: self)
+    func showPreviewViewController(file: File) {
+        let previewController: PreviewViewController = previewSDK.openFile(file: file, delegate: self)
         navigationController?.pushViewController(previewController, animated: true)
     }
 }

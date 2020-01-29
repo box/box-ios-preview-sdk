@@ -112,7 +112,7 @@ class ViewController: UITableViewController {
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = folderItems[indexPath.row]
         if case let .file(file) = item {
-            showPreviewViewController(fileId: file.id)
+            showPreviewViewController(file: file)
         }
     }
 }
@@ -207,8 +207,8 @@ private extension ViewController {
         }
     }
     
-    func showPreviewViewController(fileId: String) {
-        let previewController: PreviewViewController? = previewSDK?.openFile(fileId: fileId, delegate: self)
+    func showPreviewViewController(file: File) {
+        let previewController: PreviewViewController? = previewSDK?.openFile(file: file, delegate: self)
         
         guard let unwrappedPreviewController = previewController else {
             return

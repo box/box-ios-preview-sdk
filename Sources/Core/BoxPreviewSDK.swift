@@ -66,7 +66,7 @@ public extension BoxPreviewSDK {
         return PreviewViewController(client: client, fileId: fileId, delegate: delegate, allowedActions: allowedAction)
     }
     
-    /// Creates UIViewController for previewing file detail. Makes less calls than the other openFile
+    /// Creates UIViewController for previewing file detail. This is the preferred openFile method as it makes less API calls than calling openFile with just the fileID.
     ///
     /// - Parameters:
     ///   - file: File Info object of the file to preview.

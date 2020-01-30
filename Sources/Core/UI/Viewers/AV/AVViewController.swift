@@ -37,7 +37,6 @@ public class AVViewController: UIViewController, PreviewItemChildViewController 
         super.init(nibName: nil, bundle: nil)
         // Not showing controls, so when video players doesn't flash a play button before it automatically starts playing
         self.AVPlayerVC.showsPlaybackControls = false
-        self.set(actions: actions)
         self.setupPlayer()
     }
     
@@ -150,68 +149,5 @@ private extension AVViewController {
             self.AVPlayerVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             self.AVPlayerVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-    }
-
-    func set(actions actionTypes: [FileInteractions]) {
-        var buttons: [UIBarButtonItem] = []
-
-        if actionTypes.contains(.allShareAndSaveActions) {
-            let button = makeShareButton()
-            button.action = #selector(shareOptionsButtonTapped(_:))
-            buttons.append(button)
-            toolbarButtons = buttons
-            return
-        }
-        
-        if actionTypes.contains(.saveToFiles) {
-            let button = makeSaveToFilesButton()
-            button.action = #selector(saveButtonTapped(_:))
-            buttons.append(button)
-        }
-        
-        toolbarButtons = buttons
-    }
-}
-
-// MARK: - Actions
-
-private extension AVViewController {
-    @objc func shareOptionsButtonTapped(_: Any) {
-        if let unwrappedClient = client, let unwrappedFile = file {
-            let filesDirectory = FileManager.default.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
-            guard let filePath = filesDirectory.first else {
-                showAlertWith(title: "Error", message: "Unable to open share options")
-                return
-            }
-            let fileURL = filePath.appendingPathComponent(unwrappedFile.name ?? "untitled")
-            unwrappedClient.files.download(fileId: unwrappedFile.id, destinationURL: fileURL ) { result in
-                switch result {
-                case .success:
-                    self.displayAllShareOptions(filePath: fileURL)
-                case .failure:
-                    self.showAlertWith(title: "Error", message: "Unable to open share options")
-                }
-            }
-        }
-    }
-    
-    @objc func saveButtonTapped(_: Any) {
-        if let unwrappedClient = client, let unwrappedFile = file {
-            let filesDirectory = FileManager.default.urls(for: .documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)
-            guard let filePath = filesDirectory.first else {
-                showAlertWith(title: "Error", message: "Unable to save media")
-                return
-            }
-            unwrappedClient.files.download(fileId: unwrappedFile.id, destinationURL: filePath) { result in
-                switch result {
-                case .success:
-                    self.showAlertWith(title: "Media saved", message: "Media was successfully saved to your files")
-                case .failure:
-                    self.showAlertWith(title: "Error", message: "Unable to save media")
-                }
-            }
-        } else {
-            self.showAlertWith(title: "Media saved", message: "Media was successfully saved to your files")
-        }
     }
 }

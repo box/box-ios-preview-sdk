@@ -22,6 +22,11 @@ public class AVViewController: UIViewController, PreviewItemChildViewController 
     private var AVPlayerVC: AVPlayerViewController
     private var client: BoxClient?
     
+    private lazy var progressView: CustomProgressView = {
+        let progressView = CustomProgressView()
+        return progressView
+    }()
+    
     private lazy var titleView: CustomTitleView = {
         let view: CustomTitleView = CustomTitleView()
         return view
@@ -171,6 +176,27 @@ private extension AVViewController {
         
         toolbarButtons = buttons
     }
+    
+    func presentProgressView() -> UIAlertController {
+        let alert = UIAlertController(title: "Downloading", message: "0%", preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: "Cancel", style: .default) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(closeAction)
+        alert.view.addSubview(progressView)
+        
+        progressView.removePercentageLabel()
+        progressView.isUserInteractionEnabled = false
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            progressView.leadingAnchor.constraint(equalTo: alert.view.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: alert.view.trailingAnchor),
+            progressView.topAnchor.constraint(equalTo: alert.view.topAnchor),
+            progressView.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor)
+        ])
+        present(alert, animated: true, completion: nil)
+        return alert
+    }
 }
 
 // MARK: - Actions
@@ -184,14 +210,32 @@ private extension AVViewController {
                 return
             }
             let fileURL = filePath.appendingPathComponent(unwrappedFile.name ?? "untitled")
-            unwrappedClient.files.download(fileId: unwrappedFile.id, destinationURL: fileURL ) { result in
-                switch result {
-                case .success:
-                    self.displayAllShareOptions(filePath: fileURL)
-                case .failure:
-                    self.showAlertWith(title: "Error", message: "Unable to open share options")
+            let alertProgress = presentProgressView()
+            unwrappedClient.files.download(fileId: unwrappedFile.id, destinationURL: fileURL, progress: { [weak self] progress in
+                DispatchQueue.main.async {
+                    alertProgress.message = "\(Int(progress.fractionCompleted * 100))%"
+                    self?.progressView.setProgress(progress.fractionCompleted)
+                }
+            }) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        if self.presentedViewController != nil {
+                            alertProgress.dismiss(animated: true, completion: nil)
+                            self.displayAllShareOptions(filePath: fileURL)
+                        }
+                    case .failure:
+                        if self.presentedViewController != nil {
+                            alertProgress.dismiss(animated: true, completion: nil)
+                            self.showAlertWith(title: "Error", message: "Unable to open share options")
+                        }
+                    }
+                    self.progressView.setProgress(0.0)
                 }
             }
+        }
+        else {
+            self.displayAllShareOptions(filePath: url)
         }
     }
     

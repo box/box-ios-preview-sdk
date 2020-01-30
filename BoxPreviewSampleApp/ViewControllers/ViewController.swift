@@ -30,7 +30,7 @@ class ViewController: UITableViewController {
         title = "Box Preview SDK - Sample App"
         setupView()
         contentSDK = BoxSDK(clientId: "", clientSecret: "")
-        #error("Obtain a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console")
+//        #error("Obtain a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console")
         client = contentSDK.getClient(token: "")
         previewSDK = BoxPreviewSDK(client: client)
         getSinglePageOfFolderItems()

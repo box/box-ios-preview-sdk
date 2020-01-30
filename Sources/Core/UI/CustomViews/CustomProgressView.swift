@@ -55,6 +55,12 @@ final class CustomProgressView: UIView {
             self.progressView.progress = Float(progress)
         }
     }
+    
+    public func removePercentageLabel() {
+        DispatchQueue.main.async {
+            self.percentageLabel.removeFromSuperview()
+        }
+    }
 
     // MARK: - Private helpers
 

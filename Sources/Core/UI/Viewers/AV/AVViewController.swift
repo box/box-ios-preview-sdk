@@ -42,7 +42,7 @@ public class AVViewController: UIViewController, PreviewItemChildViewController 
     
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - View life cycle

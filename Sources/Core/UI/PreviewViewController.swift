@@ -252,10 +252,9 @@ private extension PreviewViewController {
                     guard let self = self else {
                         return
                     }
+                    self.removeProgressView()
                     switch result {
                     case .success:
-                        self.removeProgressView()
-                        
                         let result = self.previewHelper.getChildViewController(withActions: self.itemActions)
                         switch result {
                         case let .success(childViewController):
@@ -264,7 +263,6 @@ private extension PreviewViewController {
                             self.previewViewControllerFailed(error: getChildViewControllerError)
                         }
                     case let .failure(downloadFileError):
-                        self.removeProgressView()
                         self.previewViewControllerFailed(error: BoxPreviewError(message: .contentSDKError, error: downloadFileError))
                     }
                 }

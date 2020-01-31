@@ -95,6 +95,8 @@ internal class PreviewHelper {
             guard let streamURL = streamRepresentation.content?.urlTemplate else {
                 return
             }
+            // Gets content URL for a stream from the API, then replaces the last path component `{asset+path}` with `master.m3u8`.
+            // This newly formed URL is the HLS stream
             fileURL = URL(fileURLWithPath: streamURL)
             fileURL.deleteLastPathComponent()
             fileURL.appendPathComponent("master.m3u8")
@@ -109,7 +111,6 @@ internal class PreviewHelper {
                     guard let self = self else {
                         return
                     }
-                    
                     completion(self.processFileDownload(to: fileURL, result: result))
                 }
             )

@@ -133,7 +133,6 @@ private extension AVViewController {
     // swiftlint:enable cyclomatic_complexity
 }
 
-
 // MARK: - Set up view
 
 private extension AVViewController {

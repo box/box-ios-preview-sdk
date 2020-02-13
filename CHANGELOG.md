@@ -1,6 +1,14 @@
 Changelog
 =========
 
+# Next Release
+
+__Breaking Changes:__
+
+__New Features and Enhancements:__
+
+- Add audio and video previewing
+
 ## v3.1.0 [2020-01-10]
 
 __Breaking Changes:__

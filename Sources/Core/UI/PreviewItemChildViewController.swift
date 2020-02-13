@@ -122,4 +122,13 @@ extension PreviewItemChildViewController {
         let activityController: UIActivityViewController = UIActivityViewController(activityItems: [path], applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
+    
+    /// Displays available share and other options for a file.
+    ///
+    /// - Parameters:
+    ///   - filePath: URL of the file path to the downloaded file
+    func displayAllShareOptions(filePath: URL) {
+        let activityController: UIActivityViewController = UIActivityViewController(activityItems: [filePath], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
+    }
 }

@@ -15,36 +15,22 @@ internal class PreviewHelper {
     // MARK: - Properties
     
     var client: BoxClient
-    var fileId: String
+    var file: File?
+    var fileName: String?
     var filePath: URL?
-    private var supportedFileFormat = ["pdf", "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "BMPf", "ico", "cur", "xbm"]
+    var AVFileFormat = ["mp4", "mov", "wmv", "flv", "avi", "mp3"]
+    var otherFileFormat = ["pdf", "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "BMPf", "ico", "cur", "xbm"]
+    var supportedFileFormat: [String] {
+        return AVFileFormat + otherFileFormat
+    }
     
     // MARK: - Init
     
-    public init(client: BoxClient, fileId: String) {
+    public init(client: BoxClient) {
         self.client = client
-        self.fileId = fileId
     }
     
     // MARK: - Helpers
-    
-    func downloadBoxFile(progress: @escaping (Progress) -> Void, completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
-        client.files.get(fileId: fileId) { [weak self] (result: Result<File, BoxSDKError>) in
-            guard let self = self else {
-                return
-            }
-            
-            switch result {
-            case let .failure(error):
-                completion(.failure(error))
-                return
-                
-            case let .success(file):
-                self.downloadFile(file: file, progress: progress, completion: completion)
-            }
-        }
-    }
-    
     
     func getChildViewController(withActions actions: [FileInteractions]) -> Result<PreviewItemChildViewController, BoxPreviewError> {
         var childViewController: PreviewItemChildViewController
@@ -58,11 +44,11 @@ internal class PreviewHelper {
             do {
                 let data = try Data(contentsOf: unwrappedFileURL)
                 if let document = PDFDocument(data: data) {
-                    childViewController = PDFViewController(document: document, title: unwrappedFileURL.lastPathComponent, actions: actions)
+                    childViewController = PDFViewController(document: document, title: fileName, actions: actions)
                     return .success(childViewController)
                 }
                 else {
-                    return .failure(BoxPreviewError(message: .unableToReadFile(fileId)))
+                    return .failure(BoxPreviewError(message: .unableToReadFile(file?.id ?? "")))
                 }
             }
             catch {
@@ -72,32 +58,51 @@ internal class PreviewHelper {
             do {
                 let data = try Data(contentsOf: unwrappedFileURL)
                 if let image = UIImage(data: data) {
-                    childViewController = ImageViewController(image: image, title: unwrappedFileURL.lastPathComponent, actions: actions)
+                    childViewController = ImageViewController(image: image, title: fileName, actions: actions)
                     return .success(childViewController)
                 }
                 else {
-                    return .failure(BoxPreviewError(message: .unableToReadFile(fileId)))
+                    return .failure(BoxPreviewError(message: .unableToReadFile(file?.id ?? "")))
                 }
             }
             catch {
                 return .failure(BoxPreviewError(error: error))
             }
+        case "mp4", "mov", "wmv", "flv", "avi", "mp3":
+            childViewController = AVViewController(url: unwrappedFileURL, file: file, actions: actions)
+            return .success(childViewController)
+        case "m3u8":
+            childViewController = AVViewController(url: unwrappedFileURL, file: file, client: client, actions: actions)
+            return .success(childViewController)
         default:
             return .failure(BoxPreviewError(message: .unknownFileType(unwrappedFileURL.pathExtension)))
         }
     }
     
-    
-    // MARK: - Private helpers
-    
-    private func downloadFile(file: File, progress: @escaping (Progress) -> Void,
-                              completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
+    func downloadFile(file: File,
+                      representations: [FileRepresentation]? = nil,
+                      progress: @escaping (Progress) -> Void,
+                      completion: @escaping (Result<Void, BoxSDKError>) -> Void) {
         guard let fileName = file.name,
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 return
         }
+        self.fileName = fileName
+        self.file = file
+        
         var fileURL = documentsURL.appendingPathComponent(fileName)
-        if supportedFileFormat.contains(fileURL.pathExtension) {
+        if let streamRepresentation = representations?.first(where: { $0.representation == "hls" }) {
+            guard let streamURL = streamRepresentation.content?.urlTemplate else {
+                return
+            }
+            // Gets content URL for a stream from the API, then replaces the last path component `{asset+path}` with `master.m3u8`.
+            // This newly formed URL is the HLS stream
+            fileURL = URL(fileURLWithPath: streamURL)
+            fileURL.deleteLastPathComponent()
+            fileURL.appendPathComponent("master.m3u8")
+            completion(self.processFileDownload(to: fileURL, result: .success(())))
+        }
+        else if supportedFileFormat.contains(fileURL.pathExtension) {
             self.client.files.download(
                 fileId: file.id,
                 destinationURL: fileURL,
@@ -106,7 +111,6 @@ internal class PreviewHelper {
                     guard let self = self else {
                         return
                     }
-                    
                     completion(self.processFileDownload(to: fileURL, result: result))
                 }
             )
@@ -125,6 +129,8 @@ internal class PreviewHelper {
             })
         }
     }
+    
+    // MARK: - Private helpers
     
     private func processFileDownload(to fileURL: URL, result: Result<Void, BoxSDKError>) -> Result<Void, BoxSDKError> {
         switch result {

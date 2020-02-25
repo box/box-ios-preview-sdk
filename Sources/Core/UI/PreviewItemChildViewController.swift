@@ -120,6 +120,9 @@ extension PreviewItemChildViewController {
         try? itemData?.write(to: path)
 
         let activityController: UIActivityViewController = UIActivityViewController(activityItems: [path], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceRect = self.view.bounds
+        activityController.popoverPresentationController?.sourceView = self.view
+        activityController.popoverPresentationController?.permittedArrowDirections = []
         present(activityController, animated: true, completion: nil)
     }
     
@@ -129,6 +132,9 @@ extension PreviewItemChildViewController {
     ///   - filePath: URL of the file path to the downloaded file
     func displayAllShareOptions(filePath: URL) {
         let activityController: UIActivityViewController = UIActivityViewController(activityItems: [filePath], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceRect = self.view.bounds
+        activityController.popoverPresentationController?.sourceView = self.view
+        activityController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         present(activityController, animated: true, completion: nil)
     }
 }

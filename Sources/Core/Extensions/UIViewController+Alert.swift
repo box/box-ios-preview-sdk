@@ -14,6 +14,9 @@ extension UIViewController {
         let closeAction = UIAlertAction(title: "OK", style: .default) { _ in
             alert.dismiss(animated: true, completion: nil)
         }
+        alert.popoverPresentationController?.sourceRect = self.view.bounds
+        alert.popoverPresentationController?.sourceView = self.view
+        alert.popoverPresentationController?.permittedArrowDirections = []
         alert.addAction(closeAction)
         present(alert, animated: true, completion: nil)
     }

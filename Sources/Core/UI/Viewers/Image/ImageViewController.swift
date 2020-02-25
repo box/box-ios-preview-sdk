@@ -226,7 +226,6 @@ private extension ImageViewController {
             button.action = #selector(shareOptionsButtonTapped(_:))
             buttons.append(button)
             toolbarButtons = buttons
-            showAlertWith(title: "Error", message: "Was not able to save the image due to missing data.")
             return
         }
 

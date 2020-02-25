@@ -134,7 +134,7 @@ extension PreviewItemChildViewController {
         let activityController: UIActivityViewController = UIActivityViewController(activityItems: [filePath], applicationActivities: nil)
         activityController.popoverPresentationController?.sourceRect = self.view.bounds
         activityController.popoverPresentationController?.sourceView = self.view
-        activityController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        activityController.popoverPresentationController?.permittedArrowDirections = []
         present(activityController, animated: true, completion: nil)
     }
 }

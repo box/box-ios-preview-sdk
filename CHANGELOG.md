@@ -1,6 +1,17 @@
 Changelog
 =========
 
+## Next Release
+
+__Breaking Changes:__
+
+__New Features and Enhancements:__
+
+__Bug Fixes:__
+
+- Fixed error for alerts and share sheets on the iPad.
+
+
 ## v3.2.0 [2020-02-13]
 
 __Breaking Changes:__

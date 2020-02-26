@@ -9,7 +9,7 @@ __New Features and Enhancements:__
 
 __Bug Fixes:__
 
-- Fixed error for alerts and share sheets on the iPad ([#92](https://github.com/box/box-ios-preview-sdk/pull/92))
+- Fixed bug with Alerts and Share Sheets on the iPad ([#92](https://github.com/box/box-ios-preview-sdk/pull/92))
 
 
 ## v3.2.0 [2020-02-13]

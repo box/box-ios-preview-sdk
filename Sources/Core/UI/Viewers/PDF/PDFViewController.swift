@@ -67,6 +67,7 @@ public class PDFViewController: UIViewController, PreviewItemChildViewController
         pdfView.delegate = self
         pdfView.displayMode = .singlePage
         pdfView.backgroundColor = pdfBackgroundColor
+        pdfView.enableDataDetectors = true
         pdfView.autoScales = true
         pdfView.displayDirection = .vertical
         if let scrollView = pdfView.subviews.first as? UIScrollView {
@@ -535,8 +536,19 @@ extension PDFViewController: SearchViewControllerDelegate {
 
 extension PDFViewController: PDFViewDelegate {
     public func pdfViewWillClick(onLink _: PDFView, with url: URL) {
-        let safaryVC = SFSafariViewController(url: url)
-        present(safaryVC, animated: true, completion: nil)
+        var URLCopy = url
+        if URLCopy.scheme == nil {
+            let URLCopyString = "https://" + URLCopy.absoluteString
+            URLCopy = URL(string: URLCopyString)!
+        }
+        if UIApplication.shared.canOpenURL(URLCopy) {
+            let safaryVC = SFSafariViewController(url: URLCopy)
+            present(safaryVC, animated: true, completion: nil)
+        } else {
+            DispatchQueue.main.async {
+                self.showAlertWith(title: "Error", message: URLCopy.absoluteString + " is an invalid link.")
+            }
+        }
     }
 }
 

@@ -10,6 +10,7 @@ __New Features and Enhancements:__
 __Bug Fixes:__
 
 - Fixed bug with Alerts and Share Sheets on the iPad ([#92](https://github.com/box/box-ios-preview-sdk/pull/92))
+- Fixed bug where URLs without schemes in a PDF would crash the app when clicked
 
 
 ## v3.2.0 [2020-02-13]

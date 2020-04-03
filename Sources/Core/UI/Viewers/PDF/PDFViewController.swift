@@ -536,17 +536,12 @@ extension PDFViewController: SearchViewControllerDelegate {
 
 extension PDFViewController: PDFViewDelegate {
     public func pdfViewWillClick(onLink _: PDFView, with url: URL) {
-        var URLCopy = url
-        if URLCopy.scheme == nil {
-            let URLCopyString = "https://" + URLCopy.absoluteString
-            URLCopy = URL(string: URLCopyString)!
-        }
-        if UIApplication.shared.canOpenURL(URLCopy) {
-            let safaryVC = SFSafariViewController(url: URLCopy)
+        if let scheme = url.scheme, (scheme == "https" || scheme == "http") {
+            let safaryVC = SFSafariViewController(url: url)
             present(safaryVC, animated: true, completion: nil)
         } else {
             DispatchQueue.main.async {
-                self.showAlertWith(title: "Error", message: URLCopy.absoluteString + " is an invalid link.")
+                self.showAlertWith(title: "Error", message: url.absoluteString + " is an invalid link. Must have http or https.")
             }
         }
     }

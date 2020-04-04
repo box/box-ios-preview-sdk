@@ -67,7 +67,6 @@ public class PDFViewController: UIViewController, PreviewItemChildViewController
         pdfView.delegate = self
         pdfView.displayMode = .singlePage
         pdfView.backgroundColor = pdfBackgroundColor
-        pdfView.enableDataDetectors = true
         pdfView.autoScales = true
         pdfView.displayDirection = .vertical
         if let scrollView = pdfView.subviews.first as? UIScrollView {

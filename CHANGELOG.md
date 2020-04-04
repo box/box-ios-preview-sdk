@@ -6,6 +6,7 @@ Changelog
 __Breaking Changes:__
 
 __New Features and Enhancements:__
+- Add the ability to have mail, facetime, etc. links open in the appropriate apps ([#93](https://github.com/box/box-ios-preview-sdk/pull/93))
 
 __Bug Fixes:__
 

@@ -535,16 +535,15 @@ extension PDFViewController: SearchViewControllerDelegate {
 
 extension PDFViewController: PDFViewDelegate {
     public func pdfViewWillClick(onLink _: PDFView, with url: URL) {
-        var URLCopy = url
-        if URLCopy.scheme == nil {
-            let URLCopyString = "https://" + URLCopy.absoluteString
-            URLCopy = URL(string: URLCopyString)!
+        var finalURL = url
+        if finalURL.scheme == nil {
+            finalURL = URL(string: "https://" + finalURL.absoluteString)!
         }
-        if let scheme = URLCopy.scheme, (scheme == "https" || scheme == "http") {
-            let safaryVC = SFSafariViewController(url: URLCopy)
+        if let scheme = finalURL.scheme, ["http", "https"].contains(scheme) {
+            let safaryVC = SFSafariViewController(url: finalURL)
             present(safaryVC, animated: true, completion: nil)
         } else {
-            UIApplication.shared.open(URLCopy) { (result) in
+            UIApplication.shared.open(finalURL) { (result) in
                 if !result {
                     DispatchQueue.main.async {
                         self.showAlertWith(title: "Error", message: url.absoluteString + " is an invalid link that can't be handled by any application.")

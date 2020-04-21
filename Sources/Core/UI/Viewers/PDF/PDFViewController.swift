@@ -535,8 +535,22 @@ extension PDFViewController: SearchViewControllerDelegate {
 
 extension PDFViewController: PDFViewDelegate {
     public func pdfViewWillClick(onLink _: PDFView, with url: URL) {
-        let safaryVC = SFSafariViewController(url: url)
-        present(safaryVC, animated: true, completion: nil)
+        var finalURL = url
+        if finalURL.scheme == nil {
+            finalURL = URL(string: "https://" + finalURL.absoluteString)!
+        }
+        if let scheme = finalURL.scheme, ["http", "https"].contains(scheme) {
+            let safaryVC = SFSafariViewController(url: finalURL)
+            present(safaryVC, animated: true, completion: nil)
+        } else {
+            UIApplication.shared.open(finalURL) { (result) in
+                if !result {
+                    DispatchQueue.main.async {
+                        self.showAlertWith(title: "Error", message: url.absoluteString + " is an invalid link that can't be handled by any application.")
+                    }
+                }
+            }
+        }
     }
 }
 

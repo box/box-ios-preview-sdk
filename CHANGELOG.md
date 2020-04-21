@@ -7,9 +7,12 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
+- Add the ability to have `mailto`, `tel`, etc. links open in the appropriate apps ([#93](https://github.com/box/box-ios-preview-sdk/pull/93))
+
 __Bug Fixes:__
 
-- Fixed bug with Alerts and Share Sheets on the iPad ([#92](https://github.com/box/box-ios-preview-sdk/pull/92))
+- Fix bug with Alerts and Share Sheets on the iPad ([#92](https://github.com/box/box-ios-preview-sdk/pull/92))
+- Fix bug where invalid links in a PDF crash the app when clicked ([#93](https://github.com/box/box-ios-preview-sdk/pull/93))
 
 
 ## v3.2.0 [2020-02-13]

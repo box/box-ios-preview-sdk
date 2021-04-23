@@ -1,13 +1,13 @@
 # BoxPreviewSDK
 
 [![Platforms](https://img.shields.io/cocoapods/p/BoxPreviewSDK.svg)](https://cocoapods.org/pods/BoxPreviewSDK)
-[![License](https://img.shields.io/cocoapods/l/BoxPreviewSDK.svg)](https://raw.githubusercontent.com/box/BoxPreviewSDK/master/LICENSE)
+[![License](https://img.shields.io/cocoapods/l/BoxPreviewSDK.svg)](https://raw.githubusercontent.com/box/box-ios-preview-sdk/main/LICENSE)
 
 [![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods compatible](https://img.shields.io/cocoapods/v/BoxPreviewSDK.svg)](https://cocoapods.org/pods/BoxPreviewSDK)
 
-[![Build Status](https://travis-ci.com/box/box-swift-preview-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=master)](https://travis-ci.com/box/box-swift-preview-sdk)
+[![Build Status](https://travis-ci.com/box/box-swift-preview-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main)](https://travis-ci.com/box/box-swift-preview-sdk)
 
 This SDK makes it easy to present Box files in your iOS application.
 

@@ -1,0 +1,474 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/BoxPreviewSDK.swift",
+      "line": 12,
+      "symbol": "BoxPreviewSDK",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/BoxPreviewSDK.swift",
+      "line": 17,
+      "symbol": "BoxPreviewSDK.init(client:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/BoxPreviewSDK.swift",
+      "line": 24,
+      "symbol": "BoxPreviewSDK",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 12,
+      "symbol": "BoxPreviewErrorEnum",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 14,
+      "symbol": "BoxPreviewErrorEnum.fileCouldNotBeDownloaded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 15,
+      "symbol": "BoxPreviewErrorEnum.fileCouldNotBeDecoded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 16,
+      "symbol": "BoxPreviewErrorEnum.unableToReadFile(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 17,
+      "symbol": "BoxPreviewErrorEnum.unknownFileType(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 18,
+      "symbol": "BoxPreviewErrorEnum.unableToAccessFilesDirectory",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 19,
+      "symbol": "BoxPreviewErrorEnum.unableToFindImage",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 22,
+      "symbol": "BoxPreviewErrorEnum.invalidURLForSearchHistoryStore",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 23,
+      "symbol": "BoxPreviewErrorEnum.invalidSearchHistoryData",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 25,
+      "symbol": "BoxPreviewErrorEnum.contentSDKError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 27,
+      "symbol": "BoxPreviewErrorEnum.customValue(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 74,
+      "symbol": "BoxPreviewErrorEnum",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 82,
+      "symbol": "BoxPreviewError.errorType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 83,
+      "symbol": "BoxPreviewError.message",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 84,
+      "symbol": "BoxPreviewError.stackTrace",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 85,
+      "symbol": "BoxPreviewError.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/Errors/BoxPreviewError.swift",
+      "line": 94,
+      "symbol": "BoxPreviewError.getDictionary()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewPageViewController.swift",
+      "line": 12,
+      "symbol": "PreviewPageViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewPageViewController.swift",
+      "line": 66,
+      "symbol": "PreviewPageViewController.init(client:fileIds:index:delegate:allowedActions:customErrorView:displayThumbnails:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewPageViewController.swift",
+      "line": 87,
+      "symbol": "PreviewPageViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewPageViewController.swift",
+      "line": 93,
+      "symbol": "PreviewPageViewController.viewWillDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewPageViewController.swift",
+      "line": 132,
+      "symbol": "PreviewPageViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewPageViewController.swift",
+      "line": 134,
+      "symbol": "PreviewPageViewController.pageViewController(_:viewControllerBefore:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewPageViewController.swift",
+      "line": 139,
+      "symbol": "PreviewPageViewController.pageViewController(_:viewControllerAfter:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewPageViewController.swift",
+      "line": 144,
+      "symbol": "PreviewPageViewController.pageViewController(_:didFinishAnimating:previousViewControllers:transitionCompleted:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 14,
+      "symbol": "FileInteractions",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 35,
+      "symbol": "PreviewViewControllerDelegate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 36,
+      "symbol": "PreviewViewControllerDelegate.previewViewControllerFailed(error:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 37,
+      "symbol": "PreviewViewControllerDelegate.makeCustomErrorView()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 40,
+      "symbol": "PreviewViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 69,
+      "symbol": "PreviewViewController.init(client:fileId:delegate:allowedActions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 81,
+      "symbol": "PreviewViewController.init(client:file:delegate:allowedActions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 100,
+      "symbol": "PreviewViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 106,
+      "symbol": "PreviewViewController.viewWillAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 117,
+      "symbol": "PreviewViewController.viewWillDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 124,
+      "symbol": "PreviewViewController.prefersStatusBarHidden",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 128,
+      "symbol": "PreviewViewController.preferredStatusBarUpdateAnimation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 132,
+      "symbol": "PreviewViewController.prefersHomeIndicatorAutoHidden",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/PreviewViewController.swift",
+      "line": 136,
+      "symbol": "PreviewViewController.childForHomeIndicatorAutoHidden",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/AV/AVViewController.swift",
+      "line": 13,
+      "symbol": "AVViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/AV/AVViewController.swift",
+      "line": 32,
+      "symbol": "AVViewController.init(url:file:client:actions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/AV/AVViewController.swift",
+      "line": 50,
+      "symbol": "AVViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/Image/ImageViewController.swift",
+      "line": 12,
+      "symbol": "ImageViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/Image/ImageViewController.swift",
+      "line": 48,
+      "symbol": "ImageViewController.init(image:title:actions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/Image/ImageViewController.swift",
+      "line": 62,
+      "symbol": "ImageViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/Image/ImageViewController.swift",
+      "line": 67,
+      "symbol": "ImageViewController.viewWillDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/Image/ImageViewController.swift",
+      "line": 72,
+      "symbol": "ImageViewController.viewWillTransition(to:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/Image/ImageViewController.swift",
+      "line": 260,
+      "symbol": "ImageViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/Image/ImageViewController.swift",
+      "line": 261,
+      "symbol": "ImageViewController.gestureRecognizer(_:shouldRequireFailureOf:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 13,
+      "symbol": "PDFViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 118,
+      "symbol": "PDFViewController.init(document:title:actions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 132,
+      "symbol": "PDFViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 137,
+      "symbol": "PDFViewController.viewDidLayoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 145,
+      "symbol": "PDFViewController.viewWillTransition(to:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 536,
+      "symbol": "PDFViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 537,
+      "symbol": "PDFViewController.pdfViewWillClick(onLink:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 559,
+      "symbol": "PDFViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
+      "line": 560,
+      "symbol": "PDFViewController.gestureRecognizer(_:shouldReceive:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/QuickLook/QuickLookPreviewViewController.swift",
+      "line": 12,
+      "symbol": "QuickLookPreviewViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/QuickLook/QuickLookPreviewViewController.swift",
+      "line": 23,
+      "symbol": "QuickLookPreviewViewController.init(fileURL:title:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/QuickLook/QuickLookPreviewViewController.swift",
+      "line": 35,
+      "symbol": "QuickLookPreviewViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/QuickLook/QuickLookPreviewViewController.swift",
+      "line": 69,
+      "symbol": "QuickLookPreviewViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/QuickLook/QuickLookPreviewViewController.swift",
+      "line": 70,
+      "symbol": "QuickLookPreviewViewController.numberOfPreviewItems(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mhagmajer/Repositories/box-ios-preview-sdk/Sources/Core/UI/Viewers/QuickLook/QuickLookPreviewViewController.swift",
+      "line": 74,
+      "symbol": "QuickLookPreviewViewController.previewController(_:previewItemAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mhagmajer/Repositories/box-ios-preview-sdk"
+}

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## Next Release
+## v3.3.0 [2021-10-01]
 
 __Breaking Changes:__
 
@@ -13,6 +13,8 @@ __Bug Fixes:__
 
 - Fix bug with Alerts and Share Sheets on the iPad ([#92](https://github.com/box/box-ios-preview-sdk/pull/92))
 - Fix bug where invalid links in a PDF crash the app when clicked ([#93](https://github.com/box/box-ios-preview-sdk/pull/93))
+- Upgrade dependencies ([#98](https://github.com/box/box-ios-preview-sdk/pull/98))
+- Rename default branch from master to main ([#101](https://github.com/box/box-ios-preview-sdk/pull/101))
 
 
 ## v3.2.0 [2020-02-13]

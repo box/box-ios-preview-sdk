@@ -1,2 +1,2 @@
-github "box/box-ios-preview-sdk" "v3.0.0"
-github "box/box-ios-sdk" "v3.1.0"
+github "box/box-ios-preview-sdk" "f79cf58bcfd2b345630b13e331c39e2fc6533ae5"
+github "box/box-ios-sdk" "v4.4.0"

@@ -20,19 +20,31 @@ Box Preview SDK
 ------------------
 This SDK makes it easy to present Box files in your iOS application.
 
-- [Requirements](#requirements)
-- [Installing the SDK](#installing-the-sdk)
-  - [Carthage](#carthage)
-  - [CocoaPods](#cocoapods)
-  - [Swift Package Manager](#swift-package-manager)
-- [Getting Started](#getting-started)
-- [Sample App Config](#sample-app-config)
-- [Using the Sample App](#using-the-sample-app)
-- [Open a PDF File](#open-a-pdf-file)
-- [Open an Image File](#open-an-image-file)
-- [Future Enhancements](#future-enhancements)
-- [Release Definitions](#release-definitions)
-- [Copyright and License](#copyright-and-license)
+- [Box Preview SDK](#box-preview-sdk)
+- [NOTE:](#note)
+  - [Box Preview SDK](#box-preview-sdk-1)
+  - [Requirements](#requirements)
+  - [Installing the SDK](#installing-the-sdk)
+    - [Carthage](#carthage)
+    - [CocoaPods](#cocoapods)
+    - [Swift Package Manager](#swift-package-manager)
+      - [Importing BoxPreviewSDK into Project](#importing-boxpreviewsdk-into-project)
+      - [Adding BoxPreviewSDK as a Dependency](#adding-boxpreviewsdk-as-a-dependency)
+  - [Getting Started](#getting-started)
+  - [Sample App Config](#sample-app-config)
+  - [Using the Sample App](#using-the-sample-app)
+  - [Open a PDF File](#open-a-pdf-file)
+  - [Open an Image File](#open-an-image-file)
+  - [Future Enhancements](#future-enhancements)
+  - [Release Definitions](#release-definitions)
+    - [Release Candidate (RC)](#release-candidate-rc)
+    - [Current Release](#current-release)
+    - [Long Term Support](#long-term-support)
+    - [Support Phases](#support-phases)
+      - [Active](#active)
+      - [Maintenance](#maintenance)
+      - [End-of-life](#end-of-life)
+  - [Copyright and License](#copyright-and-license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -56,10 +68,10 @@ git "https://github.com/box/box-ios-preview-sdk.git" ~> 3.0
 
 __Step 2__: Update dependencies
 ```shell
-$ carthage update --platform iOS
+$ carthage update --use-xcframeworks --platform iOS
 ```
 
-__Step 3__: The framework in the Carthage/Build/iOS folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.
+__Step 3__: The xcframework in the Carthage/Build folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.
 
 For more detailed instructions, please see the [official documentation for Carthage](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos).
 
@@ -124,7 +136,7 @@ To execute the sample app:
 __Step 1__: Run carthage
 ```shell
 $ cd BoxPreviewSDKSampleApp
-$ carthage update --platform iOS
+$ carthage update --use-xcframeworks --platform iOS
 ```
 
 __Step 2__: Open Xcode Project File

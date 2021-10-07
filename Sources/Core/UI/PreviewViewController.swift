@@ -202,7 +202,7 @@ private extension PreviewViewController {
     }
     
     func previewFile(file: File) {
-        if let fileName = file.name, previewHelper.AVFileFormat.contains(URL(fileURLWithPath: fileName).pathExtension) {
+        if let fileName = file.name, previewHelper.AVFileFormat.contains(URL(fileURLWithPath: fileName).pathExtension.lowercased()) {
             self.client.files.listRepresentations(
                 fileId: file.id,
                 representationHint: .customValue("[hls]"),

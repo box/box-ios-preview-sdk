@@ -39,7 +39,7 @@ internal class PreviewHelper {
             return .failure(BoxPreviewError(message: .fileCouldNotBeDownloaded))
         }
         
-        switch unwrappedFileURL.pathExtension {
+        switch unwrappedFileURL.pathExtension.lowercased() {
         case "pdf":
             do {
                 let data = try Data(contentsOf: unwrappedFileURL)
@@ -102,7 +102,7 @@ internal class PreviewHelper {
             fileURL.appendPathComponent("master.m3u8")
             completion(self.processFileDownload(to: fileURL, result: .success(())))
         }
-        else if supportedFileFormat.contains(fileURL.pathExtension) {
+        else if supportedFileFormat.contains(fileURL.pathExtension.lowercased()) {
             self.client.files.download(
                 fileId: file.id,
                 destinationURL: fileURL,

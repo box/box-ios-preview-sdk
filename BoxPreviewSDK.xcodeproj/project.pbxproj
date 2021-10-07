@@ -450,7 +450,6 @@
 				3549BB1F1DA389CD00C63030 /* Resources */,
 				0CEFC90822C220380013B84B /* SwiftLint Run Script */,
 				0CEFC90922C220530013B84B /* SwiftFormat Run Script */,
-				0CCBBAD222BAAC8600166C2D /* Cartage Run Script */,
 			);
 			buildRules = (
 			);
@@ -523,26 +522,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0CCBBAD222BAAC8600166C2D /* Cartage Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/BoxSDK.framework",
-			);
-			name = "Cartage Run Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BoxSDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
-		};
 		0CEFC90822C220380013B84B /* SwiftLint Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

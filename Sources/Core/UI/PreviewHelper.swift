@@ -19,7 +19,7 @@ internal class PreviewHelper {
     var fileName: String?
     var filePath: URL?
     var AVFileFormat = ["mp4", "mov", "wmv", "flv", "avi", "mp3"]
-    var otherFileFormat = ["pdf", "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "BMPf", "ico", "cur", "xbm"]
+    var otherFileFormat = ["pdf", "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "bmpf", "ico", "cur", "xbm"]
     var supportedFileFormat: [String] {
         return AVFileFormat + otherFileFormat
     }
@@ -54,7 +54,7 @@ internal class PreviewHelper {
             catch {
                 return .failure(BoxPreviewError(error: error))
             }
-        case "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "BMPf", "ico", "cur", "xbm":
+        case "jpg", "jpeg", "png", "tiff", "tif", "gif", "bmp", "bmpf", "ico", "cur", "xbm":
             do {
                 let data = try Data(contentsOf: unwrappedFileURL)
                 if let image = UIImage(data: data) {

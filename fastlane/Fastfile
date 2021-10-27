@@ -1,0 +1,340 @@
+# This file contains Box iOS Preview SDK release script.
+#
+# Make sure to run `bundle install` before first run this script in root directory of this repository.
+#
+# USAGE:
+#############
+# bundle exec fastlane release preview_version:<<PREVIEW RELEASE VERSION HERE>> content_version:<<LATEST CONTENT RELEASE VERSION>> github_token:<<GITHUB TOKEN HERE>>
+# bundle exec fastlane release preview_version:5.6.7 content_version:10.11.12 github_token:secret_token_123
+#
+# PARAMETERS:
+#############
+# preview_version:  Required parameter. It determines which version of box-ios-preview-sdk we want to release.
+#                   e.g. preview_version:5.6.7
+#                   e.g. preview_version:9.11.12
+#
+# content_version:  Required parameter. It determines latest released version of box-ios-sdk.
+#                   e.g. content_version:9.1.1
+#                   e.g. content_version:10.11.12
+#
+# github_token:     Required only if we don't have defined environment variable name "GITHUB_TOKEN".
+#                   It's a personal API Token for GitHub - generate one at https://github.com/settings/tokens
+#                   It is needed to communicate with GitHub.
+#                   e.g. github_token:secret_token_123
+#
+# is_draft:         Optinoal parameter. Default value is fasle.
+#                   It determines whether the release should be marked as draft.
+#                   e.g. is_draft:true
+#
+# dry_run:          Optional parameter. Default value is false.
+#                   If false then no any changes will be made on external systems.
+#                   e.g. dry_run:true
+#
+# release_branch:   Optional paremeter. Default value is "main".
+#                   It specifies the branch used to create release.
+#                   e.g. release_branch:relese_beta_10.11.12
+
+default_platform(:ios)
+
+platform :ios do
+
+  # Making sure that git status is clean before run release lane
+  before_all do |lane, options|
+    ensure_git_status_clean
+  end
+
+  desc "Prepare and release Box iOS Preview SDK"
+  lane :release do |options|
+
+    # Variables from parameters
+    preview_version = options[:preview_version]
+    content_version = options[:content_version]
+    is_draft = options[:is_draft] || false
+    dry_run = options[:dry_run] || false
+    github_token = options[:github_token] || ENV["GITHUB_TOKEN"]
+    release_branch = options[:release_branch] || "main"
+
+    # Local variables
+    release_notes = get_release_notes()
+  
+    # Preconditions
+    if preview_version.nil?
+      UI.user_error!("Missing required parameter \"preview_version\"")
+    end
+
+    if content_version.nil?
+      UI.user_error!("Missing required parameter \"content_version\"")
+    end
+
+    # Script phases
+    update_version(
+      preview_version: preview_version,
+      content_version: content_version
+    )
+    update_changelog(
+      preview_version: preview_version,
+      release_notes: release_notes
+    )
+    update_jazzy_documentation()
+    buld()
+    commit_release_changes_with_tag(
+      preview_version: preview_version,
+      release_notes: release_notes,
+      dry_run: dry_run
+    )
+    create_release_on_github(
+      preview_version: preview_version,
+      release_notes: release_notes,
+      github_token: github_token,
+      release_branch: release_branch,
+      dry_run: dry_run,
+      is_draft: is_draft
+    )
+  end
+
+##############################################################################
+# RELEASE
+##############################################################################
+
+  desc "Create release on GitHub"
+  private_lane :create_release_on_github do |options|
+    preview_version = options[:preview_version]
+    preview_version_tag = "v#{preview_version}"
+    release_notes = options[:release_notes]
+    github_token = options[:github_token]
+    release_branch = options[:release_branch]
+    dry_run = options[:dry_run] 
+    is_draft = options[:is_draft]
+    release_notes_filename = ENV["RELEASE_NOTES_TMP_FILENAME"]
+    release_notes_path = "../#{release_notes_filename}"
+
+    if dry_run == true
+      UI.important("Running in \"dry run\" mode. Release won't be published.")
+    else
+      if github_token.nil?
+        UI.user_error!("GitHub Token is required to make release.")
+      end
+
+      File.write("#{release_notes_path}", release_notes)
+
+      set_github_release(
+      repository_name: "box/box-ios-preview-sdk",
+      api_token: github_token,
+      name: "#{preview_version_tag}",
+      tag_name: "#{preview_version_tag}",
+      description: (File.read("#{release_notes_path}") rescue "No changelog provided"),
+      commitish: "#{release_branch}",
+      is_draft: is_draft
+    )
+
+    sh("rm #{release_notes_path}")
+    end
+  end
+
+  desc "Commit version update"
+  private_lane :commit_release_changes_with_tag do |options|
+    preview_version = options[:preview_version]
+    dry_run = options[:dry_run] 
+    preview_version_tag = "v#{preview_version}"
+    release_notes = "#{preview_version_tag}\n\n" + options[:release_notes]
+    puts "#{release_notes}"
+    release_notes_filename = ENV["RELEASE_NOTES_TMP_FILENAME"]
+
+    Dir.chdir("..") do
+      sh("git add .")
+      File.write(release_notes_filename, release_notes)
+      sh("git commit -am #{preview_version_tag}")
+      sh("git tag -F#{release_notes_filename} #{preview_version_tag}")
+
+      if dry_run == true
+        UI.important("Running in \"dry run\" mode. No commit will be made.")
+      else
+        sh("git push --atomic origin HEAD #{preview_version_tag}")
+      end
+
+      sh("rm #{release_notes_filename}")
+    end
+  end
+
+##############################################################################
+# DOCUMENTATION UPDATE
+##############################################################################
+
+  desc "Update jazzy documentation"
+  private_lane :update_jazzy_documentation do |options|
+    Dir.chdir("..") do
+      sh("jazzy --output docs")
+    end
+  end
+
+##############################################################################
+# VERSION UPDATE
+##############################################################################
+
+  desc "Update SDK version"
+  private_lane :update_version do |options|
+    preview_version = options[:preview_version]
+    content_version = options[:content_version]
+    
+    update_regular_version( 
+      preview_version: preview_version,
+      content_version: content_version
+    )
+
+    update_sample_apps_version( 
+      preview_version: preview_version,
+      content_version: content_version
+    )
+  end
+
+  desc "Update version in configuration and documentation files"
+  private_lane :update_regular_version do |options|
+    preview_version = options[:preview_version]
+    content_version = options[:content_version]
+    new_preview_major_version = preview_version.split('.').first.to_i
+    new_content_major_version = content_version.split('.').first.to_i
+
+    # Update BoxPreviewSDK.podspec
+    podspec_path = ENV["PODSPEC_PATH"]
+    pods_content_dependency_version = "#{new_content_major_version}.0"
+    sh("sed -i.bak -E 's|(.*spec.version.* = ).*|\\1\"#{preview_version}\"|g' #{podspec_path}")
+    sh("sed -i.bak -E 's|(.*spec.dependency \"BoxSDK\", ).*|\\1\"~> #{pods_content_dependency_version}\"|g' #{podspec_path}")
+    sh("rm #{podspec_path}.bak")
+
+     # Update Package.swift
+    package_path = ENV["PACKAGE_PATH"]
+    spm_content_dependency_version = "#{new_content_major_version}.0.0"
+    sh("sed -i.bak -E 's|(.*package\\(url: \"https://github.com/box/box-ios-sdk.git\", \.upToNextMajor\\(from: ).*(\\)\\).*)|\\1\"#{spm_content_dependency_version}\"\\2|g' #{package_path}")
+    sh("rm #{package_path}.bak")
+    
+    # # Update Info.plist
+    info_plist_path = ENV["INFO_PLIST_PATH"]
+    sh("plutil -replace CFBundleShortVersionString -string \"#{preview_version}\" #{info_plist_path}")
+
+    # Update README.md and /docs/usage/getting-started.md
+    preview_dependency_version = "#{new_preview_major_version}.0"
+    content_dependency_version = "#{new_content_major_version}.0"
+
+    readme_path = ENV["README_PATH"]
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ~> ).*|\\1#{content_dependency_version}|g' #{readme_path}")
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ~> ).*|\\1#{preview_dependency_version}|g' #{readme_path}")
+    sh("sed -i.bak -E \"s|(^pod 'BoxPreviewSDK', '~> ).*(')|\\1#{preview_dependency_version}\\2|g\"  #{readme_path}")
+    sh("rm #{readme_path}.bak")
+
+    getting_started_path = ENV["GETTING_STARTED_PATH"]
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ~> ).*|\\1#{content_dependency_version}|g' #{getting_started_path}")
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ~> ).*|\\1#{preview_dependency_version}|g' #{getting_started_path}")
+    sh("sed -i.bak -E \"s|(^pod 'BoxPreviewSDK', '~> ).*(')|\\1#{preview_dependency_version}\\2|g\"  #{getting_started_path}")
+    sh("rm #{getting_started_path}.bak")
+
+  end
+
+  desc "Update version in sample apps"
+  private_lane :update_sample_apps_version do |options|
+    preview_version = options[:preview_version]
+    content_version = options[:content_version]
+    new_preview_major_version = preview_version.split('.').first.to_i
+    new_content_major_version = content_version.split('.').first.to_i
+    preview_dependency_version = "#{new_preview_major_version}.0"
+    content_dependency_version = "#{new_content_major_version}.0"
+
+    # Update SDK Cartfile 
+    sdk_cartfile_path = ENV["SDK_CARTFILE_PATH"]
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{sdk_cartfile_path}")
+    sh("rm #{sdk_cartfile_path}.bak")
+
+    # Update Cartfile from JWTSampleApp
+    jwt_app_cartfile_path = ENV["JWT_APP_CARTFILE_PATH"]
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{jwt_app_cartfile_path}")
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ).*|\\1~> #{preview_dependency_version}|g' #{jwt_app_cartfile_path}")
+    sh("rm #{jwt_app_cartfile_path}.bak")
+
+    # Update Cartfile from JWTSampleApp
+    oauth2_app_cartfile_path = ENV["OAUTH2_APP_CARTFILE_PATH"]
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{oauth2_app_cartfile_path}")
+    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ).*|\\1~> #{preview_dependency_version}|g' #{oauth2_app_cartfile_path}")
+    sh("rm #{oauth2_app_cartfile_path}.bak")
+  end
+
+##############################################################################
+# CHANGELOG UPDATE
+##############################################################################
+
+  desc "Return release notes based on actual CHANGELOG.md file"
+  private_lane :get_release_notes do |options|
+    changelog_path = ENV["CHANGELOG_PATH"]
+    release_notes_to_process = sh("sed -nE '/^## Next/,/^## v/p'  #{changelog_path} | sed -e '$ d' | sed 1,2d")
+
+    processing_section = ""
+    final_release_notes = ""
+    release_notes_to_process.each_line do |line|
+      if ["__Breaking Changes:__\n", "__New Features and Enhancements:__\n", "__Bug Fixes:__\n"].include? line
+        if processing_section.lines.count > 2
+          final_release_notes += processing_section 
+        end
+
+        processing_section = ""
+      end
+      processing_section += line
+    end
+
+    if processing_section.lines.count > 2
+      final_release_notes += processing_section 
+    end
+
+    final_release_notes
+  end
+
+  desc "Update changelog"
+  private_lane :update_changelog do |options|
+    preview_version = options[:preview_version]
+    release_notes = options[:release_notes]
+    changelog_path = ENV["CHANGELOG_PATH"]
+    date = sh("date '+%Y-%m-%d' | tr -d '\n'")
+
+    # Remove empty sections from "Next Release"
+    sh("sed -i '.bak' -E '/^## Next/,/^## v/{//!d;}' #{changelog_path}")
+    File.open(changelog_path, "r+") do |file|
+      content = ""
+      line_number = 1
+      file.each_line do |file_line|
+        if line_number == 5
+        content += "\n"
+        release_notes.lines.each { |notes_line|
+          content += notes_line
+        }
+        end
+
+        content += file_line
+        line_number += 1
+      end
+
+      file.rewind
+      file.write(content)
+    end
+
+    # Change Next Release to specific version
+    sh("sed -i.bak -E 's/## Next Release.*/## v#{preview_version} \[#{date}\]/g' #{changelog_path}")
+    sh("rm #{changelog_path}.bak")
+
+    # Add next release template
+    header_template = ENV["CHANGELOG_HEADER_TEMPTLATE"].split("\n")
+    header_template.reverse.each { |line| 
+      sh("sed -i '.bak' '4s/^/#{line}\\n\\n/' #{changelog_path}")
+    }
+    sh("rm #{changelog_path}.bak")
+    end
+
+##############################################################################
+# BUILD
+##############################################################################
+
+  desc "Build"
+  private_lane :buld do |options|
+    bootstrap_path = ENV["BOOTSTRAP_CARTHAGE_PATH"]
+    Dir.chdir("..") do
+      sh("#{bootstrap_path}")
+      sh("xcodebuild -workspace BoxPreviewSDK.xcworkspace -scheme BoxPreviewSDK-iOS -sdk \"iphonesimulator\" -destination \"generic/platform=iOS Simulator\" build")
+    end
+  end
+end

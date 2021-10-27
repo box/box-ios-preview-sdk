@@ -1,2 +1,2 @@
-git "https://github.com/box/box-ios-sdk.git" ~> 4.0
+git "https://github.com/box/box-ios-sdk.git" "main"
 git "https://github.com/box/box-ios-preview-sdk.git" "main"

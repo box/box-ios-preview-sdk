@@ -11,12 +11,11 @@ import BoxPreviewSDK
 import BoxSDK
 
 class ViewController: UITableViewController {
-    
+
     var contentSDK: BoxSDK!
     var client: BoxClient!
     var previewSDK: BoxPreviewSDK?
     var folderItems: [FolderItem] = []
-    private let initialPageSize: Int = 100
 
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -29,9 +28,9 @@ class ViewController: UITableViewController {
         errorView.translatesAutoresizingMaskIntoConstraints = false
         return errorView
     }()
-    
+
     // MARK: - View life cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Box Preview SDK - JWT Sample App"
@@ -43,24 +42,24 @@ class ViewController: UITableViewController {
         refresh.addTarget(self, action: #selector(getSinglePageOfFolderItems), for: .valueChanged)
         tableView.refreshControl = refresh
     }
-    
+
     // MARK: - Actions
-    
+
     @objc func loginPressed() {
         removeErrorView()
         authorizeWithJWClient()
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return folderItems.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FileCell", for: indexPath)
         let item = folderItems[indexPath.row]
@@ -108,7 +107,7 @@ class ViewController: UITableViewController {
         
         return cell
     }
-    
+
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = folderItems[indexPath.row]
         if case let .file(file) = item {
@@ -136,7 +135,7 @@ private extension ViewController {
             }
         }
     }
-    
+
     func obtainJWTTokenFromExternalSources() -> DelegatedAuthClosure {
         return { uniqueID, completion in
             #error("Obtain a JWT Token from your own service or a Developer Token for your app in the Box Developer Console at https://app.box.com/developers/console and return it in the completion.")
@@ -167,38 +166,31 @@ private extension ViewController {
     }
 
     @objc func getSinglePageOfFolderItems() {
-        client.folders.listItems(
+        let iterator = client.folders.listItems(
             folderId: BoxSDK.Constants.rootFolder,
             usemarker: true,
             fields: ["modified_at", "name", "extension"]
-        ){ [weak self] result in
-            guard let self = self else {return}
+        )
+
+        iterator.next { [weak self] result in
+            guard let self = self else { return }
 
             switch result {
-            case let .success(items):
+            case let .success(page):
                 self.folderItems = []
-
-                for i in 1...self.initialPageSize {
-                    print ("Request Item #\(String(format: "%03d", i)) |")
-                    items.next { result in
-                        switch result {
-                        case let .success(item):
-                            print ("    Got Item #\(String(format: "%03d", i)) | \(item.debugDescription))")
-                            DispatchQueue.main.async {
-                                self.folderItems.append(item)
-                                self.tableView.reloadData()
-                                self.navigationItem.rightBarButtonItem = nil
-                            }
-                        case let .failure(error):
-                            print ("     No Item #\(String(format: "%03d", i)) | \(error.message)")
-                            return
-                        }
+                for (i, item) in page.entries.enumerated() {
+                    print ("Item #\(String(format: "%03d", i + 1)) | \(item.debugDescription))")
+                    DispatchQueue.main.async {
+                        self.folderItems.append(item)
+                        self.tableView.reloadData()
+                        self.navigationItem.rightBarButtonItem = nil
                     }
                 }
             case let .failure(error):
                 print("error in getSinglePageOfFolderItems: \(error)")
                 self.addErrorView(with: error)
             }
+
             DispatchQueue.main.async { [weak self] in
                 self?.navigationItem.rightBarButtonItem = nil
                 self?.tableView.refreshControl?.endRefreshing()
@@ -206,14 +198,14 @@ private extension ViewController {
             }
         }
     }
-    
+
     func showPreviewViewController(file: File) {
         let previewController: PreviewViewController? = previewSDK?.openFile(file: file, delegate: self)
-        
+
         guard let unwrappedPreviewController = previewController else {
             return
         }
-        
+
         navigationController?.pushViewController(unwrappedPreviewController, animated: true)
     }
 }
@@ -242,7 +234,7 @@ private extension ViewController {
                 self.errorView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
                 self.errorView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
                 self.errorView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-                ])
+            ])
             self.errorView.displayError(error)
         }
     }

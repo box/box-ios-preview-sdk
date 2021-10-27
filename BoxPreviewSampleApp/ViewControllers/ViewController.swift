@@ -16,7 +16,6 @@ class ViewController: UITableViewController {
     private var client: BoxClient!
     private var previewSDK: BoxPreviewSDK!
     private var folderItems: [FolderItem] = []
-    private let initialPageSize: Int = 100
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd,yyyy at HH:mm a"
@@ -85,37 +84,30 @@ private extension ViewController {
     }
 
     @objc func getSinglePageOfFolderItems() {
-        client.folders.listItems(
+        let iterator = client.folders.listItems(
             folderId: BoxSDK.Constants.rootFolder,
             usemarker: true,
             fields: ["modified_at", "name"]
-        ){ [weak self] result in
-            guard let self = self else {return}
+        )
+
+        iterator.next { [weak self] result in
+            guard let self = self else { return }
 
             switch result {
-            case let .success(items):
+            case let .success(page):
                 self.folderItems = []
-
-                for i in 1...self.initialPageSize {
-                    print ("Request Item #\(String(format: "%03d", i)) |")
-                    items.next { result in
-                        switch result {
-                        case let .success(item):
-                            print ("    Got Item #\(String(format: "%03d", i)) | \(item.debugDescription))")
-                            DispatchQueue.main.async {
-                                self.folderItems.append(item)
-                                self.tableView.reloadData()
-                                self.navigationItem.rightBarButtonItem = nil
-                            }
-                        case let .failure(error):
-                            print ("     No Item #\(String(format: "%03d", i)) | \(error.message)")
-                            return
-                        }
+                for (i, item) in page.entries.enumerated() {
+                    print ("Item #\(String(format: "%03d", i + 1)) | \(item.debugDescription))")
+                    DispatchQueue.main.async {
+                        self.folderItems.append(item)
+                        self.tableView.reloadData()
+                        self.navigationItem.rightBarButtonItem = nil
                     }
                 }
             case let .failure(error):
                 print (error)
             }
+
             DispatchQueue.main.async { [weak self] in
                 self?.navigationItem.rightBarButtonItem = nil
                 self?.tableView.refreshControl?.endRefreshing()
@@ -131,7 +123,7 @@ private extension ViewController {
 }
 
 extension ViewController: PreviewViewControllerDelegate {
-    
+
     func previewViewControllerFailed(error: BoxPreviewError) {
         print(error)
     }

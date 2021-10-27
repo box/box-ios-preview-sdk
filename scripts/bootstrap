@@ -1,1 +1,1 @@
-carthage bootstrap --no-use-binaries --cache-builds --platform iOS
+carthage bootstrap  --use-xcframeworks --no-use-binaries --cache-builds --platform iOS

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## v3.3.0 [2021-10-01]
+## Next Release
 
 __Breaking Changes:__
 

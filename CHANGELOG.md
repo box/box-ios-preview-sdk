@@ -7,6 +7,12 @@ __Breaking Changes:__
 
 __New Features and Enhancements:__
 
+__Bug Fixes:__
+
+## v3.3.0 [2021-10-29]
+
+__New Features and Enhancements:__
+
 - Add the ability to have `mailto`, `tel`, etc. links open in the appropriate apps ([#93](https://github.com/box/box-ios-preview-sdk/pull/93))
 
 __Bug Fixes:__

@@ -16,18 +16,18 @@
     <a title="BoxPreviewSDK  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BoxPreviewSDK 3.2.0 Docs</a> (20% documented)</p>
-        <p class="header-right">
+        <p><a href="index.html">BoxPreviewSDK 3.3.0 Docs</a> (20% documented)</p>
+        <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="index.html">BoxPreviewSDK Reference</a>
-        <img id="carat" src="img/carat.png" />
+        <img id="carat" src="img/carat.png" alt=""/>
         BoxPreviewSDK  Reference
       </p>
     </div>
@@ -110,13 +110,20 @@ Going forward, the main branch will contain the iOS Preview SDK in <strong>Swift
 <p>This SDK makes it easy to present Box files in your iOS application.</p>
 
 <ul>
-<li><a href="#requirements">Requirements</a></li>
-<li><a href="#installing-the-sdk">Installing the SDK</a>
+<li><a href="#box-preview-sdk">Box Preview SDK</a></li>
+<li><a href="#note">NOTE:</a>
 
 <ul>
+<li><a href="#box-preview-sdk-1">Box Preview SDK</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installing-the-sdk">Installing the SDK</a></li>
 <li><a href="#carthage">Carthage</a></li>
 <li><a href="#cocoapods">CocoaPods</a></li>
-<li><a href="#swift-package-manager">Swift Package Manager</a></li>
+<li><a href="#swift-package-manager">Swift Package Manager</a>
+
+<ul>
+<li><a href="#importing-boxpreviewsdk-into-project">Importing BoxPreviewSDK into Project</a></li>
+<li><a href="#adding-boxpreviewsdk-as-a-dependency">Adding BoxPreviewSDK as a Dependency</a></li>
 </ul></li>
 <li><a href="#getting-started">Getting Started</a></li>
 <li><a href="#sample-app-config">Sample App Config</a></li>
@@ -125,7 +132,18 @@ Going forward, the main branch will contain the iOS Preview SDK in <strong>Swift
 <li><a href="#open-an-image-file">Open an Image File</a></li>
 <li><a href="#future-enhancements">Future Enhancements</a></li>
 <li><a href="#release-definitions">Release Definitions</a></li>
+<li><a href="#release-candidate-rc">Release Candidate (RC)</a></li>
+<li><a href="#current-release">Current Release</a></li>
+<li><a href="#long-term-support">Long Term Support</a></li>
+<li><a href="#support-phases">Support Phases</a>
+
+<ul>
+<li><a href="#active">Active</a></li>
+<li><a href="#maintenance">Maintenance</a></li>
+<li><a href="#end-of-life">End-of-life</a></li>
+</ul></li>
 <li><a href="#copyright-and-license">Copyright and License</a></li>
+</ul></li>
 </ul>
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -139,15 +157,15 @@ Going forward, the main branch will contain the iOS Preview SDK in <strong>Swift
 <h3 id='carthage' class='heading'>Carthage</h3>
 
 <p><strong>Step 1</strong>: Add to your <code>Cartfile</code></p>
-<pre class="highlight plaintext"><code>git "https://github.com/box/box-ios-sdk.git" ~&gt; 4.0
+<pre class="highlight plaintext"><code>git "https://github.com/box/box-ios-sdk.git" ~&gt; 5.0
 git "https://github.com/box/box-ios-preview-sdk.git" ~&gt; 3.0
 </code></pre>
 
 <p><strong>Step 2</strong>: Update dependencies</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
+<pre class="highlight shell"><code><span class="gp">$ </span>carthage update --use-xcframeworks --platform iOS
 </code></pre>
 
-<p><strong>Step 3</strong>: The framework in the Carthage/Build/iOS folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.</p>
+<p><strong>Step 3</strong>: The xcframework in the Carthage/Build folder is already referenced in the BoxPreviewSDKSampleApp Xcode project.</p>
 
 <p>For more detailed instructions, please see the <a href="https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos">official documentation for Carthage</a>.</p>
 <h3 id='cocoapods' class='heading'>CocoaPods</h3>
@@ -192,12 +210,12 @@ log in.</p>
 <p>To execute the sample app:</p>
 
 <p><strong>Step 1</strong>: Run carthage</p>
-<pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">cd </span>BoxPreviewSDKSampleApp
-<span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd </span>BoxPreviewSDKSampleApp
+<span class="gp">$ </span>carthage update --use-xcframeworks --platform iOS
 </code></pre>
 
 <p><strong>Step 2</strong>: Open Xcode Project File</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>open OAuth2SampleApp.xcodeproj
+<pre class="highlight shell"><code><span class="gp">$ </span>open OAuth2SampleApp.xcodeproj
 </code></pre>
 
 <p><strong>Step 3</strong>: Insert your client ID and client secret</p>
@@ -380,11 +398,10 @@ PDF and all iOS-supported image files are currently supported in the app.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-preview-sdk" target="_blank" rel="external">Box</a>. All rights reserved. (Last updated: 2021-07-06)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-preview-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2021-10-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>

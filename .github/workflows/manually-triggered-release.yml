@@ -8,6 +8,9 @@ on:
       content_version:
         description: 'Please provide the latest released version of box-ios-sdk in format <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0'
         required: true
+  push:
+    branches:
+      - 'aj/sdk-1811-release-workflow'
 jobs:
   release_box-ios-preview-sdk:
     runs-on: macos-11
@@ -24,7 +27,7 @@ jobs:
     - name: Checkout main branch
       uses: actions/checkout@v2
       with:
-        ref: main
+        ref: aj/sdk-1811-release-workflow
         token: ${{ secrets.GITHUB_TOKEN }}
         submodules: true
     - name: Setup git user
@@ -41,4 +44,4 @@ jobs:
         bundler-cache: true
     - name: Run fastlane release script
       run: |
-        bundle exec fastlane ios release preview_version:${{ github.event.inputs.preview_version }} content_version:${{ github.event.inputs.content_version }} github_token:${{ secrets.RELEASE_TOKEN }}
+        bundle exec fastlane ios release preview_version:6.7.8 content_version:9.10.11 github_token:${{ secrets.RELEASE_TOKEN }} dry_run:true

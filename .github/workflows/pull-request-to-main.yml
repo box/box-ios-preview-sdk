@@ -3,11 +3,8 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches:
-      - aj/test_workflow
 jobs:
-  Run-Tests:
+  Build BoxPreviewSDK:
     runs-on: macos-11
     strategy:
       matrix:
@@ -28,4 +25,4 @@ jobs:
       - name: Lint
         run: swiftlint
       - name: Build project
-        run: set -o pipefail && xcodebuild -workspace BoxPreviewSDK.xcworkspace -scheme BoxPreviewSDK-iOS  -destination "${{ matrix.destination }}" -configuration Release build
+        run: set -o pipefail && xcodebuild -workspace BoxPreviewSDK.xcworkspace -scheme BoxPreviewSDK-iOS -destination "${{ matrix.destination }}" -configuration Release build

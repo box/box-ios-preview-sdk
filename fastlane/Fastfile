@@ -9,7 +9,7 @@
 #
 # PARAMETERS:
 #############
-# preview_version:  Required parameter. It determines which version of box-ios-preview-sdk we want to release.
+# preview_version:  Required parameter. It determines which version of box-ios-preview-sdk we want to release in format: <MAJOR>.<MINOR>.<PATCH>.
 #                   e.g. preview_version:5.6.7
 #                   e.g. preview_version:9.11.12
 #
@@ -62,8 +62,16 @@ platform :ios do
       UI.user_error!("Missing required parameter \"preview_version\"")
     end
 
+    if !is_version_valid(version: preview_version)
+      UI.user_error!("\"preview_version\" parameter: \"#{preview_version}\" is in invalid format. Required format is <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0")
+    end
+
     if content_version.nil?
       UI.user_error!("Missing required parameter \"content_version\"")
+    end
+
+    if !is_version_valid(version: content_version)
+      UI.user_error!("\"content_version\" parameter: \"#{content_version}\" is in invalid format. Required format is <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0")
     end
 
     # Script phases
@@ -170,6 +178,12 @@ platform :ios do
 ##############################################################################
 # VERSION UPDATE
 ##############################################################################
+
+  desc "Validate version"
+  private_lane :is_version_valid do |options|
+    version = options[:version]
+    !!(version =~ /^\d+\.\d+\.\d+$/)
+  end
 
   desc "Update SDK version"
   private_lane :update_version do |options|

@@ -2,6 +2,9 @@ name: Pull request checklist
 on: 
   pull_request:
     branches:
+      - main
+  push:
+    branches:
       - aj/test_workflow
 jobs:
   Run-Tests:

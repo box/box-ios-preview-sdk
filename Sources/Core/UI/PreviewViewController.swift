@@ -32,7 +32,7 @@ public enum FileInteractions: CaseIterable {
 
 // MARK: - PreviewViewControllerDelegate
 
-public protocol PreviewViewControllerDelegate: class {
+public protocol PreviewViewControllerDelegate: AnyObject {
     func previewViewControllerFailed(error: BoxPreviewError)
     func makeCustomErrorView() -> ErrorView?
 }

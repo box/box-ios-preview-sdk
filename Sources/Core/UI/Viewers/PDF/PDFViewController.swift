@@ -537,8 +537,10 @@ extension PDFViewController: PDFViewDelegate {
     public func pdfViewWillClick(onLink _: PDFView, with url: URL) {
         var finalURL = url
         if finalURL.scheme == nil {
+            // swiftlint:disable:next force_unwrapping
             finalURL = URL(string: "https://" + finalURL.absoluteString)!
         }
+        // swiftlint:disable:next force_https
         if let scheme = finalURL.scheme, ["http", "https"].contains(scheme) {
             let safaryVC = SFSafariViewController(url: finalURL)
             present(safaryVC, animated: true, completion: nil)

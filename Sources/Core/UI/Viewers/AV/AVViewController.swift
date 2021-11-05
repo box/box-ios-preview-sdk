@@ -65,6 +65,7 @@ private extension AVViewController {
                        "Authorization": "Bearer \(accessToken)"
                     ]
                     DispatchQueue.main.async {
+                        // swiftlint:disable:next force_https
                         let asset = AVURLAsset(url: self.url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
                         let playerItem = AVPlayerItem(asset: asset)
                         self.AVPlayerVC.player = AVPlayer(playerItem: playerItem)

@@ -29,7 +29,7 @@ opt_in_rules:
   - fatal_error_message
   - first_where
   - toggle_bool
-  - unused_private_declaration
+  - unused_declaration
   - modifier_order
   - contains_over_first_not_nil
   - convenience_type
@@ -74,9 +74,6 @@ identifier_name:
     - y
 
 empty_count: warning
-
-trailing_whitespace:
-  ignores_empty_lines: yes
 
 line_length:
   ignores_function_declarations: yes

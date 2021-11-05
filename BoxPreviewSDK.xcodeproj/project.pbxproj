@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		05E75016270B104C00F32469 /* BoxSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E75015270B104C00F32469 /* BoxSDK.xcframework */; };
-		05E75017270B104C00F32469 /* BoxSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05E75015270B104C00F32469 /* BoxSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05E75019270B106F00F32469 /* BoxSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E75015270B104C00F32469 /* BoxSDK.xcframework */; };
 		05E7501A270B106F00F32469 /* BoxSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 05E75015270B104C00F32469 /* BoxSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C02F8E422E06A7300B6419F /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C02F8E322E06A7300B6419F /* CustomProgressView.swift */; };
@@ -70,17 +69,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		05E75018270B104C00F32469 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				05E75017270B104C00F32469 /* BoxSDK.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0C6C930C22EEED4100AD01F5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,7 +540,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint --strict\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		0CEFC90922C220530013B84B /* SwiftFormat Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -570,7 +558,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftformat >/dev/null; then\nswiftformat . --version 5.0\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "if which swiftformat >/dev/null; then\n    swiftformat . --version 5.0\nelse\n    echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

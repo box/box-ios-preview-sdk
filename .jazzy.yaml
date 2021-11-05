@@ -3,4 +3,10 @@ author_url: https://twitter.com/box
 github_url: https://github.com/box/box-ios-preview-sdk
 module: BoxPreviewSDK
 output: docs
-xcodebuild_arguments: ["-workspace", "BoxPreviewSDK.xcworkspace", "-scheme", "BoxPreviewSDK-iOS", "-destination", "generic/platform=iOS"]
+xcodebuild_arguments:
+  - "-workspace"
+  - "BoxPreviewSDK.xcworkspace"
+  - "-scheme"
+  - "BoxPreviewSDK-iOS"
+  - "-destination"
+  - "generic/platform=iOS"

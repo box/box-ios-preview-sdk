@@ -1,0 +1,7 @@
+author: Box
+author_url: https://twitter.com/box
+github_url: https://github.com/box/box-ios-preview-sdk
+module: BoxPreviewSDK
+output: docs
+theme: fullwidth
+xcodebuild_arguments: [-workspace, 'BoxPreviewSDK.xcworkspace', -scheme, 'BoxPreviewSDK-iOS']

@@ -4,4 +4,4 @@ github_url: https://github.com/box/box-ios-preview-sdk
 module: BoxPreviewSDK
 output: docs
 sdk: iphonesimulator
-xcodebuild_arguments: ["-workspace", "BoxPreviewSDK.xcworkspace", "-scheme", "BoxPreviewSDK-iOS", "-sdk", "iphonesimulator", "-destination", "generic/platform=iOS Simulator"]
+xcodebuild_arguments: ["-workspace", "BoxPreviewSDK.xcworkspace", "-scheme", "BoxPreviewSDK-iOS", "-destination", "platform=iOS Simulator,OS=14.5,name=iPhone 11"]

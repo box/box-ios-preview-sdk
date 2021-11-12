@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/box/box-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "feacd35520c8456ac5eb06acbe7a58c59c5f33f1",
-          "version": "4.0.0"
+          "revision": "ec3acc7b31a9b3ea55a87f38e77476b09f0f6618",
+          "version": "5.1.0"
         }
       }
     ]

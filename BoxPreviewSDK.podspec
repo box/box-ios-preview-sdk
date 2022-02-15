@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "BoxPreviewSDK"
-  spec.version      = "3.3.0"
+  spec.version      = "3.4.0"
   spec.summary      = "Box Preview SDK"
   spec.description  = <<-DESC
   This SDK makes it easy to present Box files.

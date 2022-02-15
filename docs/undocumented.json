@@ -415,14 +415,14 @@
     },
     {
       "file": "/Users/ajankowski/work/projects/sdk/ios/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
-      "line": 559,
+      "line": 561,
       "symbol": "PDFViewController",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ajankowski/work/projects/sdk/ios/box-ios-preview-sdk/Sources/Core/UI/Viewers/PDF/PDFViewController.swift",
-      "line": 560,
+      "line": 562,
       "symbol": "PDFViewController.gestureRecognizer(_:shouldReceive:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

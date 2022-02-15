@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/box/box-ios-preview-sdk/compare/v3.3.0...v3.4.0) (2022-02-15)
+
+
+### New Features and Enhancements
+
+* This is test only commit ([ea62521](https://github.com/box/box-ios-preview-sdk/commit/ea625211a0d9bb197a8d52634ad54e739b8d9e9f))
+
 ## [3.3.0](https://github.com/box/box-ios-preview-sdk/compare/v3.2.0...v3.3.0) (2021-10-29)
 
 

@@ -41,7 +41,7 @@ Installing the SDK
 __Step 1__: Add to your `Cartfile`
 
 ```ogdl
-git "https://github.com/box/box-ios-sdk.git" ~> 5.0
+git "https://github.com/box/box-ios-sdk.git" ~> 6.0
 git "https://github.com/box/box-ios-preview-sdk.git" ~> 3.0
 ```
 

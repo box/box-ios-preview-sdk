@@ -22,7 +22,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "5.0.0"))
+        .package(url: "https://github.com/box/box-ios-sdk.git", .upToNextMajor(from: "6.0.0"))
     ],
     targets: [
         .target(

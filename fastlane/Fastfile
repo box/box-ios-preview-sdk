@@ -2,64 +2,75 @@
 #
 # Make sure to run `bundle install` before first run this script in root directory of this repository.
 #
+# REQUIRED:
+#############
+# 1) Make sure to run `bundle install` before first run this script in root directory of this repository.
+# 2) The computer that invoke these script should have installed node.js with standard-version package.
+# 3) To run `bundle exec fastlane make_publish_pod` command, system enviornment `COCOAPODS_TRUNK_TOKEN` should be set to a valid token.
+#
 # USAGE:
 #############
-# bundle exec fastlane release preview_version:<<PREVIEW RELEASE VERSION HERE>> content_version:<<LATEST CONTENT RELEASE VERSION>> github_token:<<GITHUB TOKEN HERE>>
-# bundle exec fastlane release preview_version:5.6.7 content_version:10.11.12 github_token:secret_token_123
+# To make a full release, execute the following 3 commands:
+# 1) `bundle exec fastlane make_pull_request`
+# 2) `bundle exec fastlane make_release`
+# 3) `bundle exec fastlane make_publish_pod`
 #
 # PARAMETERS:
 #############
-# preview_version:  Required parameter. It determines which version of box-ios-preview-sdk we want to release in format: <MAJOR>.<MINOR>.<PATCH>.
-#                   e.g. preview_version:5.6.7
-#                   e.g. preview_version:9.11.12
+# preview_version:      Optional parameter. It determines which version of box-ios-preview-sdk we want to release in format: <MAJOR>.<MINOR>.<PATCH>.
+#                       When not specified then new version will be based on the previous one with consider commits convetions.
+#                       e.g. preview_version:5.6.7
+#                       e.g. preview_version:9.11.12
 #
-# content_version:  Required parameter. It determines latest released version of box-ios-sdk.
-#                   e.g. content_version:9.1.1
-#                   e.g. content_version:10.11.12
+# content_version:      Required parameter. It determines latest released version of box-ios-sdk.
+#                       e.g. content_version:9.1.1
+#                       e.g. content_version:10.11.12
 #
-# github_token:     Required only if we don't have defined environment variable name "GITHUB_TOKEN".
-#                   It's a personal API Token for GitHub - generate one at https://github.com/settings/tokens
-#                   It is needed to communicate with GitHub.
-#                   e.g. github_token:secret_token_123
+# github_token:         Required only if we don't have defined environment variable name "GITHUB_TOKEN".
+#                       It's a personal API Token for GitHub - generate one at https://github.com/settings/tokens
+#                       It is needed to communicate with GitHub.
+#                       e.g. github_token:secret_token_123
 #
-# is_draft:         Optinoal parameter. Default value is fasle.
-#                   It determines whether the release should be marked as draft.
-#                   e.g. is_draft:true
+# dry_run:              Optional parameter. Default value is false.
+#                       If false then no any changes will be made on external systems.
+#                       e.g. dry_run:true
 #
-# dry_run:          Optional parameter. Default value is false.
-#                   If false then no any changes will be made on external systems.
-#                   e.g. dry_run:true
+# release_branch:       Optional paremeter. Default value is "main".
+#                       It specifies the branch used to create release.
+#                       e.g. release_branch:relese_beta_10.11.12
 #
-# release_branch:   Optional paremeter. Default value is "main".
-#                   It specifies the branch used to create release.
-#                   e.g. release_branch:relese_beta_10.11.12
+# skip_setup_git_user: Optional parameter. Default value is fasle.
+#                      It `true` then local git config and `origin` will be used without any modification.
+#                      Otherwise these settings will be overwritten by `git_user_name`, `git_user_email`
+#                      and `origin` will be set to https url with github_token.
+#
+# git_user_name:       Required only if skip_setup_git_user is set to `false`.
+#                      It determines the git user.name
+#
+# git_user_email:      Required only if skip_setup_git_user is set to `false`.
+#                      It determines the git user.email
 
 default_platform(:ios)
 
 platform :ios do
 
-  # Making sure that git status is clean before run release lane
-  before_all do |lane, options|
-    ensure_git_status_clean
-  end
+##############################################################################
+# STEP 1) CREATE PR WITH RELEASE CHANGES
+##############################################################################
 
-  desc "Prepare and release Box iOS Preview SDK"
-  lane :release do |options|
-
-    # Variables from parameters
+  desc "Create PR with release changes"
+  lane :make_pull_request do |options|
     preview_version = options[:preview_version]
     content_version = options[:content_version]
-    is_draft = options[:is_draft] || false
     dry_run = options[:dry_run] || false
     github_token = options[:github_token] || ENV["GITHUB_TOKEN"]
+    skip_setup_git_user = options[:skip_setup_git_user] || false
+    git_user_name = options[:git_user_name] || ENV["GIT_USER_NAME"]
+    git_user_email = options[:git_user_email] || ENV["GIT_USER_EMAIL"]
     release_branch = options[:release_branch] || "main"
 
-    # Local variables
-    release_notes = get_release_notes()
-  
-    # Preconditions
     if preview_version.nil?
-      UI.user_error!("Missing required parameter \"preview_version\"")
+      preview_version = get_next_release_version()
     end
 
     if !is_version_valid(version: preview_version)
@@ -70,51 +81,140 @@ platform :ios do
       UI.user_error!("Missing required parameter \"content_version\"")
     end
 
-    if !is_version_valid(version: content_version)
-      UI.user_error!("\"content_version\" parameter: \"#{content_version}\" is in invalid format. Required format is <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0")
-    end
+    setup_git_user(
+      git_user_name: git_user_name,
+      git_user_email: git_user_email,
+      github_token: github_token,
+      skip_setup_git_user: skip_setup_git_user
+    )
+    ensure_git_clean(release_branch: release_branch)
 
-    # Script phases
-    update_version(
+    bump_version(
       preview_version: preview_version,
       content_version: content_version
     )
-    update_changelog(
+    update_changelog(preview_version: preview_version)
+    update_documentation()
+
+    create_github_pull_request(
       preview_version: preview_version,
-      release_notes: release_notes
-    )
-    buld()
-    update_jazzy_documentation()
-    commit_release_changes_with_tag(
-      preview_version: preview_version,
-      release_notes: release_notes,
-      dry_run: dry_run
-    )
-    create_release_on_github(
-      preview_version: preview_version,
-      release_notes: release_notes,
       github_token: github_token,
       release_branch: release_branch,
-      dry_run: dry_run,
-      is_draft: is_draft
+      dry_run: dry_run
     )
   end
 
 ##############################################################################
-# RELEASE
+# STEP 2) CREATE NEW RELEASE ON GITHUB
 ##############################################################################
 
-  desc "Create release on GitHub"
-  private_lane :create_release_on_github do |options|
+  desc "Create new release on github"
+  lane :make_release do |options|
     preview_version = options[:preview_version]
-    preview_version_tag = "v#{preview_version}"
+    dry_run = options[:dry_run] || false
+    github_token = options[:github_token] || ENV["GITHUB_TOKEN"]
+    skip_setup_git_user = options[:skip_setup_git_user] || false
+    git_user_name = options[:git_user_name] || ENV["GIT_USER_NAME"]
+    git_user_email = options[:git_user_email] || ENV["GIT_USER_EMAIL"]
+    release_branch = options[:release_branch] || "main"
+
+    if preview_version.nil?
+      preview_version = get_next_release_version()
+    end
+
+    if !is_version_valid(version: preview_version)
+      UI.user_error!("\"preview_version\" parameter: \"#{preview_version}\" is in invalid format. Required format is <MAJOR>.<MINOR>.<PATCH> e.g.: 1.0.0")
+    end
+
+    release_notes = get_release_notes(preview_version: preview_version)
+
+    setup_git_user(
+      git_user_name: git_user_name,
+      git_user_email: git_user_email,
+      skip_setup_git_user: skip_setup_git_user
+    )
+    create_github_release(
+      preview_version: preview_version,
+      release_notes: release_notes,
+      github_token: github_token,
+      release_branch: release_branch,
+      dry_run: dry_run
+    )
+  end
+
+##############################################################################
+# STEP 3) PUBLISH NEW POD VERSION TO COCOAPODS
+##############################################################################
+
+  desc "Publish to version of cocoapods"
+  lane :make_publish_pod do |options|
+    dry_run = options[:dry_run] || false
+    trunk_token = ENV["COCOAPODS_TRUNK_TOKEN"]
+    podpsec_name = ENV["PODSPEC_NAME"]
+
+    if dry_run == true
+      UI.important("Running in \"dry run\" mode. Publish to cocoapods won't happen.")
+    else
+      if trunk_token.nil?
+        UI.user_error!("System environment \"COCOAPODS_TRUNK_TOKEN\" is required to publish a pod. Aborting script.")
+      end
+    
+      Dir.chdir("..") do
+        sh("pod lib lint --allow-warnings")
+        sh("pod trunk push #{podpsec_name} --allow-warnings")
+      end
+    end
+  end
+
+##############################################################################
+# GITHUB
+##############################################################################
+
+  desc "Commit version update"
+  private_lane :create_github_pull_request do |options|
+    preview_version = options[:preview_version]
+    github_token = options[:github_token]
+    release_branch = options[:release_branch]
+    dry_run = options[:dry_run]
+    repository_name = ENV["REPOSITORY_NAME"]
+    repository_owner = ENV["REPOSITORY_OWNER"]
+    commit_version_tag = "v#{preview_version}"
+    commit_title = "chore: release #{commit_version_tag}"
+
+    if dry_run == true
+      UI.important("Running in \"dry run\" mode. PR won't be created.")
+    else
+      Dir.chdir("..") do
+        sh("git checkout -b #{commit_version_tag}")
+        sh("git add .")
+        sh("git commit -am \"#{commit_title}\"")
+        sh("git push origin -u #{commit_version_tag}")
+
+        if github_token.nil?
+          UI.user_error!("GitHub Token is required to create PR.")
+        end
+
+        create_pull_request(
+          api_token: github_token,
+          repo: "#{repository_owner}/#{repository_name}",
+          title: "#{commit_title}",
+          head: "#{commit_version_tag}",
+          base: "#{release_branch}",
+        )
+      end
+    end
+  end
+
+  desc "Create release on GitHub"
+  private_lane :create_github_release do |options|
+    preview_version = options[:preview_version]
+    version_tag = "v#{preview_version}"
     release_notes = options[:release_notes]
     github_token = options[:github_token]
     release_branch = options[:release_branch]
-    dry_run = options[:dry_run] 
-    is_draft = options[:is_draft]
-    release_notes_filename = ENV["RELEASE_NOTES_TMP_FILENAME"]
-    release_notes_path = "../#{release_notes_filename}"
+    dry_run = options[:dry_run]
+    repository_name = ENV["REPOSITORY_NAME"]
+    repository_owner = ENV["REPOSITORY_OWNER"]
 
     if dry_run == true
       UI.important("Running in \"dry run\" mode. Release won't be published.")
@@ -123,61 +223,30 @@ platform :ios do
         UI.user_error!("GitHub Token is required to make release.")
       end
 
-      File.write("#{release_notes_path}", release_notes)
-
       set_github_release(
-      repository_name: "box/box-ios-preview-sdk",
-      api_token: github_token,
-      name: "#{preview_version_tag}",
-      tag_name: "#{preview_version_tag}",
-      description: (File.read("#{release_notes_path}") rescue "No changelog provided"),
-      commitish: "#{release_branch}",
-      is_draft: is_draft
-    )
-
-    sh("rm #{release_notes_path}")
+        repository_name: "#{repository_owner}/#{repository_name}",
+        api_token: github_token,
+        name: version_tag,
+        tag_name: version_tag,
+        description: release_notes,
+        commitish: release_branch
+      )
     end
   end
 
-  desc "Commit version update"
-  private_lane :commit_release_changes_with_tag do |options|
-    preview_version = options[:preview_version]
-    dry_run = options[:dry_run] 
-    preview_version_tag = "v#{preview_version}"
-    release_notes = "#{preview_version_tag}\n\n" + options[:release_notes]
-    puts "#{release_notes}"
-    release_notes_filename = ENV["RELEASE_NOTES_TMP_FILENAME"]
+##############################################################################
+# VERSION
+##############################################################################
 
+  desc "Get next release version based on conventional commits"
+  private_lane :get_next_release_version do |options|
+    release_version = ""
     Dir.chdir("..") do
-      sh("git add .")
-      File.write(release_notes_filename, release_notes)
-      sh("git commit -am #{preview_version_tag}")
-      sh("git tag -F#{release_notes_filename} #{preview_version_tag}")
-
-      if dry_run == true
-        UI.important("Running in \"dry run\" mode. No commit will be made.")
-      else
-        sh("git push --atomic origin HEAD #{preview_version_tag}")
-      end
-
-      sh("rm #{release_notes_filename}")
+      release_version = sh("standard-version --dry-run |  sed -En \"s/.*tagging release v(.*)/\\1/p\" | tr -d \"\n\"")
     end
+
+    release_version
   end
-
-##############################################################################
-# DOCUMENTATION UPDATE
-##############################################################################
-
-  desc "Update jazzy documentation"
-  private_lane :update_jazzy_documentation do |options|
-    Dir.chdir("..") do
-      sh("jazzy --output docs")
-    end
-  end
-
-##############################################################################
-# VERSION UPDATE
-##############################################################################
 
   desc "Validate version"
   private_lane :is_version_valid do |options|
@@ -185,8 +254,8 @@ platform :ios do
     !!(version =~ /^\d+\.\d+\.\d+$/)
   end
 
-  desc "Update SDK version"
-  private_lane :update_version do |options|
+  desc "Bump SDK version in all required files"
+  private_lane :bump_version do |options|
     preview_version = options[:preview_version]
     content_version = options[:content_version]
     
@@ -211,17 +280,15 @@ platform :ios do
     # Update BoxPreviewSDK.podspec
     podspec_path = ENV["PODSPEC_PATH"]
     pods_content_dependency_version = "#{new_content_major_version}.0"
-    sh("sed -i.bak -E 's|(.*spec.version.* = ).*|\\1\"#{preview_version}\"|g' #{podspec_path}")
-    sh("sed -i.bak -E 's|(.*spec.dependency \"BoxSDK\", ).*|\\1\"~> #{pods_content_dependency_version}\"|g' #{podspec_path}")
-    sh("rm #{podspec_path}.bak")
+    sh("sed -i '' -E 's|(.*spec.version.* = ).*|\\1\"#{preview_version}\"|g' #{podspec_path}")
+    sh("sed -i '' -E 's|(.*spec.dependency \"BoxSDK\", ).*|\\1\"~> #{pods_content_dependency_version}\"|g' #{podspec_path}")
 
-     # Update Package.swift
+    # Update Package.swift
     package_path = ENV["PACKAGE_PATH"]
     spm_content_dependency_version = "#{new_content_major_version}.0.0"
-    sh("sed -i.bak -E 's|(.*package\\(url: \"https://github.com/box/box-ios-sdk.git\", \.upToNextMajor\\(from: ).*(\\)\\).*)|\\1\"#{spm_content_dependency_version}\"\\2|g' #{package_path}")
-    sh("rm #{package_path}.bak")
-    
-    # # Update Info.plist
+    sh("sed -i '' -E 's|(.*package\\(url: \"https://github.com/box/box-ios-sdk.git\", \.upToNextMajor\\(from: ).*(\\)\\).*)|\\1\"#{spm_content_dependency_version}\"\\2|g' #{package_path}")
+      
+    # Update Info.plist
     info_plist_path = ENV["INFO_PLIST_PATH"]
     sh("plutil -replace CFBundleShortVersionString -string \"#{preview_version}\" #{info_plist_path}")
 
@@ -230,17 +297,14 @@ platform :ios do
     content_dependency_version = "#{new_content_major_version}.0"
 
     readme_path = ENV["README_PATH"]
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ~> ).*|\\1#{content_dependency_version}|g' #{readme_path}")
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ~> ).*|\\1#{preview_dependency_version}|g' #{readme_path}")
-    sh("sed -i.bak -E \"s|(^pod 'BoxPreviewSDK', '~> ).*(')|\\1#{preview_dependency_version}\\2|g\"  #{readme_path}")
-    sh("rm #{readme_path}.bak")
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ~> ).*|\\1#{content_dependency_version}|g' #{readme_path}")
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ~> ).*|\\1#{preview_dependency_version}|g' #{readme_path}")
+    sh("sed -i '' -E \"s|(^pod 'BoxPreviewSDK', '~> ).*(')|\\1#{preview_dependency_version}\\2|g\"  #{readme_path}")
 
     getting_started_path = ENV["GETTING_STARTED_PATH"]
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ~> ).*|\\1#{content_dependency_version}|g' #{getting_started_path}")
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ~> ).*|\\1#{preview_dependency_version}|g' #{getting_started_path}")
-    sh("sed -i.bak -E \"s|(^pod 'BoxPreviewSDK', '~> ).*(')|\\1#{preview_dependency_version}\\2|g\"  #{getting_started_path}")
-    sh("rm #{getting_started_path}.bak")
-
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ~> ).*|\\1#{content_dependency_version}|g' #{getting_started_path}")
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ~> ).*|\\1#{preview_dependency_version}|g' #{getting_started_path}")
+    sh("sed -i '' -E \"s|(^pod 'BoxPreviewSDK', '~> ).*(')|\\1#{preview_dependency_version}\\2|g\"  #{getting_started_path}")
   end
 
   desc "Update version in sample apps"
@@ -254,101 +318,108 @@ platform :ios do
 
     # Update SDK Cartfile 
     sdk_cartfile_path = ENV["SDK_CARTFILE_PATH"]
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{sdk_cartfile_path}")
-    sh("rm #{sdk_cartfile_path}.bak")
-
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{sdk_cartfile_path}")
+    
     # Update Cartfile from JWTSampleApp
     jwt_app_cartfile_path = ENV["JWT_APP_CARTFILE_PATH"]
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{jwt_app_cartfile_path}")
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ).*|\\1~> #{preview_dependency_version}|g' #{jwt_app_cartfile_path}")
-    sh("rm #{jwt_app_cartfile_path}.bak")
-
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{jwt_app_cartfile_path}")
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ).*|\\1~> #{preview_dependency_version}|g' #{jwt_app_cartfile_path}")
+    
     # Update Cartfile from JWTSampleApp
     oauth2_app_cartfile_path = ENV["OAUTH2_APP_CARTFILE_PATH"]
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{oauth2_app_cartfile_path}")
-    sh("sed -i.bak -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ).*|\\1~> #{preview_dependency_version}|g' #{oauth2_app_cartfile_path}")
-    sh("rm #{oauth2_app_cartfile_path}.bak")
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-sdk.git\" ).*|\\1~> #{content_dependency_version}|g' #{oauth2_app_cartfile_path}")
+    sh("sed -i '' -E 's|(^git \"https://github.com/box/box-ios-preview-sdk.git\" ).*|\\1~> #{preview_dependency_version}|g' #{oauth2_app_cartfile_path}")
   end
 
 ##############################################################################
-# CHANGELOG UPDATE
+# CHANGELOG
 ##############################################################################
 
-  desc "Return release notes based on actual CHANGELOG.md file"
+  desc "Return release notes based on conventional commits"
   private_lane :get_release_notes do |options|
-    changelog_path = ENV["CHANGELOG_PATH"]
-    release_notes_to_process = sh("sed -nE '/^## Next/,/^## v/p'  #{changelog_path} | sed -e '$ d' | sed 1,2d")
-
-    processing_section = ""
-    final_release_notes = ""
-    release_notes_to_process.each_line do |line|
-      if ["__Breaking Changes:__\n", "__New Features and Enhancements:__\n", "__Bug Fixes:__\n"].include? line
-        if processing_section.lines.count > 2
-          final_release_notes += processing_section 
-        end
-
-        processing_section = ""
-      end
-      processing_section += line
+    preview_version = options[:preview_version]
+    escaped_version = sh("echo \"#{preview_version}\" | sed -E 's/(\\.)/\\\\\\./g' | tr -d \"\n\"")
+    release_notes = ""
+    
+    Dir.chdir("..") do
+      release_notes = sh("sed -nE '/^#\{1,\} \\[#{escaped_version}\\]/,/^#\{1,\} \\[[0-9]+\.[0-9]+\.[0-9]+\\]/p' CHANGELOG.md | sed '1,2d' | sed '$d'")
     end
-
-    if processing_section.lines.count > 2
-      final_release_notes += processing_section 
-    end
-
-    final_release_notes
+    
+    release_notes
   end
 
-  desc "Update changelog"
+  desc "Update CHANGELOG.md file based on conventional commits"
   private_lane :update_changelog do |options|
     preview_version = options[:preview_version]
-    release_notes = options[:release_notes]
-    changelog_path = ENV["CHANGELOG_PATH"]
-    date = sh("date '+%Y-%m-%d' | tr -d '\n'")
+    update_changelog_script_path = ENV["UPDATE_CHANGELOG_SCRIPT_PATH"]
 
-    # Remove empty sections from "Next Release"
-    sh("sed -i '.bak' -E '/^## Next/,/^## v/{//!d;}' #{changelog_path}")
-    File.open(changelog_path, "r+") do |file|
-      content = ""
-      line_number = 1
-      file.each_line do |file_line|
-        if line_number == 5
-        content += "\n"
-        release_notes.lines.each { |notes_line|
-          content += notes_line
-        }
-        end
-
-        content += file_line
-        line_number += 1
-      end
-
-      file.rewind
-      file.write(content)
+    Dir.chdir("..") do
+      sh("standard-version --skip.tag --skip.commit --release-as #{preview_version}")
+      sh("#{update_changelog_script_path}")
     end
-
-    # Change Next Release to specific version
-    sh("sed -i.bak -E 's/## Next Release.*/## v#{preview_version} \[#{date}\]/g' #{changelog_path}")
-    sh("rm #{changelog_path}.bak")
-
-    # Add next release template
-    header_template = ENV["CHANGELOG_HEADER_TEMPTLATE"].split("\n")
-    header_template.reverse.each { |line| 
-      sh("sed -i '.bak' '4s/^/#{line}\\n\\n/' #{changelog_path}")
-    }
-    sh("rm #{changelog_path}.bak")
-    end
+  end
 
 ##############################################################################
-# BUILD
+# DOCUMENTATION
 ##############################################################################
 
-  desc "Build"
-  private_lane :buld do |options|
+  desc "Update jazzy documentation"
+  private_lane :update_documentation do |options|
     bootstrap_path = ENV["BOOTSTRAP_CARTHAGE_PATH"]
+
     Dir.chdir("..") do
       sh("#{bootstrap_path}")
-      sh("xcodebuild -workspace BoxPreviewSDK.xcworkspace -scheme BoxPreviewSDK-iOS -sdk \"iphonesimulator\" -destination \"generic/platform=iOS Simulator\" build")
+      sh("jazzy --output docs")
+    end
+  end
+
+##############################################################################
+# GIT
+##############################################################################
+
+  desc "Setup git user"
+  private_lane :setup_git_user do |options|
+    git_user_name = options[:git_user_name]
+    git_user_email = options[:git_user_email]
+    github_token = options[:github_token]
+    skip_setup_git_user = options[:skip_setup_git_user]
+
+    if skip_setup_git_user == true
+      UI.important("Skipping setup git user. Current git configuration will be used.")
+    else
+      repository_name = ENV["REPOSITORY_NAME"]
+      repository_owner = ENV["REPOSITORY_OWNER"]
+
+      if git_user_name.nil? || git_user_email.nil?
+        UI.user_error!("Git user.name and user.email are requird. Aborting script.")
+      end
+
+      remote_url = "https://#{repository_owner}:#{github_token}@github.com/#{repository_owner}/#{repository_name}.git"
+      sh("git config user.name #{git_user_name}")
+      sh("git config user.email #{git_user_email}")
+      sh("git remote set-url origin #{remote_url}")
+    end
+  end
+
+  desc "Ensure git is clean"
+  private_lane :ensure_git_clean do |options|
+    release_branch = options[:release_branch]
+    current_branch = sh("git rev-parse --abbrev-ref HEAD | tr -d \"\n\"")
+
+    sh("git remote update")
+
+    if current_branch != release_branch
+      UI.user_error!("Local branch: \"#{current_branch}\" is different than release branch: \"#{release_branch}\". Abort script.")
+    end
+
+    different_commits_count = sh(" git rev-list HEAD...origin/#{release_branch} --count | tr -d \"\n\"")
+    if different_commits_count != "0"
+      UI.user_error!("Local branch HEAD is different than remote branch HEAD. Abort script.")
+    end
+
+    status_result = sh("git status --porcelain")
+    if status_result != ""
+      UI.user_error!("There are local changes that are not present on the remote. Aborting script.")
     end
   end
 end

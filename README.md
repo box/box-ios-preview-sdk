@@ -235,25 +235,6 @@ __Step 6__: Run the sample app
 
 The next screen displays all the files in the root folder for the account. If you don't see any files on the screen, check that you have files saved in the root folder of the Box account. Note that for simplicity, folders are not displayed in this sample app. From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it. PDF and all iOS-supported image files are currently supported in the app.
 
-Using the Sample App
---------------------
-The app opens with a prompt to begin OAuth2.0 Authentication.  Tap "OAuth2.0 Authentication" to proceed.
-
-On the next screen, tap "Login".
-
-An iOS System Dialog pops up asking if you agree to open a URL to authenticate.  Tap "Continue" to proceed.
-
-A Box login page loads.  Enter your credentials and tap "Authorize" to proceed.
-
-A confirmation screen displays the name of your application, as defined in the [Box Developer Console][dev-console], along with the scopes it is configured with.
-Tap "Grant access to Box" to grant your application access to the Box account.
-
-The next screen displays all the files in the root folder for the account.  If you don't see any files on the screen, check that you have files saved in the root folder of the Box account.
-Note that for simplicity, folders are not displayed in this sample app.
-From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it.
-PDF and all iOS-supported image files are currently supported in the app.
-
-
 Open a PDF File
 ---------------
 

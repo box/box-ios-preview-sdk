@@ -9,44 +9,35 @@
 
 [![Build Status](https://travis-ci.com/box/box-swift-preview-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main)](https://travis-ci.com/box/box-swift-preview-sdk)
 
-NOTE:
-===================
+This SDK makes it easy to present Box files in your iOS application.
 
-The Box iOS Preview SDK in **Objective-C** (prior to v3.0.0) has been moved from the main branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-preview-sdk/tree/objective-c-maintenance).
+> **_NOTE:_**  The Box iOS Preview SDK in **Objective-C** (prior to v3.0.0) has been moved from the main branch to the [objective-c-maintenance branch](https://github.com/box/box-ios-preview-sdk/tree/objective-c-maintenance).
 Going forward, the main branch will contain the iOS Preview SDK in **Swift**, starting with v3.0.0.
 
 
-Box Preview SDK
-------------------
-This SDK makes it easy to present Box files in your iOS application.
 
-- [Box Preview SDK](#box-preview-sdk)
-- [NOTE:](#note)
-  - [Box Preview SDK](#box-preview-sdk-1)
-  - [Requirements](#requirements)
-  - [Installing the SDK](#installing-the-sdk)
-    - [Carthage](#carthage)
-    - [CocoaPods](#cocoapods)
-    - [Swift Package Manager](#swift-package-manager)
-      - [Importing BoxPreviewSDK into Project](#importing-boxpreviewsdk-into-project)
-      - [Adding BoxPreviewSDK as a Dependency](#adding-boxpreviewsdk-as-a-dependency)
-  - [Getting Started](#getting-started)
-  - [Sample Apps](#sample-apps)
-      - [OAuth2 Sample App](#oauth2-sample-app)
-      - [CCG Auth Sample App](#ccg-auth-sample-app)
-  - [Using the Sample App](#using-the-sample-app)
-  - [Open a PDF File](#open-a-pdf-file)
-  - [Open an Image File](#open-an-image-file)
-  - [Future Enhancements](#future-enhancements)
-  - [Release Definitions](#release-definitions)
-    - [Release Candidate (RC)](#release-candidate-rc)
-    - [Current Release](#current-release)
-    - [Long Term Support](#long-term-support)
-    - [Support Phases](#support-phases)
-      - [Active](#active)
-      - [Maintenance](#maintenance)
-      - [End-of-life](#end-of-life)
-  - [Copyright and License](#copyright-and-license)
+
+## Table of Contents
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Requirements](#requirements)
+- [Installing the SDK](#installing-the-sdk)
+  - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
+  - [Swift Package Manager](#swift-package-manager)
+- [Getting Started](#getting-started)
+- [Sample Apps](#sample-apps)
+  - [OAuth2 Sample App](#oauth2-sample-app)
+  - [CCG Auth Sample App](#ccg-auth-sample-app)
+- [Open a PDF File](#open-a-pdf-file)
+- [Open an Image File](#open-an-image-file)
+- [Future Enhancements](#future-enhancements)
+- [Versions](#versions)
+  - [Supported Version](#supported-version)
+  - [Version schedule](#version-schedule)
+- [Copyright and License](#copyright-and-license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -275,70 +266,25 @@ You can expect to see the following enhancements in future updates of the Box Pr
 - And more!
 
 
-## Release Definitions
-Starting Oct 19th, 2019 the Box Swift SDK for iOS will be available for general use. This implies all Box developers will be able to use the SDK to build native iOS applications on Box. Between now and the next couple of months, we will be making frequent updates to the SDK based on feedback from our customers, and this document aims to set expectations with respect to:
-1. the various release types you will see over the next few months, what they mean and how to identify them
-1. support policy for each of the release types
 
-Between now and the next couple of months, the Box Swift SDK for iOS releases will be one of the following types:
-- [Release Candidate (RC)](#release-candidate-rc)
-- [Current Release](#current-release)
-- [Long Term Support](#long-term-support)
+## Versions
 
-### Release Candidate (RC)
-The initial releases of the SDK starting Oct 19th will be Release Candidate (RC). This means (1) the core functionality is present and tested, (2) additional functionality from this point on will be considered improvements or enhancements based on customer feedback. RC releases are usually more frequent (every few weeks), followed shortly by a current release. If you plan to use an RC release, we recommend:
-- that you don't use it for production workloads (If that is unavoidable, we recommend upgrading to the Current Release version once it's ready.)
-- that you create a plan to keep your application on the latest RC release version at all times (since older RC releases are considered "out of support" as soon as a new RC release is released)
+We use a modified version of [Semantic Versioning](https://semver.org/) for all changes. See [version strategy](VERSIONS.md) for details which is effective from 30 July 2022.
 
-Also, RC releases may carry breaking changes from the previous release and we advise developers to test their application adequately with the new RC release before adopting it.
+### Supported Version
 
-The idea behind releasing RC releases is to rapidly iterate on the SDK (bug fixes, feature tweaks, etc.) to get it to a production-ready state, and typically we don't expect to have the SDK in the RC phase for more than a month.
+Only the current MAJOR version of SDK is supported. New features, functionality, bug fixes, and security updates will only be added to the current MAJOR version.
 
-> #### Support for RC releases
-> A RC release
-> - is Considered [Active](#active) when released
-> - transitions to [End-of-life](#end-of-life) when the next release becomes Active
+A current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  Instead of stating a release date for a new feature, we set a fixed minor or patch release cadence of maximum 2-3 months (while we may release more often). At the same time, there is no schedule for major or breaking release. Instead, we will communicate one quarter in advance the upcoming breaking change to allow customers to plan for the upgrade. We always recommend that all users run the latest available minor release for whatever major version is in use. We highly recommend upgrading to the latest SDK major release at the earliest convenient time and before the EOL date.
 
+### Version schedule
 
-### Current Release
+| Version | Supported Environments                                  | State     | First Release | EOL/Terminated |
+|---------|---------------------------------------------------------|-----------|---------------|----------------|
+| 3       | iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+ | Supported | 20 Nov 2019   | TBD            |
+| 2       |                                                         | EOL       | 30 Jun 2018   | 20 Nov 2019    |
+| 1       |                                                         | EOL       | 12 Aug 2015   | 30 Jun 2018    |
 
-A Current Release is considered more stable that a Release Candidate Release and for that reason we expect less frequent releases of a Current Release. We typically expect to refresh Current Releases approximately every 3 months (could be shorter or longer depending on the criticality of the contents of the release).
-
-A new Current Release will usually carry new functionality, bug fixes and may contain breaking changes. We will call out all breaking changes (if any) in the Release Notes section of every Current Release, and we advise developers to test their application adequately before adopting in for production use. 
-
-A Current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  Current releases are not intended for long-term use, and will only receive enough support after the next release becomes available to allow for a smooth transition to the new version. 
-
-
-> #### Support for Current Release
-> A Current Release
-> - is Considered [Active](#active) when released
-> - transitions to [Maintenance](#maintenance) 3 months after it becomes Active, or when the next release becomes Active, whichever is later
-> - reaches [End-of-life](#end-of-life) 6 months after it becomes Active, or 3 months after the next release becomes Active, whichever is later
-
-
-### Long Term Support
-
-A Long-Term Support (LTS) release is one which we plan to guarantee compatibility with for an extended period of time.  The public interfaces of the SDK should not be changed in ways that would break customers’ application, and the release should continue to receive at least bug fixes for its entire lifecycle. We expect to refresh Long Term Release version every 18 - 24 months.
-
-For the above reasons, we recommend all developers who do not intend to make frequent updates (~every 6 - 12 months) to their application, only use a Long Term Release version of the SDK. 
-
-> #### Support for Long Term Release
-> A Long Term Release
-> - is considered [Active](#active) when released
-> - transitions to [Maintenance](#maintenance) 1 year after it becomes Active, or when the next release becomes Active, whichever is later
-> - reaches [End-of-life](#end-of-life) 2 years after it becomes Active, or 1 year after the next LTS release becomes Active, whichever is later
-
-
-### Support Phases
-#### Active
-Once a release is considered ready for release, a new version is cut and the release enters the Active phase.  However, new features may be added to the SDK, including support for new API endpoints. 
-
-#### Maintenance
-
-After a time, the release is no longer under active development, but customers may still be depending on it.  At this time, we consider the release to be in Maintenance phase; generally, only bug fixes will be considered for inclusion in new versions.  We may of course opt to include new functionality based on customer demand, but in general customers should expect that the SDK feature set will be mostly frozen for the remainder of its lifecycle.
-
-#### End-of-life
-After a release is no longer being supported by Box, it enters End-of-life (EOL) and no further changes should be expected by customers.  Customers must upgrade to a newer release if they want to receive support.
 
 Copyright and License
 -------

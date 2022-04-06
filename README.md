@@ -31,7 +31,9 @@ This SDK makes it easy to present Box files in your iOS application.
       - [Importing BoxPreviewSDK into Project](#importing-boxpreviewsdk-into-project)
       - [Adding BoxPreviewSDK as a Dependency](#adding-boxpreviewsdk-as-a-dependency)
   - [Getting Started](#getting-started)
-  - [Sample App Config](#sample-app-config)
+  - [Sample Apps](#sample-apps)
+      - [OAuth2 Sample App](#oauth2-sample-app)
+      - [CCG Auth Sample App](#ccg-auth-sample-app)
   - [Using the Sample App](#using-the-sample-app)
   - [Open a PDF File](#open-a-pdf-file)
   - [Open an Image File](#open-an-image-file)
@@ -122,20 +124,21 @@ you'll find the process very similar.
 
 [dev-console]: https://app.box.com/developers/console
 
-Sample App Config
------------------
+Sample Apps
+-----------
+### OAuth2 Sample App
 
 A sample app using OAuth2 Authentication can be found in the repository [here][oauth2-sample-app].  This app demonstrates how to use the
 Box Preview SDK to make calls with OAuth2 Authentication, and can be run directly by entering your own credentials to
 log in.
 
-[oauth2-sample-app]: https://github.com/box/box-ios-preview-sdk/tree/limited-beta-release/SampleApps/OAuth2SampleApp
+[oauth2-sample-app]: https://github.com/box/box-ios-preview-sdk/tree/main/SampleApps/OAuth2SampleApp
 
 To execute the sample app:
 
 __Step 1__: Run carthage
 ```shell
-$ cd BoxPreviewSDKSampleApp
+$ cd SampleApps/OAuth2SampleApp
 $ carthage update --use-xcframeworks --platform iOS
 ```
 
@@ -173,24 +176,64 @@ ID were `vvxff7v61xi7gqveejo8jh9d2z9xhox5` the redirect URL should be
 
 __Step 6__: Run the sample app
 
-Using the Sample App
---------------------
-The app opens with a prompt to begin OAuth2.0 Authentication.  Tap "OAuth2.0 Authentication" to proceed.
+The app opens with a prompt to begin OAuth2.0 Authentication. Tap "OAuth2.0 Authentication" to proceed.
 
 On the next screen, tap "Login".
 
-An iOS System Dialog pops up asking if you agree to open a URL to authenticate.  Tap "Continue" to proceed.
+An iOS System Dialog pops up asking if you agree to open a URL to authenticate. Tap "Continue" to proceed.
 
-A Box login page loads.  Enter your credentials and tap "Authorize" to proceed.
+A Box login page loads. Enter your credentials and tap "Authorize" to proceed.
 
-A confirmation screen displays the name of your application, as defined in the [Box Developer Console][dev-console], along with the scopes it is configured with.
-Tap "Grant access to Box" to grant your application access to the Box account.
+A confirmation screen displays the name of your application, as defined in the Box Developer Console, along with the scopes it is configured with. Tap "Grant access to Box" to grant your application access to the Box account.
 
-The next screen displays all the files in the root folder for the account.  If you don't see any files on the screen, check that you have files saved in the root folder of the Box account.
-Note that for simplicity, folders are not displayed in this sample app.
-From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it.
-PDF and all iOS-supported image files are currently supported in the app.
+The next screen displays all the files in the root folder for the account. If you don't see any files on the screen, check that you have files saved in the root folder of the Box account. Note that for simplicity, folders are not displayed in this sample app. From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it. PDF and all iOS-supported image files are currently supported in the app.
 
+### CCG Auth Sample App
+
+A sample app using CCG Authentication can be found in the repository [here][ccg-sample-app]. This app demonstrates how to use the
+Box Preview SDK to make calls with CCG Authentication.
+
+[ccg-sample-app]: https://github.com/box/box-ios-preview-sdk/tree/main/SampleApps/CCGSampleApp
+
+To execute the sample app:
+
+__Step 1__: Run carthage
+```shell
+$ cd SampleApps/CCGSampleApp
+$ carthage update --use-xcframeworks --platform iOS
+```
+
+__Step 2__: Open Xcode Project File
+```shell
+$ open CCGSampleApp.xcodeproj
+```
+
+__Step 3__: Insert your client ID and client secret
+
+First, find your CCG app's client ID and secret from the [Box Developer Console][dev-console].  Then, add these
+values to the sample app in `Constants.swift` file:
+```swift
+static let clientId = "YOUR CLIENT ID GOES HERE"
+static let clientSecret = "YOUR CLIENT SECRET GOES HERE"
+```
+
+__Step 4__: Insert your userId if you to use CCG for user connection or enterpriseId for account service connection
+
+You can find these values in your app at [Box Developer Console][dev-console].  Then, add these
+values to the sample app in `Constants.swift` file:
+```swift
+static let userId = "YOUR USER ID GOES HERE"
+static let enterpriseId = "YOUR ENTERPRISE ID GOES HERE"
+```
+
+__Step 5__: Uncomment the appropriate section in `authorizeWithCCGClient()` method in ViewController class.
+
+As this sample app is prepared to CCG authentication as user and account service, you should uncomment 
+`Section 1` for CCG connection for account service or `Section 2` for CCG connection for user account.
+
+__Step 6__: Run the sample app
+
+The next screen displays all the files in the root folder for the account. If you don't see any files on the screen, check that you have files saved in the root folder of the Box account. Note that for simplicity, folders are not displayed in this sample app. From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it. PDF and all iOS-supported image files are currently supported in the app.
 
 Open a PDF File
 ---------------

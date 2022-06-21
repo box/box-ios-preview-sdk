@@ -16,7 +16,8 @@
     <a title="BoxPreviewSDK  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">BoxPreviewSDK 3.3.0 Docs</a> (20% documented)</p>
+        <p><a href="index.html">BoxPreviewSDK 3.3.1 Docs</a> (20% documented)</p>
+        <p class="header-right"><a href="https://github.com/box/box-ios-preview-sdk"><img src="img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
@@ -101,49 +102,45 @@
 <a href="https://cocoapods.org/pods/BoxPreviewSDK"><img src="https://img.shields.io/cocoapods/v/BoxPreviewSDK.svg" alt="CocoaPods compatible"></a></p>
 
 <p><a href="https://travis-ci.com/box/box-swift-preview-sdk"><img src="https://travis-ci.com/box/box-swift-preview-sdk.svg?token=4tREKKzQDqwgYX8vMDUk&branch=main" alt="Build Status"></a></p>
-<h1 id='note' class='heading'>NOTE:</h1>
-
-<p>The Box iOS Preview SDK in <strong>Objective-C</strong> (prior to v3.0.0) has been moved from the main branch to the <a href="https://github.com/box/box-ios-preview-sdk/tree/objective-c-maintenance">objective-c-maintenance branch</a>.
-Going forward, the main branch will contain the iOS Preview SDK in <strong>Swift</strong>, starting with v3.0.0.</p>
-<h2 id='box-preview-sdk' class='heading'>Box Preview SDK</h2>
 
 <p>This SDK makes it easy to present Box files in your iOS application.</p>
 
-<ul>
-<li><a href="#box-preview-sdk">Box Preview SDK</a></li>
-<li><a href="#note">NOTE:</a>
+<blockquote>
+<p><strong><em>NOTE:</em></strong>  The Box iOS Preview SDK in <strong>Objective-C</strong> (prior to v3.0.0) has been moved from the main branch to the <a href="https://github.com/box/box-ios-preview-sdk/tree/objective-c-maintenance">objective-c-maintenance branch</a>.
+Going forward, the main branch will contain the iOS Preview SDK in <strong>Swift</strong>, starting with v3.0.0.</p>
+</blockquote>
+<h2 id='table-of-contents' class='heading'>Table of Contents</h2>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 <ul>
-<li><a href="#box-preview-sdk-1">Box Preview SDK</a></li>
 <li><a href="#requirements">Requirements</a></li>
-<li><a href="#installing-the-sdk">Installing the SDK</a></li>
+<li><a href="#installing-the-sdk">Installing the SDK</a>
+
+<ul>
 <li><a href="#carthage">Carthage</a></li>
 <li><a href="#cocoapods">CocoaPods</a></li>
-<li><a href="#swift-package-manager">Swift Package Manager</a>
-
-<ul>
-<li><a href="#importing-boxpreviewsdk-into-project">Importing BoxPreviewSDK into Project</a></li>
-<li><a href="#adding-boxpreviewsdk-as-a-dependency">Adding BoxPreviewSDK as a Dependency</a></li>
+<li><a href="#swift-package-manager">Swift Package Manager</a></li>
 </ul></li>
 <li><a href="#getting-started">Getting Started</a></li>
-<li><a href="#sample-app-config">Sample App Config</a></li>
-<li><a href="#using-the-sample-app">Using the Sample App</a></li>
+<li><a href="#sample-apps">Sample Apps</a>
+
+<ul>
+<li><a href="#oauth2-sample-app">OAuth2 Sample App</a></li>
+<li><a href="#ccg-auth-sample-app">CCG Auth Sample App</a></li>
+</ul></li>
 <li><a href="#open-a-pdf-file">Open a PDF File</a></li>
 <li><a href="#open-an-image-file">Open an Image File</a></li>
 <li><a href="#future-enhancements">Future Enhancements</a></li>
-<li><a href="#release-definitions">Release Definitions</a></li>
-<li><a href="#release-candidate-rc">Release Candidate (RC)</a></li>
-<li><a href="#current-release">Current Release</a></li>
-<li><a href="#long-term-support">Long Term Support</a></li>
-<li><a href="#support-phases">Support Phases</a>
+<li><a href="#versions">Versions</a>
 
 <ul>
-<li><a href="#active">Active</a></li>
-<li><a href="#maintenance">Maintenance</a></li>
-<li><a href="#end-of-life">End-of-life</a></li>
+<li><a href="#supported-version">Supported Version</a></li>
+<li><a href="#version-schedule">Version schedule</a></li>
 </ul></li>
 <li><a href="#copyright-and-license">Copyright and License</a></li>
-</ul></li>
 </ul>
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -201,16 +198,17 @@ git "https://github.com/box/box-ios-preview-sdk.git" ~&gt; 3.0
 <p>To get started with the SDK, you&rsquo;ll need the Client ID and Client Secret of your app in the <a href="https://app.box.com/developers/console">Box Developer Console</a>.
 If you&rsquo;re familar with <a href="https://github.com/box/box-ios-sdk/docs/usage/getting-started.md#oauth2-sample-app">Getting Started with the OAuth2 Sample App in the Box Content SDK</a>
 you&rsquo;ll find the process very similar.</p>
-<h2 id='sample-app-config' class='heading'>Sample App Config</h2>
+<h2 id='sample-apps' class='heading'>Sample Apps</h2>
+<h3 id='oauth2-sample-app' class='heading'>OAuth2 Sample App</h3>
 
-<p>A sample app using OAuth2 Authentication can be found in the repository <a href="https://github.com/box/box-ios-preview-sdk/tree/limited-beta-release/SampleApps/OAuth2SampleApp">here</a>.  This app demonstrates how to use the
+<p>A sample app using OAuth2 Authentication can be found in the repository <a href="https://github.com/box/box-ios-preview-sdk/tree/main/SampleApps/OAuth2SampleApp">here</a>.  This app demonstrates how to use the
 Box Preview SDK to make calls with OAuth2 Authentication, and can be run directly by entering your own credentials to
 log in.</p>
 
 <p>To execute the sample app:</p>
 
 <p><strong>Step 1</strong>: Run carthage</p>
-<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd </span>BoxPreviewSDKSampleApp
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd </span>SampleApps/OAuth2SampleApp
 <span class="gp">$ </span>carthage update --use-xcframeworks --platform iOS
 </code></pre>
 
@@ -245,23 +243,58 @@ ID were <code>vvxff7v61xi7gqveejo8jh9d2z9xhox5</code> the redirect URL should be
 <p><img src="docs/usage/redirect-url-scheme.png" alt="Info.plist setting"></p>
 
 <p><strong>Step 6</strong>: Run the sample app</p>
-<h2 id='using-the-sample-app' class='heading'>Using the Sample App</h2>
 
-<p>The app opens with a prompt to begin OAuth2.0 Authentication.  Tap &ldquo;OAuth2.0 Authentication&rdquo; to proceed.</p>
+<p>The app opens with a prompt to begin OAuth2.0 Authentication. Tap &ldquo;OAuth2.0 Authentication&rdquo; to proceed.</p>
 
 <p>On the next screen, tap &ldquo;Login&rdquo;.</p>
 
-<p>An iOS System Dialog pops up asking if you agree to open a URL to authenticate.  Tap &ldquo;Continue&rdquo; to proceed.</p>
+<p>An iOS System Dialog pops up asking if you agree to open a URL to authenticate. Tap &ldquo;Continue&rdquo; to proceed.</p>
 
-<p>A Box login page loads.  Enter your credentials and tap &ldquo;Authorize&rdquo; to proceed.</p>
+<p>A Box login page loads. Enter your credentials and tap &ldquo;Authorize&rdquo; to proceed.</p>
 
-<p>A confirmation screen displays the name of your application, as defined in the <a href="https://app.box.com/developers/console">Box Developer Console</a>, along with the scopes it is configured with.
-Tap &ldquo;Grant access to Box&rdquo; to grant your application access to the Box account.</p>
+<p>A confirmation screen displays the name of your application, as defined in the Box Developer Console, along with the scopes it is configured with. Tap &ldquo;Grant access to Box&rdquo; to grant your application access to the Box account.</p>
 
-<p>The next screen displays all the files in the root folder for the account.  If you don&rsquo;t see any files on the screen, check that you have files saved in the root folder of the Box account.
-Note that for simplicity, folders are not displayed in this sample app.
-From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it.
-PDF and all iOS-supported image files are currently supported in the app.</p>
+<p>The next screen displays all the files in the root folder for the account. If you don&rsquo;t see any files on the screen, check that you have files saved in the root folder of the Box account. Note that for simplicity, folders are not displayed in this sample app. From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it. PDF and all iOS-supported image files are currently supported in the app.</p>
+<h3 id='ccg-auth-sample-app' class='heading'>CCG Auth Sample App</h3>
+
+<p>A sample app using CCG Authentication can be found in the repository <a href="https://github.com/box/box-ios-preview-sdk/tree/main/SampleApps/CCGSampleApp">here</a>. This app demonstrates how to use the
+Box Preview SDK to make calls with CCG Authentication.</p>
+
+<p>To execute the sample app:</p>
+
+<p><strong>Step 1</strong>: Run carthage</p>
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd </span>SampleApps/CCGSampleApp
+<span class="gp">$ </span>carthage update --use-xcframeworks --platform iOS
+</code></pre>
+
+<p><strong>Step 2</strong>: Open Xcode Project File</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>open CCGSampleApp.xcodeproj
+</code></pre>
+
+<p><strong>Step 3</strong>: Insert your client ID and client secret</p>
+
+<p>First, find your CCG app&rsquo;s client ID and secret from the <a href="https://app.box.com/developers/console">Box Developer Console</a>.  Then, add these
+values to the sample app in <code>Constants.swift</code> file:</p>
+<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">clientId</span> <span class="o">=</span> <span class="s">"YOUR CLIENT ID GOES HERE"</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">clientSecret</span> <span class="o">=</span> <span class="s">"YOUR CLIENT SECRET GOES HERE"</span>
+</code></pre>
+
+<p><strong>Step 4</strong>: Insert your userId if you to use CCG for user connection or enterpriseId for account service connection</p>
+
+<p>You can find these values in your app at <a href="https://app.box.com/developers/console">Box Developer Console</a>.  Then, add these
+values to the sample app in <code>Constants.swift</code> file:</p>
+<pre class="highlight swift"><code><span class="kd">static</span> <span class="k">let</span> <span class="nv">userId</span> <span class="o">=</span> <span class="s">"YOUR USER ID GOES HERE"</span>
+<span class="kd">static</span> <span class="k">let</span> <span class="nv">enterpriseId</span> <span class="o">=</span> <span class="s">"YOUR ENTERPRISE ID GOES HERE"</span>
+</code></pre>
+
+<p><strong>Step 5</strong>: Uncomment the appropriate section in <code>authorizeWithCCGClient()</code> method in ViewController class.</p>
+
+<p>As this sample app is prepared to CCG authentication as user and account service, you should uncomment 
+<code>Section 1</code> for CCG connection for account service or <code>Section 2</code> for CCG connection for user account.</p>
+
+<p><strong>Step 6</strong>: Run the sample app</p>
+
+<p>The next screen displays all the files in the root folder for the account. If you don&rsquo;t see any files on the screen, check that you have files saved in the root folder of the Box account. Note that for simplicity, folders are not displayed in this sample app. From this screen you can tap the back arrow to log out, or tap a file name in the list to download it and display it. PDF and all iOS-supported image files are currently supported in the app.</p>
 <h2 id='open-a-pdf-file' class='heading'>Open a PDF File</h2>
 
 <p>Tap a PDF file in the file list.  A progress bar indicates the download progress as the file is retrieved from Box.  When the progress reaches 100%, the document is displayed.</p>
@@ -300,91 +333,47 @@ PDF and all iOS-supported image files are currently supported in the app.</p>
 <li>Start app on last-viewed file</li>
 <li>And more!</li>
 </ul>
-<h2 id='release-definitions' class='heading'>Release Definitions</h2>
+<h2 id='versions' class='heading'>Versions</h2>
 
-<p>Starting Oct 19th, 2019 the Box Swift SDK for iOS will be available for general use. This implies all Box developers will be able to use the SDK to build native iOS applications on Box. Between now and the next couple of months, we will be making frequent updates to the SDK based on feedback from our customers, and this document aims to set expectations with respect to:</p>
+<p>We use a modified version of <a href="https://semver.org/">Semantic Versioning</a> for all changes. See <a href="VERSIONS.md">version strategy</a> for details which is effective from 30 July 2022.</p>
+<h3 id='supported-version' class='heading'>Supported Version</h3>
 
-<ol>
-<li>the various release types you will see over the next few months, what they mean and how to identify them</li>
-<li>support policy for each of the release types</li>
-</ol>
+<p>Only the current MAJOR version of SDK is supported. New features, functionality, bug fixes, and security updates will only be added to the current MAJOR version.</p>
 
-<p>Between now and the next couple of months, the Box Swift SDK for iOS releases will be one of the following types:</p>
+<p>A current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  Instead of stating a release date for a new feature, we set a fixed minor or patch release cadence of maximum 2-3 months (while we may release more often). At the same time, there is no schedule for major or breaking release. Instead, we will communicate one quarter in advance the upcoming breaking change to allow customers to plan for the upgrade. We always recommend that all users run the latest available minor release for whatever major version is in use. We highly recommend upgrading to the latest SDK major release at the earliest convenient time and before the EOL date.</p>
+<h3 id='version-schedule' class='heading'>Version schedule</h3>
 
-<ul>
-<li><a href="#release-candidate-rc">Release Candidate (RC)</a></li>
-<li><a href="#current-release">Current Release</a></li>
-<li><a href="#long-term-support">Long Term Support</a></li>
-</ul>
-<h3 id='release-candidate-rc' class='heading'>Release Candidate (RC)</h3>
-
-<p>The initial releases of the SDK starting Oct 19th will be Release Candidate (RC). This means (1) the core functionality is present and tested, (2) additional functionality from this point on will be considered improvements or enhancements based on customer feedback. RC releases are usually more frequent (every few weeks), followed shortly by a current release. If you plan to use an RC release, we recommend:</p>
-
-<ul>
-<li>that you don&rsquo;t use it for production workloads (If that is unavoidable, we recommend upgrading to the Current Release version once it&rsquo;s ready.)</li>
-<li>that you create a plan to keep your application on the latest RC release version at all times (since older RC releases are considered &ldquo;out of support&rdquo; as soon as a new RC release is released)</li>
-</ul>
-
-<p>Also, RC releases may carry breaking changes from the previous release and we advise developers to test their application adequately with the new RC release before adopting it.</p>
-
-<p>The idea behind releasing RC releases is to rapidly iterate on the SDK (bug fixes, feature tweaks, etc.) to get it to a production-ready state, and typically we don&rsquo;t expect to have the SDK in the RC phase for more than a month.</p>
-
-<blockquote>
-<h4 id='support-for-rc-releases' class='heading'>Support for RC releases</h4>
-
-<p>A RC release</p>
-
-<ul>
-<li>is Considered <a href="#active">Active</a> when released</li>
-<li>transitions to <a href="#end-of-life">End-of-life</a> when the next release becomes Active</li>
-</ul>
-</blockquote>
-<h3 id='current-release' class='heading'>Current Release</h3>
-
-<p>A Current Release is considered more stable that a Release Candidate Release and for that reason we expect less frequent releases of a Current Release. We typically expect to refresh Current Releases approximately every 3 months (could be shorter or longer depending on the criticality of the contents of the release).</p>
-
-<p>A new Current Release will usually carry new functionality, bug fixes and may contain breaking changes. We will call out all breaking changes (if any) in the Release Notes section of every Current Release, and we advise developers to test their application adequately before adopting in for production use. </p>
-
-<p>A Current release is on the leading edge of our SDK development, and is intended for customers who are in active development and want the latest and greatest features.  Current releases are not intended for long-term use, and will only receive enough support after the next release becomes available to allow for a smooth transition to the new version. </p>
-
-<blockquote>
-<h4 id='support-for-current-release' class='heading'>Support for Current Release</h4>
-
-<p>A Current Release</p>
-
-<ul>
-<li>is Considered <a href="#active">Active</a> when released</li>
-<li>transitions to <a href="#maintenance">Maintenance</a> 3 months after it becomes Active, or when the next release becomes Active, whichever is later</li>
-<li>reaches <a href="#end-of-life">End-of-life</a> 6 months after it becomes Active, or 3 months after the next release becomes Active, whichever is later</li>
-</ul>
-</blockquote>
-<h3 id='long-term-support' class='heading'>Long Term Support</h3>
-
-<p>A Long-Term Support (LTS) release is one which we plan to guarantee compatibility with for an extended period of time.  The public interfaces of the SDK should not be changed in ways that would break customers’ application, and the release should continue to receive at least bug fixes for its entire lifecycle. We expect to refresh Long Term Release version every 18 - 24 months.</p>
-
-<p>For the above reasons, we recommend all developers who do not intend to make frequent updates (~every 6 - 12 months) to their application, only use a Long Term Release version of the SDK. </p>
-
-<blockquote>
-<h4 id='support-for-long-term-release' class='heading'>Support for Long Term Release</h4>
-
-<p>A Long Term Release</p>
-
-<ul>
-<li>is considered <a href="#active">Active</a> when released</li>
-<li>transitions to <a href="#maintenance">Maintenance</a> 1 year after it becomes Active, or when the next release becomes Active, whichever is later</li>
-<li>reaches <a href="#end-of-life">End-of-life</a> 2 years after it becomes Active, or 1 year after the next LTS release becomes Active, whichever is later</li>
-</ul>
-</blockquote>
-<h3 id='support-phases' class='heading'>Support Phases</h3>
-<h4 id='active' class='heading'>Active</h4>
-
-<p>Once a release is considered ready for release, a new version is cut and the release enters the Active phase.  However, new features may be added to the SDK, including support for new API endpoints. </p>
-<h4 id='maintenance' class='heading'>Maintenance</h4>
-
-<p>After a time, the release is no longer under active development, but customers may still be depending on it.  At this time, we consider the release to be in Maintenance phase; generally, only bug fixes will be considered for inclusion in new versions.  We may of course opt to include new functionality based on customer demand, but in general customers should expect that the SDK feature set will be mostly frozen for the remainder of its lifecycle.</p>
-<h4 id='end-of-life' class='heading'>End-of-life</h4>
-
-<p>After a release is no longer being supported by Box, it enters End-of-life (EOL) and no further changes should be expected by customers.  Customers must upgrade to a newer release if they want to receive support.</p>
+<table><thead>
+<tr>
+<th>Version</th>
+<th>Supported Environments</th>
+<th>State</th>
+<th>First Release</th>
+<th>EOL/Terminated</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>3</td>
+<td>iOS 11.0+ / Mac OS X 10.13+ / tvOS 11.0+ / watchOS 4.0+</td>
+<td>Supported</td>
+<td>20 Nov 2019</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td>EOL</td>
+<td>30 Jun 2018</td>
+<td>20 Nov 2019</td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+<td>EOL</td>
+<td>12 Aug 2015</td>
+<td>30 Jun 2018</td>
+</tr>
+</tbody></table>
 <h2 id='copyright-and-license' class='heading'>Copyright and License</h2>
 
 <p>Copyright 2019 Box, Inc. All rights reserved.</p>
@@ -398,8 +387,8 @@ PDF and all iOS-supported image files are currently supported in the app.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/box/box-ios-preview-sdk" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2021-10-29)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+          <p>&copy; 2022 <a class="link" href="https://twitter.com/box" target="_blank" rel="external noopener">Box</a>. All rights reserved. (Last updated: 2022-06-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
